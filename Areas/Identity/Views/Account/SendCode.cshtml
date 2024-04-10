@@ -1,0 +1,47 @@
+﻿@model SendCodeViewModel
+@{
+    ViewData["Title"] = "Gửi mã xác thực";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Gửi mã xác thực</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="SendCode" asp-route-returnurl="@Model.ReturnUrl" method="post" class="form-horizontal" role="form">
+                            <input asp-for="RememberMe" type="hidden" />
+                            <div class="row">
+                                <div class="col-md-8">
+                                    Mã xác thực gửi tới:
+                                    <select asp-for="SelectedProvider" asp-items="Model.Providers" style="width: 50%;"></select>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> Gửi</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

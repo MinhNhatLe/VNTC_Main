@@ -1,0 +1,54 @@
+﻿@model ExternalLoginConfirmationViewModel
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Đăng ký</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                            <h4>Thông tin liên kết</h4>
+                            <hr />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <p class="text-info">
+                                Bạn đã xác thực liên kết với <strong>@ViewData["ProviderDisplayName"]</strong>. <br />
+                                Hãy nhập địa chỉ email để liên kết hoặc tạo tài khoản.
+                            </p>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label">Địa chỉ email <b style="color: red">*</b></label>
+                                <input asp-for="Email" class="form-control" placeholder="Yêu cầu nhập địa chỉ email ..." />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="text-center m-3">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-wrench" aria-hidden="true"></i> Đăng ký</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

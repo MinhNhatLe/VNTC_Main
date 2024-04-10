@@ -1,0 +1,54 @@
+@model EditClaimModel
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@{
+    ViewData["Title"] = "Gán đặc tính cho role";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4>Gán đặc tính (Claim) cho vai trò: @Model.role.Name</h4>
+<partial name="_StatusMessage"></partial>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ClaimType" class="control-label">Kiểu (tên) claim <b style="color: red">*</b></label>
+                <input asp-for="ClaimType" class="form-control" placeholder="Yêu cầu nhập kiểu (tên) claim" />
+                <span asp-validation-for="ClaimType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimValue" class="control-label">Giá trị <b style="color: red">*</b></label>
+                <input asp-for="ClaimValue" class="form-control" placeholder="Yêu cầu nhập giá trị" />
+                <span asp-validation-for="ClaimValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Tạo claim cho vai trò
+                </button>
+            </div>
+        </form>
+
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Edit" asp-route-roleid="@Model.role.Id"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Quay lại chỉnh sửa vai trò</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    _AdminSidebarService.SetActive("Role", "Index", "Identity");
+}
+
+@section Sidebar{
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

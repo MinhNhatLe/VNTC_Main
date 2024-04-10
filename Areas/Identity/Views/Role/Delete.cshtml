@@ -1,0 +1,41 @@
+@model IdentityRole
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+
+@{
+    ViewData["Title"] = "Xóa vai trò (Role)";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<partial name="_StatusMessage"></partial>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <p>Bạn có chắc chắn muốn xóa vai trò: <strong>@Model.Name</strong></p>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Xóa vai trò (Role)
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các vai trò (Role)</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    _AdminSidebarService.SetActive("Role", "Index", "Identity");
+}
+
+@section Sidebar{
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

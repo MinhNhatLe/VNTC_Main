@@ -1,0 +1,47 @@
+﻿@model dotnetstartermvc.Models.Contacts.Contact
+
+@{
+    ViewData["Title"] = "Gửi liên hệ tới AppMvc";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="contact-firstcol p-2 h-100">
+            <img src="~/images/email.png" />
+            <h1>LIÊN HỆ VNTC</h1>
+            <p>Chúng tôi luôn lắng nghe các ý kiến của bạn !</p>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="SendContact" class="formcontact">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label">Họ và tên</label>
+                <input asp-for="FullName" class="form-control" placeholder="Họ và tên" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Địa chỉ email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label">Số điện thoại</label>
+                <input asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Message" class="control-label">Nội dung</label>
+                <textarea rows="5" asp-for="Message" class="form-control" placeholder="Nhập nội dung cần gửi ..."></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Gửi liên hệ" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

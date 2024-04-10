@@ -1,0 +1,47 @@
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model CreateRoleModel
+@{
+    ViewData["Title"] = "Tạo vai trò (Role) mới";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<partial name="_StatusMessage"></partial>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Tên của vai trò (Role) <b style="color: red">*</b></label>
+                <input asp-for="Name" class="form-control" placeholder="Yêu cầu nhập nhập tên của vai trò ..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Tạo vai trò mới
+                </button>
+            </div>
+        </form>
+
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các role</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    _AdminSidebarService.SetActive("Role", "Create", "Identity");
+}
+
+@section Sidebar{
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

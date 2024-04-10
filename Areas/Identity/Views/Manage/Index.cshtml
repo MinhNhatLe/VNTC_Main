@@ -1,0 +1,219 @@
+﻿@using System.Globalization;
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Hồ sơ cá nhân";
+    var mgs = ViewData["StatusMessage"] as string;
+}
+
+<h2 class="text-center">@ViewData["Title"] </h2>
+@*<p class="text-success">@ViewData["StatusMessage"]</p>*@
+<hr />
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hồ sơ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hồ sơ cá nhân</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        @if (!String.IsNullOrEmpty(mgs))
+        {
+            var statusMessageClass = mgs.StartsWith("Error") ? "danger" : "warning";
+            <div class="alert alert-@statusMessageClass alert-dismissible fade show" role="alert">
+                <strong>Thông báo!</strong>
+                @mgs
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@Html.DisplayFor(m => Model.profile.UserName)</h5>
+                        @*<p class="text-muted mb-1">@Html.DisplayFor(m => Model.profile.UserEmail)</p>*@
+                        @*<p class="text-muted mb-4">Chúc bạn 1 ngày vui vẻ!</p>*@
+                        <div class="d-flex justify-content-center mb-2">
+                            <a class="btn btn-primary" asp-action="EditProfile">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                Sửa thông tin
+                            </a>
+                            @if (Model.HasPassword)
+                            {
+                                <a asp-controller="Manage" asp-action="ChangePassword" class="btn btn-outline-danger ms-1"><i class="fa fa-wrench" aria-hidden="true"></i> Đổi mật khẩu</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Manage" asp-action="SetPassword" class="btn btn-outline-danger ms-1"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo mật khẩu</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <p class="mb-0">https://mdbootstrap.com</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <p class="mb-0">leminhnhat</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <p class="mb-0">leminhnhat</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                <p class="mb-0">leminhnhat</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                <p class="mb-0">leminhnhat</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Tên tài khoản</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.UserName)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.UserEmail)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Số điện thoại</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.PhoneNumber)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Địa chỉ</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.HomeAdress)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ngày sinh</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.BirthDate)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4">
+                                    <span class="text-primary font-italic me-1">Xác thực 2 yếu tố</span>
+                                </p>
+                                <div>
+                                    <p class="mb-1">Kích hoạt xác thực 2 yếu tố:</p>
+                                    @if (Model.TwoFactor)
+                                    {
+                                        <form asp-controller="Manage" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-ban" aria-hidden="true"></i> Hủy</button> (Đang kích hoạt)
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-controller="Manage" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-circle" aria-hidden="true"></i> Kích hoạt</button>
+                                        </form>
+                                    }
+                                </div>
+                                <hr />
+                                <div>
+                                    <p class="mb-1">
+                                        Sử dụng số điện thoại dùng để xác thực hai yêu tố:
+                                    </p>
+                                    @if (Model.PhoneNumber != null)
+                                    {
+                                        <a asp-controller="Manage" asp-action="AddPhoneNumber">Thay đổi</a>
+                                        <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post" role="form">
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Loại bỏ số điện thoại</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn btn-primary btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Thêm số điện thoại</a>
+                                    }
+                                    @(Model.PhoneNumber ?? "(Tính năng chưa phát triển)")
+                                </div>
+                                <hr />
+                                <div>
+                                    <p class="mb-1">
+                                        Xác thực ứng dụng:
+                                    </p>
+                                    @if (Model.AuthenticatorKey == null)
+                                    {
+                                        <form asp-controller="Manage" asp-action="ResetAuthenticatorKey" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check-circle" aria-hidden="true"></i> Phát sinh mã</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span>Nhập mã này khi yêu cầu xác thực 2 yếu tố</span>
+                                        <b>@Model.AuthenticatorKey</b>
+                                        <hr style="color: blue" />
+                                        <form asp-controller="Manage" asp-action="GenerateRecoveryCode" method="post" class="form-horizontal" role="form">
+                                            <p>Mã phục hồi sử dụng để xác thực hai yếu tố</p>
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check-circle" aria-hidden="true"></i> Phát sinh mã phục hồi</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4">
+                                    <span class="text-primary font-italic me-1">Liên kết tài khoản</span>
+                                </p>
+                                <div>
+                                    <p class="mb-1">Hiện tại có <b>@Model.Logins.Count</b> liên kết:</p>
+                                    <a asp-controller="Manage" asp-action="ManageLogins" class="btn btn-primary btn-sm"><i class="fa fa-wrench" aria-hidden="true"></i> Quản lí liên kết ngoài</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

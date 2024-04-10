@@ -1,0 +1,64 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.Models.Contacts.Contact
+
+@{
+    ViewData["Title"] = "Xóa liên hệ";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h3>Bạn có chắc chắn xóa liên hệ không?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Họ & tên
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Ngày gởi
+        </dt>
+        <dd class="col-sm-10">
+            <text>@Model.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+        </dd>
+        <dt class="col-sm-2">
+            Nội dung
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+        <dt class="col-sm-2">
+            Số điện thoại
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Xóa liên hệ
+        </button>
+    </form>
+    <hr />
+    <a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách liên hệ</a>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("Contact", "Index", "Contact");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

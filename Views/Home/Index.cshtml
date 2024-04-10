@@ -1,0 +1,30 @@
+﻿﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<partial name="_AlertMessage" />
+
+<div class="text-center">
+    <h1 class="display-4">Xin chào</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+@*Summer note*@
+<div>
+    <textarea id="summernoteEditor"></textarea>
+    <textarea id="summernoteEditor2"></textarea>
+</div>
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 400
+            };
+    var summernote2 = new dotnetstartermvc.Models.Summernote("#summernoteEditor2", false);
+}
+
+<partial name="_Summernote" model="summernote" />
+<partial name="_Summernote" model="summernote2" />
+
+@*END Summer note*@

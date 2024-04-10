@@ -1,0 +1,46 @@
+﻿@model DisplayRecoveryCodesViewModel
+@{
+    ViewData["Title"] = "Mã phục hồi";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+<hr />
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hồ sơ</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hồ sơ cá nhân</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mã phục hồi</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Đây là các mã phục hồi của bạn</h5>
+                        <p class="text-info">Lưu trữ các mã này đề phòng khi đăng nhập cần xác thực hai yếu tố</p>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>Codes:</dt>
+                            @foreach (var code in Model.Codes)
+                            {
+                                <dd>
+                                    <text>@code</text>
+                                </dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

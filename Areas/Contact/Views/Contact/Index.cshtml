@@ -1,0 +1,85 @@
+﻿@using dotnetstartermvc.Menu
+@using System.Globalization
+@inject AdminSidebarService _AdminSidebarService
+@model X.PagedList.IPagedList<dotnetstartermvc.Models.Contacts.Contact>
+@*@model IEnumerable<dotnetstartermvc.Models.Contacts.Contact>*@
+
+@{
+    ViewData["Title"] = "Danh sách liên hệ";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<partial name="_AlertMessage" />
+
+<div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-0">
+    </div>
+    <div class="col-lg-8 col-sm-8 col-xs-12">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Nhập nội dung cần tìm kiếm ..." style="display: inline-block; width: 70%">
+                <button type="submit" class="btn btn-primary" style="width: 25%">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Ngày gởi
+            </th>
+
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Tác vụ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <text>@item.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" aria-hidden="true"></i> Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Phân trang -->
+@Html.Partial("_Pagination", Model)
+
+@{
+    _AdminSidebarService.SetActive("Contact", "Index", "Contact");
+}
+
+@section Sidebar{
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

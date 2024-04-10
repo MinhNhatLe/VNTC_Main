@@ -1,0 +1,51 @@
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model List<RoleModel>
+@{
+    ViewData["Title"] = "Danh sách các vai trò (Role)";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<partial name="_StatusMessage"></partial>
+
+<div class="mb-2">
+    <a class="btn btn-primary" asp-action="Create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo vai trò</a>
+    <a class="btn btn-info" asp-action="Index" asp-controller="User"><i class="fa fa-info-circle" aria-hidden="true"></i> Danh sách thành viên</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Tên vai trò (Role)</th>
+        <th>Tác vụ</th>
+    </tr>
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>
+                <p>@role.Name</p>
+                @foreach (var claim in @role.Claims)
+                {
+                    <small>@claim</small>
+
+                    <br>
+                }
+            </td>
+            <td>
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-roleid="@role.Id">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Cập nhật
+                </a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-roleid="@role.Id"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
+
+@{
+    _AdminSidebarService.SetActive("Role", "Index", "Identity");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

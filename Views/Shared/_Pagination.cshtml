@@ -1,0 +1,64 @@
+﻿﻿@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model X.PagedList.IPagedList<dynamic>
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            color: #007bff;
+            padding: 8px 12px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            margin: 0 4px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+            .pagination a:hover {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+
+        .pagination .disabled a {
+            pointer-events: none;
+            cursor: default;
+            background-color: #e9ecef;
+            color: #6c757d;
+            border-color: #dee2e6;
+        }
+
+        .pagination .active a {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+            .pagination .active a:hover {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+</style>
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page }), new PagedListRenderOptions
+    {
+    DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+    DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+    DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+    DisplayPageCountAndCurrentLocation = true,
+    MaximumPageNumbersToDisplay = 5,
+    LinkToFirstPageFormat = "« Đầu",
+    LinkToPreviousPageFormat = "‹ Trước",
+    LinkToNextPageFormat = "Tiếp ›",
+    LinkToLastPageFormat = "Cuối »"
+    })
+</div>

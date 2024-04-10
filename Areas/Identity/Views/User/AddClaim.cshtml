@@ -1,0 +1,70 @@
+@model AddUserClaimModel
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@{
+    ViewData["Title"] = "Claim của người dùng";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4>@ViewData["Title"] : @ViewBag.user.UserName</h4>
+<partial name="_StatusMessage" />
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ClaimType" class="control-label">Kiểu (tên) claim <b style="color: red">*</b></label>
+                <input asp-for="ClaimType" class="form-control" placeholder="Yêu cầu nhập kiểu (tên) claim" />
+                <span asp-validation-for="ClaimType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimValue" class="control-label">Giá trị <b style="color: red">*</b></label>
+                <input asp-for="ClaimValue" class="form-control" placeholder="Yêu cầu nhập giá trị" />
+                <span asp-validation-for="ClaimValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (ViewBag.userclaim != null)
+                {
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Cập nhật claim
+                    </button>
+                    <button type="submit" asp-action="DeleteClaim" asp-route-claimid="@ViewBag.userclaim.Id" class="btn btn-danger">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Xóa claim
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Tạo claim cho vai trò
+                    </button>
+                }
+
+                <hr />
+                <a class="btn btn-outline-dark" asp-action="AddRole" asp-route-id="@ViewBag.user.Id"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Quay lại chỉnh sửa vai trò</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+@{
+    _AdminSidebarService.SetActive("User", "Index", "Identity");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

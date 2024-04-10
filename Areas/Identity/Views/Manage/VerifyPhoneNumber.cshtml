@@ -1,0 +1,53 @@
+﻿@model VerifyPhoneNumberViewModel
+@{
+    ViewData["Title"] = "Xác nhận số điện thoại";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hồ sơ</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hồ sơ cá nhân</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Xác nhận số điện thoại</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-controller="Manage" asp-action="VerifyPhoneNumber" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                            <input asp-for="PhoneNumber" type="hidden" />
+                            <h5>Thêm số điện thoại.</h5>
+                            <h5>@ViewData["Status"]</h5>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Code" class="control-label">Mã xác nhận <b style="color: red">*</b></label>
+                                <input asp-for="Code" class="form-control" placeholder="Yêu cầu nhập mã xác nhận" />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                            <div class="text-center m-3">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-wrench" aria-hidden="true"></i> Gửi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

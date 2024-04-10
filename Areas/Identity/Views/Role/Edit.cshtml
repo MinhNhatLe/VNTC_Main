@@ -1,0 +1,64 @@
+@model EditRoleModel
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+
+@{
+    ViewData["Title"] = "Cập nhật vai trò (Role)";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<partial name="_StatusMessage"></partial>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Tên của vai trò (Role) <b style="color: red">*</b></label>
+                <input asp-for="Name" class="form-control" placeholder="Yêu cầu nhập nhập tên của vai trò ..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Cập nhật vai trò
+                </button>
+            </div>
+        </form>
+        <hr>
+        <p>
+            Các đặc tính  (claim) của Role:
+            <a asp-action="AddRoleClaim" asp-route-roleid="@Model.role.Id" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm claim</a>
+        </p>
+        @if (Model.Claims.Count > 0)
+        {
+            <ul>
+                @foreach (var claim in Model.Claims)
+                {
+                    <li>
+                        <a asp-action="EditRoleClaim" asp-route-claimid="@claim.Id">
+                            @claim.ClaimType : @claim.ClaimValue
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các role</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    _AdminSidebarService.SetActive("Role", "Index", "Identity");
+}
+
+@section Sidebar{
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}
