@@ -37,6 +37,7 @@ namespace dotnetstartermvc.Menu
                 AwesomeIcon = "far fa-address-card"
             });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thông tin người dùng" });
 
             Items.Add(new SidebarItem()
             {
@@ -69,79 +70,103 @@ namespace dotnetstartermvc.Menu
                     },
             });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý các dịch vụ website" });
 
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
-                Title = "Quản lý bài viết",
+                Title = "Quản lý dịch vụ",
                 AwesomeIcon = "far fa-folder",
-                collapseID = "blog",
+                collapseID = "service",
                 Items = new List<SidebarItem>() {
                         new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Category",
+                                Controller = "Services",
                                 Action = "Index",
-                                Area = "Blog",
-                                Title = "Các chuyên mục"
+                                Area = "",
+                                Title = "Các dịch vụ"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Category",
+                                Controller = "Services",
                                 Action = "Create",
-                                Area = "Blog",
-                                Title = "Tạo chuyên mục"
-                        },
-                        new SidebarItem() {
-                                Type = SidebarItemType.NavItem,
-                                Controller = "Post",
-                                Action = "Index",
-                                Area = "Blog",
-                                Title = "Các bài viết"
-                        },
-                        new SidebarItem() {
-                                Type = SidebarItemType.NavItem,
-                                Controller = "Post",
-                                Action = "Create",
-                                Area = "Blog",
-                                Title = "Tạo bài viết"
+                                Area = "",
+                                Title = "Tạo dịch vụ"
                         },
                     },
             });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
-                Title = "Quản lý sản phẩm",
+                Title = "Quản lý thông báo",
                 AwesomeIcon = "far fa-folder",
-                collapseID = "product",
+                collapseID = "notification",
                 Items = new List<SidebarItem>() {
                         new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "CategoryProduct",
+                                Controller = "Notifications",
                                 Action = "Index",
-                                Area = "Product",
-                                Title = "Các chuyên mục"
+                                Area = "",
+                                Title = "Các thông báo"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "CategoryProduct",
+                                Controller = "Notifications",
                                 Action = "Create",
-                                Area = "Product",
-                                Title = "Tạo chuyên mục"
+                                Area = "",
+                                Title = "Tạo thông báo"
                         },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Title = "Quản lý tuyển dụng",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "recruitment",
+                Items = new List<SidebarItem>() {
                         new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "ProductManage",
+                                Controller = "Recruitments",
                                 Action = "Index",
-                                Area = "Product",
-                                Title = "Các sản phẩm"
+                                Area = "",
+                                Title = "Các tuyển dụng"
                         },
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Recruitments",
+                                Action = "Create",
+                                Area = "",
+                                Title = "Tạo tuyển dụng"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thống kê" });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Title = "Lịch & biểu đồ",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "allChartandSchedule",
+                Items = new List<SidebarItem>() {
                         new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "ProductManage",
-                                Action = "Create",
-                                Area = "Product",
-                                Title = "Tạo sản phẩm"
+                                Controller = "Schedule",
+                                Action = "Index",
+                                Area = "",
+                                Title = "Danh sách lịch"
+                        },
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Chart",
+                                Action = "Index",
+                                Area = "",
+                                Title = "Danh sách biểu đồ"
                         },
                     },
             });

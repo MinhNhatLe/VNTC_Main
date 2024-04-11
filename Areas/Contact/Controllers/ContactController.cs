@@ -23,7 +23,7 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
-            var pageSize = 5; // Số lượng item trên mỗi trang
+            var pageSize = 10; // Số lượng item trên mỗi trang
 
             var contact = from u in _context.Contacts select u;
 
@@ -34,6 +34,7 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
                 || u.Phone.Contains(searchString));
             }
 
+            contact = contact.OrderByDescending(u => u.DateSent);
             var pagedList = await contact.ToPagedListAsync(pageNumber, pageSize);
             ViewBag.CurrentFilter = searchString;
 

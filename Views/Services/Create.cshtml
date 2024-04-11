@@ -1,0 +1,70 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.ServicesRequest.CreateServicesRequest
+
+@{
+    ViewData["Title"] = "Tạo dịch vụ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tên dịch vụ <b style="color: red">*</b></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Mô tả thông tin dịch vụ <b style="color: red">*</b></label>
+                <textarea asp-for="Description" class="form-control" id="summernoteEditor"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label">Ngày đăng <b style="color: red">*</b></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Người tạo</label>
+                <input class="form-control" type="text" value="@ViewData["Username"]" readonly />
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Tạo dịch vụ
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các dịch vụ</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 300
+            };
+}
+<partial name="_Summernote" model="summernote" />
+
+@{
+    _AdminSidebarService.SetActive("Services", "Create", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

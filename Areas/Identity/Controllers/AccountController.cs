@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace App.Areas.Identity.Controllers
+namespace dotnetstartermvc.Areas.Identity.Controllers
 {
     [Authorize]
     [Area("Identity")]

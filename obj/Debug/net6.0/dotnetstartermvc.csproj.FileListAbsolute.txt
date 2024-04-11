@@ -614,3 +614,6 @@ C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\obj\Debug\net6
 C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\obj\Debug\net6.0\dotnetstartermvc.pdb
 C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\obj\Debug\net6.0\dotnetstartermvc.genruntimeconfig.cache
 C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\obj\Debug\net6.0\ref\dotnetstartermvc.dll
+C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\bin\Debug\net6.0\Xceed.Document.NET5.dll
+C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\bin\Debug\net6.0\Xceed.Words.NET5.dll
+C:\Users\Minh Nhat\Desktop\VNTC\dotnetstartermvc\dotnetstartermvc\bin\Debug\net6.0\System.IO.Packaging.dll

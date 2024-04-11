@@ -6,6 +6,10 @@ namespace dotnetstartermvc.Models
 {
     public class AppUser : IdentityUser
     {
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
         [Column(TypeName = "nvarchar")]
         [StringLength(400)]
         public string? HomeAdress { get; set; }

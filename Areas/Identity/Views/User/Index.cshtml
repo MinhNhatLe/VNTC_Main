@@ -5,39 +5,56 @@
 @{
     ViewData["Title"] = "Danh sách các thành viên";
     Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
 }
 
 <partial name="_StatusMessage"></partial>
-<p>Tổng số thành viên: @Model.totalUsers</p>
+<p>
+    Tổng số thành viên: 
+    <b style="color: #4e73df">
+        @Model.totalUsers
+    </b>
+</p>
 
-<table class="table">
-    <tr>
-        <th>Tên người dùng</th>
-        <th>Vai trò (Role)</th>
-        <th>Tác vụ</th>
-    </tr>
-    @foreach (var user in Model.users)
-    {
+<table class="table table-striped">
+    <thead style="background-color: #4e73df; color: #fff">
         <tr>
-            <td>@user.UserName</td>
-            <td>
-                @if (string.IsNullOrEmpty(user.RoleNames))
-                {
-                    <a class="text-dark" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm vai trò (Roles)</a>
-                }
-                else
-                {
-                    <a asp-action="AddRole" asp-route-id="@user.Id">@user.RoleNames</a>
-                }
-            </td>
-            <td>
-                <a class="btn btn-outline-primary" asp-action="SetPassword" asp-route-id="@user.Id">
-                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                    Đặt mật khẩu
-                </a>
-            </td>
+            <th>STT</th>
+            <th>Tên người dùng</th>
+            <th>Vai trò (Role)</th>
+            <th>Tác vụ</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var user in Model.users)
+        {
+            <tr>
+                <td>
+                    <b style="color: #4e73df">
+                        @(stt++)
+                    </b>
+                </td>
+                <td>@user.UserName</td>
+                <td>
+                    @if (string.IsNullOrEmpty(user.RoleNames))
+                    {
+                        <a class="text-dark" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm vai trò (Roles)</a>
+                    }
+                    else
+                    {
+                        <a asp-action="AddRole" asp-route-id="@user.Id">@user.RoleNames</a>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="SetPassword" asp-route-id="@user.Id">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        Đặt mật khẩu
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 @{
     var pagingmodel = new PagingModel()

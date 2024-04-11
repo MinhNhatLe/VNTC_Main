@@ -2,11 +2,12 @@
 @using System.Globalization
 @inject AdminSidebarService _AdminSidebarService
 @model X.PagedList.IPagedList<dotnetstartermvc.Models.Contacts.Contact>
-@*@model IEnumerable<dotnetstartermvc.Models.Contacts.Contact>*@
 
 @{
     ViewData["Title"] = "Danh sách liên hệ";
     Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
 }
 
 <partial name="_AlertMessage" />
@@ -28,8 +29,11 @@
 </div>
 
 <table class="table table-striped">
-    <thead>
+    <thead style="background-color: #4e73df; color: #fff">
         <tr>
+            <th>
+                STT
+            </th>
             <th>
                 Họ và tên
             </th>
@@ -37,11 +41,10 @@
                 Email
             </th>
             <th>
-                Ngày gởi
-            </th>
-
-            <th>
                 Số điện thoại
+            </th>
+            <th>
+                Ngày gởi
             </th>
             <th>
                 Tác vụ
@@ -53,16 +56,21 @@
         {
             <tr>
                 <td>
+                    <b style="color: #4e73df">
+                        @(stt++)
+                    </b>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.FullName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    <text>@item.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+                    @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
+                    <text>@item.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" aria-hidden="true"></i> Chi tiết</a>
@@ -73,7 +81,6 @@
     </tbody>
 </table>
 
-<!-- Phân trang -->
 @Html.Partial("_Pagination", Model)
 
 @{

@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Danh sách các vai trò (Role)";
     Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
 }
 
 <partial name="_StatusMessage"></partial>
@@ -13,32 +15,42 @@
     <a class="btn btn-info" asp-action="Index" asp-controller="User"><i class="fa fa-info-circle" aria-hidden="true"></i> Danh sách thành viên</a>
 </div>
 
-<table class="table">
-    <tr>
-        <th>Tên vai trò (Role)</th>
-        <th>Tác vụ</th>
-    </tr>
-    @foreach (var role in Model)
-    {
+<table class="table table-striped">
+    <thead style="background-color: #4e73df; color: #fff">
         <tr>
-            <td>
-                <p>@role.Name</p>
-                @foreach (var claim in @role.Claims)
-                {
-                    <small>@claim</small>
-
-                    <br>
-                }
-            </td>
-            <td>
-                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-roleid="@role.Id">
-                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                    Cập nhật
-                </a>
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-roleid="@role.Id"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
-            </td>
+            <th>STT</th>
+            <th>Tên vai trò (Role)</th>
+            <th>Tác vụ</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>
+                    <b style="color: #4e73df">
+                        @(stt++)
+                    </b>
+                </td>
+                <td>
+                    <p>@role.Name</p>
+                    @foreach (var claim in @role.Claims)
+                    {
+                        <small>@claim</small>
+
+                        <br>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-roleid="@role.Id">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        Cập nhật
+                    </a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-roleid="@role.Id"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 @{

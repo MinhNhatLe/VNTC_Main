@@ -8,6 +8,12 @@ namespace dotnetstartermvc.Areas.Identity.Models.ManageViewModels
 
         public string UserEmail { get; set; }
 
+        [Required(ErrorMessage = "Phải nhập tên")]
+        public string Firstname { get; set; }
+
+        [Required(ErrorMessage = "Phải nhập họ")]
+        public string Lastname { get; set; }
+
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Phải nhập địa chỉ")]

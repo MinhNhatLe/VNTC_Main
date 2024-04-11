@@ -83,6 +83,8 @@ namespace dotnetstartermvc.Areas.Database.Controllers
                 {
                     UserName = "dangngocdanh",
                     Email = "dangngocdanh.vntc@gmail.com",
+                    Firstname = "Danh",
+                    Lastname = "Dang Ngoc",
                     EmailConfirmed = true,
                 };
 

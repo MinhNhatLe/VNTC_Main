@@ -1,0 +1,62 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.Models.Recruitment
+
+@{
+    ViewData["Title"] = "Xóa tuyển dụng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Tên công việc
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-3">
+            Số lượng
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-3">
+            Mô tả thông tin công việc
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Description)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày đăng
+        </dt>
+        <dd class="col-sm-9">
+            <text>@Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+        </dd>
+        <dt class="col-sm-3">
+            Người đảm nhiệm
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User.Firstname)
+        </dd>
+    </dl>
+    <form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa nội dung này không?');">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Xóa công việc
+        </button>
+    </form>
+    <hr />
+    <a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách tuyển dụng</a>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("Recruitments", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}
