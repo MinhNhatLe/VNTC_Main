@@ -1,0 +1,90 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.WorkScheduleRequest.CreateWorkScheduleRequest
+
+@{
+    ViewData["Title"] = "Tạo lịch công tác";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ActionDate" class="control-label">Thời gian</label>
+                <input asp-for="ActionDate" class="form-control" />
+                <span asp-validation-for="ActionDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tên lịch công tác <b style="color: red">*</b></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Nội dung công tác</label>
+                <textarea asp-for="Description" class="form-control" id="summernoteEditor"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Note" class="control-label">Ghi chú</label>
+                <textarea asp-for="Note" class="form-control" id="summernoteEditor2"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Địa chỉ</label>
+                <textarea asp-for="Address" class="form-control" id="summernoteEditor3"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Participants" class="control-label">Thành phần tham dự</label>
+                <textarea asp-for="Participants" class="form-control" id="summernoteEditor4"></textarea>
+                <span asp-validation-for="Participants" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Tạo lịch công tác
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các lịch công tác</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 400
+            };
+    var summernote2 = new dotnetstartermvc.Models.Summernote("#summernoteEditor2", false);
+    var summernote3 = new dotnetstartermvc.Models.Summernote("#summernoteEditor3", false);
+    var summernote4 = new dotnetstartermvc.Models.Summernote("#summernoteEditor4", false);
+}
+<partial name="_Summernote" model="summernote" />
+<partial name="_Summernote" model="summernote2" />
+<partial name="_Summernote" model="summernote3" />
+<partial name="_Summernote" model="summernote4" />
+
+@{
+    _AdminSidebarService.SetActive("WorkSchedules", "Create", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

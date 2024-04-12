@@ -29,6 +29,23 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             _logger = logger;
         }
 
+        private Task<AppUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
+
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            AddLoginSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
+        }
+
         //
         // GET: /Manage/Index
         [HttpGet]
@@ -64,21 +81,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
                 }
             };
             return View(model);
-        }
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            AddLoginSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
-        private Task<AppUser> GetCurrentUserAsync()
-        {
-            return _userManager.GetUserAsync(HttpContext.User);
         }
 
         //

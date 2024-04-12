@@ -28,6 +28,9 @@ namespace dotnetstartermvc.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
+        [TempData]
+        public string StatusMessage { set; get; }
+
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
@@ -96,6 +99,9 @@ namespace dotnetstartermvc.Controllers
                 };
                 _context.Add(recruitment);
                 await _context.SaveChangesAsync();
+
+                StatusMessage = "Tạo tin tuyển dụng thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -145,6 +151,8 @@ namespace dotnetstartermvc.Controllers
                 _context.Update(recruitment);
                 await _context.SaveChangesAsync();
 
+                StatusMessage = "Cập nhật tin tuyển dụng thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(request);
@@ -184,6 +192,9 @@ namespace dotnetstartermvc.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            StatusMessage = "Xóa tin tuyển dụng thành công!";
+
             return RedirectToAction(nameof(Index));
         }
 

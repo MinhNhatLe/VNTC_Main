@@ -27,13 +27,16 @@ namespace dotnetstartermvc.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
+        [TempData]
+        public string StatusMessage { set; get; }
+
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
             var pageSize = 10; // Số lượng item trên mỗi trang
 
             var notifications = from n in _context.Notifications.Include(s => s.User)
-                       select n;
+                                select n;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -93,6 +96,9 @@ namespace dotnetstartermvc.Controllers
                 };
                 _context.Add(notifications);
                 await _context.SaveChangesAsync();
+
+                StatusMessage = "Tạo thông báo thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -141,6 +147,8 @@ namespace dotnetstartermvc.Controllers
                 _context.Update(notifications);
                 await _context.SaveChangesAsync();
 
+                StatusMessage = "Cập nhật thông báo thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -178,14 +186,17 @@ namespace dotnetstartermvc.Controllers
             {
                 _context.Notifications.Remove(notification);
             }
-            
+
             await _context.SaveChangesAsync();
+
+            StatusMessage = "Xóa thông báo thành công!";
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool NewExists(Guid id)
         {
-          return (_context.Notifications?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Notifications?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

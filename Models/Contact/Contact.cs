@@ -9,13 +9,13 @@ namespace dotnetstartermvc.Models.Contacts
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [StringLength(50)]
         [Required(ErrorMessage = "Vui lòng nhập họ & tên")]
+        [StringLength(70, ErrorMessage = "Vui lòng nhập họ & tên không được vượt quá 70 kí tự.")]
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ email")]
-        [StringLength(100)]
-        [EmailAddress(ErrorMessage = "Phải là địa chỉ email")]
+        [StringLength(70, ErrorMessage = "Vui lòng nhập địa chỉ email không được vượt quá 70 kí tự.")]
+        [EmailAddress(ErrorMessage = "Phải đúng định dạng email")]
         public string Email { get; set; }
 
         public DateTime DateSent { get; set; }

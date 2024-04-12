@@ -4,10 +4,11 @@ namespace dotnetstartermvc.Areas.Identity.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Phải nhập địa chỉ email hoặc tên tài khoản")]
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ email hoặc tên tài khoản")]
+        [StringLength(70, ErrorMessage = "Vui lòng nhập địa chỉ email hoặc tên tài khoản không được vượt quá 70 kí tự.")]
         public string UserNameOrEmail { get; set; }
 
-        [Required(ErrorMessage = "Phải nhập mật khẩu")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

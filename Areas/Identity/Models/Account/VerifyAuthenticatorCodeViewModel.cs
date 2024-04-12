@@ -4,7 +4,7 @@ namespace dotnetstartermvc.Areas.Identity.Models.AccountViewModels
 {
     public class VerifyAuthenticatorCodeViewModel
     {
-        [Required(ErrorMessage = "Phải nhập nhập mã đã lưu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã đã lưu")]
         public string Code { get; set; }
 
         public string ReturnUrl { get; set; }

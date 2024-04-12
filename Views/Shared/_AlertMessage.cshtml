@@ -1,11 +1,13 @@
 ﻿@{
     var message = TempData["StatusMessage"] as string;
 }
-@if (!string.IsNullOrEmpty(message))
+
+@if (!String.IsNullOrEmpty(message))
 {
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    var statusMessageClass = message.StartsWith("Error") ? "danger" : "warning";
+    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
         <strong>Thông báo!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         @message
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 }

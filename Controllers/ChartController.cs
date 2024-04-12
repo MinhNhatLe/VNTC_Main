@@ -22,17 +22,19 @@ namespace dotnetstartermvc.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var rolesCount = await _context.Roles.CountAsync();
             var usersCount = await _context.Users.CountAsync();
             var servicesCount = await _context.Services.CountAsync();
             var notificationsCount = await _context.Notifications.CountAsync();
             var jobCount = await _context.Recruitments.CountAsync();
-            var rolesCount = await _context.Roles.CountAsync();
+            var workScheduleCount = await _context.WorkSchedules.CountAsync();
 
+            ViewBag.RolesCount = rolesCount;
             ViewBag.UsersCount = usersCount;
             ViewBag.ServicesCount = servicesCount;
             ViewBag.NotificationsCount = notificationsCount;
             ViewBag.JobCount = jobCount;
-            ViewBag.RolesCount = rolesCount;
+            ViewBag.WorkScheduleCount = workScheduleCount;
 
             return View();
         }

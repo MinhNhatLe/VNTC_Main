@@ -4,13 +4,14 @@ namespace dotnetstartermvc.Areas.Identity.Models.AccountViewModels
 {
     public class ResetPasswordViewModel
     {
-        [Required(ErrorMessage = "Phải nhập đúng định dạng email")]
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ email")]
+        [StringLength(70, ErrorMessage = "Vui lòng nhập địa chỉ email không được vượt quá 70 kí tự.")]
         [EmailAddress(ErrorMessage = "Phải đúng định dạng email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Phải nhập mật khẩu mới")]
-        [StringLength(100, ErrorMessage = "Mật khẩu phải dài trên 5 ký tự.", MinimumLength = 5)]
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu mới")]
+        [StringLength(70, ErrorMessage = "Vui lòng nhập mật khẩu mới từ 5 đến 70 kí tự", MinimumLength = 5)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Phải nhập mật khẩu")]

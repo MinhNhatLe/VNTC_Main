@@ -123,6 +123,37 @@ namespace dotnetstartermvc.Menu
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
+                Title = "Quản lý lịch công tác",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "workschedule",
+                Items = new List<SidebarItem>() {
+                    new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "WorkSchedules",
+                                Action = "ListSchedule",
+                                Area = "",
+                                Title = "Lịch công tác chung"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "WorkSchedules",
+                                Action = "Index",
+                                Area = "",
+                                Title = "Danh sách lịch công tác"
+                        },
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "WorkSchedules",
+                                Action = "Create",
+                                Area = "",
+                                Title = "Tạo lịch công tác"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
                 Title = "Quản lý tuyển dụng",
                 AwesomeIcon = "far fa-folder",
                 collapseID = "recruitment",
@@ -154,13 +185,6 @@ namespace dotnetstartermvc.Menu
                 AwesomeIcon = "far fa-folder",
                 collapseID = "allChartandSchedule",
                 Items = new List<SidebarItem>() {
-                        new SidebarItem() {
-                                Type = SidebarItemType.NavItem,
-                                Controller = "Schedule",
-                                Action = "Index",
-                                Area = "",
-                                Title = "Danh sách lịch"
-                        },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
                                 Controller = "Chart",

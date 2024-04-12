@@ -5,8 +5,8 @@ namespace dotnetstartermvc.Areas.Identity.Models.RoleViewModels
 {
     public class EditRoleModel
     {
-        [Required(ErrorMessage = "Phải nhập tên của role")]
-        [StringLength(256, MinimumLength = 3, ErrorMessage = "Tên của vai trò phải dài trên 3 ký tự")]
+        [Required(ErrorMessage = "Vui lòng nhập tên của vai trò")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Vui lòng nhập tên của vai trò từ 3 đến 50 kí tự")]
         public string Name { get; set; }
 
         public List<IdentityRoleClaim<string>> Claims { get; set; }

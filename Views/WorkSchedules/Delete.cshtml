@@ -1,32 +1,64 @@
 ﻿@using System.Globalization;
 @using dotnetstartermvc.Menu
 @inject AdminSidebarService _AdminSidebarService
-@model dotnetstartermvc.Models.Recruitment
+@model dotnetstartermvc.Models.WorkSchedule
 
 @{
-    ViewData["Title"] = "Xóa tuyển dụng";
+    ViewData["Title"] = "Xóa lịch công tác";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div>
     <dl class="row">
         <dt class="col-sm-3">
-            Tên công việc
+            Thời gian
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.ActionDate.HasValue)
+                {
+                    var timeString = Model.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Tên lịch công tác
         </dt>
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt class="col-sm-3">
-            Số lượng
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class="col-sm-3">
-            Mô tả thông tin công việc
+            Nội dung công tác
         </dt>
         <dd class="col-sm-9">
             @Html.Raw(Model.Description)
+        </dd>
+        <dt class="col-sm-3">
+            Ghi chú
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Note)
+        </dd>
+        <dt class="col-sm-3">
+            Địa chỉ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Address)
+        </dd>
+        <dt class="col-sm-3">
+            Thành phần tham dự
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Participants)
         </dd>
         <dt class="col-sm-3">
             Ngày đăng
@@ -49,25 +81,26 @@
             }
         </dd>
         <dt class="col-sm-3">
-            Người đảm nhiệm
+            Người tạo
         </dt>
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.User.Firstname)
         </dd>
     </dl>
+
     <form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa nội dung này không?');">
         <input type="hidden" asp-for="Id" />
         <button type="submit" class="btn btn-danger">
             <i class="fa fa-trash" aria-hidden="true"></i>
-            Xóa công việc
+            Xóa lịch công tác
         </button>
     </form>
     <hr />
-    <a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách tuyển dụng</a>
+    <a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách lịch công tác</a>
 </div>
 
 @{
-    _AdminSidebarService.SetActive("Recruitments", "Index", "");
+    _AdminSidebarService.SetActive("WorkSchedules", "Index", "");
 }
 
 @section Sidebar

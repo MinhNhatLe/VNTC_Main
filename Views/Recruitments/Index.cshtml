@@ -14,6 +14,8 @@
     int stt = 1;
 }
 
+<partial name="_AlertMessage" />
+
 <div class="row">
     <div class="col-lg-4 col-sm-4 col-xs-0">
     </div>
@@ -74,7 +76,21 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    <text>@item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+                    @{
+                        if (item.CreatedDate.HasValue)
+                        {
+                            var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            if (timeString.Contains("SA"))
+                            {
+                                timeString = timeString.Replace("SA", "Sáng");
+                            }
+                            else if (timeString.Contains("CH"))
+                            {
+                                timeString = timeString.Replace("CH", "Chiều");
+                            }
+                            <text>@timeString</text>
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.Firstname)

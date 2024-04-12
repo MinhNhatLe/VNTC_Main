@@ -28,6 +28,9 @@ namespace dotnetstartermvc.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
+        [TempData]
+        public string StatusMessage { set; get; }
+
         [AllowAnonymous]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
@@ -96,6 +99,9 @@ namespace dotnetstartermvc.Controllers
                 };
                 _context.Add(service);
                 await _context.SaveChangesAsync();
+
+                StatusMessage = "Tạo dịch vụ thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -144,6 +150,8 @@ namespace dotnetstartermvc.Controllers
                 _context.Update(service);
                 await _context.SaveChangesAsync();
 
+                StatusMessage = "Cập nhật dịch vụ thành công!";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -183,6 +191,9 @@ namespace dotnetstartermvc.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            StatusMessage = "Xóa dịch vụ thành công!";
+
             return RedirectToAction(nameof(Index));
         }
 

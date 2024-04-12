@@ -5,14 +5,21 @@
 @using dotnetstartermvc.Menu
 @using dotnetstartermvc.Models;
 @inject AdminSidebarService _AdminSidebarService
-@model X.PagedList.IPagedList<Service>
+@model X.PagedList.IPagedList<WorkSchedule>
 
 @{
-    ViewData["Title"] = "Quản lý dịch vụ";
+    ViewData["Title"] = "Quản lý lịch công tác";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     int stt = 1;
 }
+
+<style>
+    th, td {
+        word-wrap: break-word;
+        max-width: 750px;
+    }
+</style>
 
 <partial name="_AlertMessage" />
 
@@ -44,13 +51,22 @@
                 STT
             </th>
             <th>
-                Tên dịch vụ
+                Thời gian
             </th>
             <th>
-                Ngày đăng
+                Tên lịch công tác
             </th>
             <th>
-                Người tạo
+                Nội dung
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Thành phần tham dự
             </th>
             <th>
                 Tác vụ
@@ -67,13 +83,10 @@
                     </b>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
                     @{
-                        if (item.CreatedDate.HasValue)
+                        if (item.ActionDate.HasValue)
                         {
-                            var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
                             if (timeString.Contains("SA"))
                             {
                                 timeString = timeString.Replace("SA", "Sáng");
@@ -87,7 +100,19 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User.Firstname)
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.Raw(item.Description)
+                </td>
+                <td>
+                    @Html.Raw(item.Note)
+                </td>
+                <td>
+                    @Html.Raw(item.Address)
+                </td>
+                <td>
+                    @Html.Raw(item.Participants)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
@@ -111,7 +136,7 @@
 @Html.Partial("_Pagination", Model)
 
 @{
-    _AdminSidebarService.SetActive("Services", "Index", "");
+    _AdminSidebarService.SetActive("WorkSchedules", "Index", "");
 }
 
 @section Sidebar

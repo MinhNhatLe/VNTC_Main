@@ -19,6 +19,9 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
             _context = context;
         }
 
+        [TempData]
+        public string StatusMessage { set; get; }
+
         [HttpGet("/admin/contact")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
@@ -58,9 +61,6 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
 
             return View(contact);
         }
-
-        [TempData]
-        public string StatusMessage { set; get; }
 
         [HttpGet("/contact/")]
         [AllowAnonymous]
