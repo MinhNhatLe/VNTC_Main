@@ -1,4 +1,5 @@
-﻿using dotnetstartermvc.Models;
+﻿using dotnetstartermvc.Data;
+using dotnetstartermvc.Models;
 using dotnetstartermvc.ModelsRequest.WorkScheduleRequest;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -31,6 +32,7 @@ namespace dotnetstartermvc.Controllers
         [TempData]
         public string StatusMessage { set; get; }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
@@ -41,15 +43,15 @@ namespace dotnetstartermvc.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                workSchedule = workSchedule.Where(s => s.Title.Contains(searchString) 
+                workSchedule = workSchedule.Where(s => s.Title.Contains(searchString)
                 || s.Description.Contains(searchString)
                 || s.Note.Contains(searchString)
                 || s.Address.Contains(searchString)
                 || s.Participants.Contains(searchString)
-                || s.User.Firstname.Contains(searchString));
+                || s.User.Email.Contains(searchString));
             }
 
-            workSchedule = workSchedule.OrderByDescending(s => s.CreatedDate);
+            workSchedule = workSchedule.OrderByDescending(s => s.ActionDate);
 
             var pagedList = await workSchedule.ToPagedListAsync(pageNumber, pageSize);
             ViewBag.CurrentFilter = searchString;
@@ -57,6 +59,7 @@ namespace dotnetstartermvc.Controllers
             return View(pagedList);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.WorkSchedules == null)
@@ -75,17 +78,19 @@ namespace dotnetstartermvc.Controllers
             return View(workSchedule);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         public async Task<IActionResult> Create()
         {
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View();
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateWorkScheduleRequest request)
@@ -114,12 +119,13 @@ namespace dotnetstartermvc.Controllers
 
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.WorkSchedules == null)
@@ -136,6 +142,7 @@ namespace dotnetstartermvc.Controllers
             return View(workSchedule);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditWorkScheduleRequest request)
@@ -157,7 +164,7 @@ namespace dotnetstartermvc.Controllers
                 workSchedule.ActionDate = request.ActionDate;
                 workSchedule.CreatedDate = DateTime.Now;
                 workSchedule.UserId = user.Id;
-                
+
                 _context.Update(workSchedule);
                 await _context.SaveChangesAsync();
 
@@ -169,6 +176,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.WorkSchedules == null)
@@ -187,6 +195,7 @@ namespace dotnetstartermvc.Controllers
             return View(workSchedule);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -213,8 +222,12 @@ namespace dotnetstartermvc.Controllers
             return (_context.WorkSchedules?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public async Task<IActionResult> ListSchedule(string searchString)
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        public async Task<IActionResult> ListSchedule(int? page, string searchString)
         {
+            var pageNumber = page ?? 1; // Trang hiện tại
+            var pageSize = 10; // Số lượng item trên mỗi trang
+
             var workSchedules = _context.WorkSchedules.AsQueryable();
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -223,14 +236,18 @@ namespace dotnetstartermvc.Controllers
                 || s.Note.Contains(searchString)
                 || s.Address.Contains(searchString)
                 || s.Participants.Contains(searchString)
-                || s.User.Firstname.Contains(searchString));
+                || s.User.Email.Contains(searchString));
             }
+
+            workSchedules = workSchedules.OrderByDescending(s => s.ActionDate);
+            var pagedList = await workSchedules.ToPagedListAsync(pageNumber, pageSize);
 
             ViewBag.CurrentFilter = searchString;
 
-            return View(workSchedules);
+            return View(pagedList);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
         public async Task<IActionResult> FilterByDay(string searchString)
         {
             var currentDate = DateTime.Today;
@@ -240,7 +257,7 @@ namespace dotnetstartermvc.Controllers
             ViewBag.CurrentDate = currentDate;
             ViewBag.CurrentFilter = searchString;
 
-            var workSchedules = _context.WorkSchedules.Where(s => s.CreatedDate >= startOfDay && s.CreatedDate < endOfDay);
+            var workSchedules = _context.WorkSchedules.Where(s => s.ActionDate >= startOfDay && s.ActionDate < endOfDay);
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -249,12 +266,15 @@ namespace dotnetstartermvc.Controllers
                 || s.Note.Contains(searchString)
                 || s.Address.Contains(searchString)
                 || s.Participants.Contains(searchString)
-                || s.User.Firstname.Contains(searchString));
+                || s.User.Email.Contains(searchString));
             }
+
+            workSchedules = workSchedules.OrderBy(s => s.ActionDate);
 
             return View(workSchedules);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
         public async Task<IActionResult> FilterByWeek(string searchString)
         {
 
@@ -272,7 +292,7 @@ namespace dotnetstartermvc.Controllers
             ViewBag.WeekNumber = weekNumber;
             ViewBag.CurrentFilter = searchString;
 
-            var workSchedules = _context.WorkSchedules.Where(s => s.CreatedDate >= startOfWeek && s.CreatedDate <= endOfWeek.AddDays(1));
+            var workSchedules = _context.WorkSchedules.Where(s => s.ActionDate >= startOfWeek && s.ActionDate <= endOfWeek.AddDays(1));
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -281,8 +301,10 @@ namespace dotnetstartermvc.Controllers
                 || s.Note.Contains(searchString)
                 || s.Address.Contains(searchString)
                 || s.Participants.Contains(searchString)
-                || s.User.Firstname.Contains(searchString));
+                || s.User.Email.Contains(searchString));
             }
+
+            workSchedules = workSchedules.OrderBy(s => s.ActionDate);
 
             return View(workSchedules);
         }

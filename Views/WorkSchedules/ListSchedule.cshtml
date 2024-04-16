@@ -1,6 +1,9 @@
-﻿@using System.Globalization
+﻿@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+@using System.Globalization
 @using dotnetstartermvc.Menu
-@model IQueryable<dotnetstartermvc.Models.WorkSchedule>
+@model X.PagedList.IPagedList<WorkSchedule>
 @inject AdminSidebarService _AdminSidebarService
 
 @{
@@ -28,12 +31,12 @@
         <div class="col-lg-12 col-sm-12 col-xs-12">
             <div class="row" style="margin-top:10px; margin-bottom:10px; ">
                 <div class="col-lg-3 col-sm-12 col-xs-12">
-                    <a class="btn btn-outline-primary" asp-action="Index">Tất cả</a>
+                    <a class="btn btn-outline-primary" asp-action="ListSchedule">Tất cả</a>
                     <a class="btn btn-primary" asp-action="FilterByWeek">Lịch tuần</a>
                     <a class="btn btn-primary" asp-action="FilterByDay">Lịch ngày</a>
                 </div>
                 <div class="col-lg-7 col-sm-12 col-xs-12">
-                    <form asp-action="Index" method="get">
+                    <form asp-action="ListSchedule" method="get">
                         <div class="form-group ">
                             <input type="text" class="form-control" id="search" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Nhập nội dung cần tìm kiếm ..." style="display: inline-block; width: 70%">
                             <button type="submit" class="btn btn-primary" style="width: 25%">
@@ -117,6 +120,8 @@
                     }
                 </tbody>
             </table>
+
+            @Html.Partial("_Pagination", Model)
         </div>
     </div>
 </div>

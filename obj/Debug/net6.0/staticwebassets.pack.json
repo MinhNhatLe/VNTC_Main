@@ -5,6 +5,150 @@
       "PackagePath": "staticwebassets\\dotnetstartermvc.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\responsive.css"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\style.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\style.css.map",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\style.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\style.scss",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\style.scss"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\asset-home-layout\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\asset-home-layout\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\asset-home-layout\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\about-img.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\about-img.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\about-img.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\about-img.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\bg-logo-vntc.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\bg-logo-vntc.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\client1.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\client1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\client2.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\client2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\hero-bg-main.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\hero-bg-main.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\hero-bg.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\hero-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\next.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\next.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\prev.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\prev.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\s1.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\s1.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\s2.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\s2.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\s3.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\s3.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider-bg.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\slider-bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider-img.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\slider-img.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\team-1.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\team-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\team-2.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\team-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\team-3.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\team-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\team-4.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\team-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\track-bg.jpg",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\track-bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\w1.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\w1.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\w2.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\w2.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\w3.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\w3.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\w4.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\w4.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\asset-home-layout\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\custom.js",
+      "PackagePath": "staticwebassets\\asset-home-layout\\js\\custom.js"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\jquery-3.4.1.min.js",
+      "PackagePath": "staticwebassets\\asset-home-layout\\js\\jquery-3.4.1.min.js"
+    },
+    {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\css\\sb-admin-2.min.css",
       "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
     },

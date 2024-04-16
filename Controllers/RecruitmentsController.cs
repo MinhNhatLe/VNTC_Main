@@ -10,7 +10,7 @@ using X.PagedList;
 
 namespace dotnetstartermvc.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize]
     [Route("/Recruitments/[action]")]
     public class RecruitmentsController : Controller
     {
@@ -31,17 +31,18 @@ namespace dotnetstartermvc.Controllers
         [TempData]
         public string StatusMessage { set; get; }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
             var pageSize = 10; // Số lượng item trên mỗi trang
 
             var recruitments = from s in _context.Recruitments.Include(s => s.User)
-                           select s;
+                               select s;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                recruitments = recruitments.Where(s => s.Title.Contains(searchString) || s.User.Firstname.Contains(searchString));
+                recruitments = recruitments.Where(s => s.Title.Contains(searchString) || s.Description.Contains(searchString) || s.User.Email.Contains(searchString));
             }
 
             recruitments = recruitments.OrderByDescending(s => s.CreatedDate);
@@ -52,6 +53,7 @@ namespace dotnetstartermvc.Controllers
             return View(pagedList);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Recruitments == null)
@@ -70,17 +72,19 @@ namespace dotnetstartermvc.Controllers
             return View(recruitment);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Create()
         {
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View();
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateRecruitmentRequest request)
@@ -107,12 +111,13 @@ namespace dotnetstartermvc.Controllers
 
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Recruitments == null)
@@ -129,6 +134,7 @@ namespace dotnetstartermvc.Controllers
             return View(recruitment);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditRecruitmentRequest request)
@@ -158,6 +164,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Recruitments == null)
@@ -176,6 +183,7 @@ namespace dotnetstartermvc.Controllers
             return View(recruitment);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         // POST: Recruitments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -190,7 +198,7 @@ namespace dotnetstartermvc.Controllers
             {
                 _context.Recruitments.Remove(recruitment);
             }
-            
+
             await _context.SaveChangesAsync();
 
             StatusMessage = "Xóa tin tuyển dụng thành công!";
@@ -200,7 +208,7 @@ namespace dotnetstartermvc.Controllers
 
         private bool RecruitmentExists(Guid id)
         {
-          return (_context.Recruitments?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Recruitments?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -9,7 +9,7 @@ using ContactModel = dotnetstartermvc.Models.Contacts.Contact;
 namespace dotnetstartermvc.Areas.Contact.Controllers
 {
     [Area("Contact")]
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
     public class ContactController : Controller
     {
         private readonly AppDbContext _context;
@@ -62,15 +62,15 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
             return View(contact);
         }
 
-        [HttpGet("/contact/")]
         [AllowAnonymous]
+        [HttpGet("/contact/")]
         public IActionResult SendContact()
         {
             return View();
         }
 
-        [HttpPost("/contact/")]
         [AllowAnonymous]
+        [HttpPost("/contact/")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendContact([Bind("FullName,Email,Message,Phone")] ContactModel contact)
         {

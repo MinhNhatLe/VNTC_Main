@@ -10,7 +10,7 @@ using X.PagedList;
 
 namespace dotnetstartermvc.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize]
     [Route("/Notifications/[action]")]
     public class NotificationsController : Controller
     {
@@ -30,6 +30,7 @@ namespace dotnetstartermvc.Controllers
         [TempData]
         public string StatusMessage { set; get; }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
@@ -40,7 +41,7 @@ namespace dotnetstartermvc.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                notifications = notifications.Where(n => n.Title.Contains(searchString) || n.Description.Contains(searchString) || n.User.Firstname.Contains(searchString));
+                notifications = notifications.Where(n => n.Title.Contains(searchString) || n.Description.Contains(searchString) || n.User.Email.Contains(searchString));
             }
 
             notifications = notifications.OrderByDescending(s => s.CreatedDate);
@@ -51,6 +52,7 @@ namespace dotnetstartermvc.Controllers
             return View(pagedList);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Notifications == null)
@@ -69,17 +71,19 @@ namespace dotnetstartermvc.Controllers
             return View(@new);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Create()
         {
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View();
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateNotificationRequest request)
@@ -104,12 +108,13 @@ namespace dotnetstartermvc.Controllers
 
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Notifications == null)
@@ -126,6 +131,7 @@ namespace dotnetstartermvc.Controllers
             return View(notifications);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditNotificationRequest request)
@@ -155,6 +161,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Notifications == null)
@@ -173,6 +180,7 @@ namespace dotnetstartermvc.Controllers
             return View(notification);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -194,7 +202,7 @@ namespace dotnetstartermvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool NewExists(Guid id)
+        private bool NotificationExists(Guid id)
         {
             return (_context.Notifications?.Any(e => e.Id == id)).GetValueOrDefault();
         }

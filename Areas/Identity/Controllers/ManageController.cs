@@ -75,8 +75,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
                     HomeAdress = user.HomeAdress,
                     UserName = user.UserName,
                     UserEmail = user.Email,
-                    Firstname = user.Firstname,
-                    Lastname = user.Lastname,
                     PhoneNumber = user.PhoneNumber,
                 }
             };
@@ -227,6 +225,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             }
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
+
         //
         // GET: /Manage/AddPhoneNumber
         public IActionResult AddPhoneNumber()
@@ -250,6 +249,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             await _emailSender.SendSmsAsync(model.PhoneNumber, "Mã xác thực là: " + code);
             return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
         }
+
         //
         // GET: /Manage/VerifyPhoneNumber
         [HttpGet]
@@ -284,6 +284,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             ModelState.AddModelError(string.Empty, "Lỗi thêm số điện thoại");
             return View(model);
         }
+
         //
         // GET: /Manage/RemovePhoneNumber
         [HttpPost]
@@ -302,7 +303,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
-
 
         //
         // POST: /Manage/EnableTwoFactorAuthentication
@@ -334,6 +334,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             }
             return RedirectToAction(nameof(Index), "Manage");
         }
+
         //
         // POST: /Manage/ResetAuthenticatorKey
         [HttpPost]
@@ -376,12 +377,11 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
                 HomeAdress = user.HomeAdress,
                 UserName = user.UserName,
                 UserEmail = user.Email,
-                Firstname = user.Firstname,
-                Lastname = user.Lastname,
                 PhoneNumber = user.PhoneNumber,
             };
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditProfileAsync(EditExtraProfileModel model)
         {
@@ -389,8 +389,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
 
             user.HomeAdress = model.HomeAdress;
             user.BirthDate = model.BirthDate;
-            user.Firstname = model.Firstname;
-            user.Lastname = model.Lastname;
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);

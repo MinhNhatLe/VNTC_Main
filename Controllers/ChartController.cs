@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnetstartermvc.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
     [Route("/Chart/[action]")]
     public class ChartController : Controller
     {
@@ -28,6 +28,7 @@ namespace dotnetstartermvc.Controllers
             var notificationsCount = await _context.Notifications.CountAsync();
             var jobCount = await _context.Recruitments.CountAsync();
             var workScheduleCount = await _context.WorkSchedules.CountAsync();
+            var assignmentCount = await _context.Assignments.CountAsync();
 
             ViewBag.RolesCount = rolesCount;
             ViewBag.UsersCount = usersCount;
@@ -35,6 +36,7 @@ namespace dotnetstartermvc.Controllers
             ViewBag.NotificationsCount = notificationsCount;
             ViewBag.JobCount = jobCount;
             ViewBag.WorkScheduleCount = workScheduleCount;
+            ViewBag.AssignmentCount = assignmentCount;
 
             return View();
         }

@@ -6,10 +6,33 @@
 }
 
 <div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div style="width:50%; margin: 0 auto;">
+            <h5 class="text-center">Biểu đồ số lượng vai trò & người dùng</h5>
+            <canvas id="myPie1" width="200" height="200"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div style="width: 50%; margin: 0 auto;">
+            <h5 class="text-center">Biểu đồ số lượng các nghiệp vụ</h5>
+            <canvas id="myPie2" width="200" height="200"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div style="width: 50%; margin: 0 auto;">
+            <h5 class="text-center">Biểu đồ lịch công tác & nhiệm vụ</h5>
+            <canvas id="myPie3" width="200" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
-        <!-- Thêm biểu đồ tại đây -->
         <div style="width: 100%; margin: 0 auto;">
-            <canvas id="myChart" width="800" height="400"></canvas>
+            <h5 class="text-center">Biểu đồ biểu diễn tất cả các số liệu của VNTC</h5>
+            <canvas id="myChartBar" width="1000" height="300"></canvas>
         </div>
     </div>
 </div>
@@ -17,11 +40,121 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var ctx1 = document.getElementById('myPie1').getContext('2d');
+        var myPie1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Vai trò', 'Người dùng'],
+                datasets: [{
+                    label: 'Số lượng',
+                    data: [
+        @ViewBag.RolesCount,
+        @ViewBag.UsersCount,
+                            ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',   // Red
+                        'rgba(54, 162, 235, 0.8)',   // Blue
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',     // Red
+                        'rgba(54, 162, 235, 1)',     // Blue
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx2 = document.getElementById('myPie2').getContext('2d');
+        var myPie2 = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Dịch vụ', 'Tin tức', 'Tuyển dụng'],
+                datasets: [{
+                    label: 'Số lượng',
+                    data: [
+        @ViewBag.ServicesCount,
+        @ViewBag.NotificationsCount,
+        @ViewBag.JobCount,
+        @ViewBag.WorkScheduleCount,
+        @ViewBag.AssignmentCount,
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 206, 86, 0.2)',   // Yellow
+                        'rgba(75, 192, 192, 0.2)',   // Green
+                        'rgba(153, 102, 255, 0.2)',  // Purple
+                    ],
+                    borderColor: [
+                        'rgba(255, 206, 86, 1)',     // Yellow
+                        'rgba(75, 192, 192, 1)',     // Green
+                        'rgba(153, 102, 255, 1)',    // Purple
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx3 = document.getElementById('myPie3').getContext('2d');
+        var myPie3 = new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: ['Lịch công tác', 'Nhiệm vụ'],
+                datasets: [{
+                    label: 'Số lượng',
+                    data: [
+        @ViewBag.WorkScheduleCount,
+        @ViewBag.AssignmentCount,
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',   // Orange
+                        'rgba(255, 0, 255, 0.2)',    // Magenta
+                    ],
+                    borderColor: [
+                        'rgba(255, 159, 64, 1)',     // Orange
+                        'rgba(255, 0, 255, 1)',      // Magenta
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('myChartBar').getContext('2d');
+        var myChartBar = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Vai trò', 'Người dùng', 'Dịch vụ', 'Tin tức', 'Tuyển dụng', 'Lịch công tác'],
+                labels: ['Vai trò', 'Người dùng', 'Dịch vụ', 'Tin tức', 'Tuyển dụng', 'Lịch công tác', 'Nhiệm vụ'],
                 datasets: [{
                     label: 'Số lượng',
                     data: [
@@ -30,23 +163,26 @@
         @ViewBag.ServicesCount,
         @ViewBag.NotificationsCount,
         @ViewBag.JobCount,
-        @ViewBag.WorkScheduleCount
+        @ViewBag.WorkScheduleCount,
+        @ViewBag.AssignmentCount,
                             ],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(93, 93, 93, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',   // Red
+                        'rgba(54, 162, 235, 0.2)',   // Blue
+                        'rgba(255, 206, 86, 0.2)',   // Yellow
+                        'rgba(75, 192, 192, 0.2)',   // Green
+                        'rgba(153, 102, 255, 0.2)',  // Purple
+                        'rgba(255, 159, 64, 0.2)',   // Orange
+                        'rgba(255, 0, 255, 0.2)',    // Magenta
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(93, 93, 93, 1)',
+                        'rgba(255, 99, 132, 1)',     // Red
+                        'rgba(54, 162, 235, 1)',     // Blue
+                        'rgba(255, 206, 86, 1)',     // Yellow
+                        'rgba(75, 192, 192, 1)',     // Green
+                        'rgba(153, 102, 255, 1)',    // Purple
+                        'rgba(255, 159, 64, 1)',     // Orange
+                        'rgba(255, 0, 255, 1)',      // Magenta
                     ],
                     borderWidth: 1
                 }]

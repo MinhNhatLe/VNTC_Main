@@ -1,0 +1,91 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.Models.Assignment
+
+@{
+    ViewData["Title"] = "Chi tiết nhiệm vụ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Thời gian
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.ActionDate.HasValue)
+                {
+                    var timeString = Model.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Tên nhiệm vụ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-3">
+            Nội dung
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Description)
+        </dd>
+        <dt class="col-sm-3">
+            Ghi chú
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Note)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày đăng
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.CreatedDate.HasValue)
+                {
+                    var timeString = Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Người tạo
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-dark"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các nhiệm vụ</a>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("Assignments", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

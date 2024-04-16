@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace dotnetstartermvc.Areas.Identity.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize(Roles = $"{RoleName.SuperAdmin}")]
     [Area("Identity")]
     [Route("/ManageUser/[action]")]
     public class UserController : Controller
@@ -252,6 +252,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             ViewBag.userclaim = userclaim;
             return View("AddClaim", model);
         }
+
         [HttpPost("{claimid}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditClaim(int claimid, AddUserClaimModel model)

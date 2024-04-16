@@ -1,0 +1,70 @@
+﻿@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+@model X.PagedList.IPagedList<dotnetstartermvc.Models.Notification>
+
+@{
+    ViewData["Title"] = "Danh sách tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .hero_area {
+        min-height: 5vh;
+    }
+</style>
+
+<!-- service section -->
+
+<section class="service_section layout_padding">
+    <div class="service_container">
+        <div class="container ">
+            <div class="heading_container heading_center">
+                <h2>
+                    Tin tức & sự kiện <span>HOT</span>
+                </h2>
+                <p>
+                    Các tin tức & sự kiện cực HOT liên quan để giải pháp công nghệ
+                </p>
+            </div>
+            <form asp-action="News" method="get">
+                <div class="row" style="margin-top: 40px;">
+                    <div class="col-lg-5 col-sm-5 col-xs-5">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-7 col-xs-7">
+                        <input type="text" class="form-control" id="search" name="searchString" placeholder="Nhập nội dung cần tìm kiếm ..." value="@ViewData["CurrentFilter"]" style="display: inline-block; width: 70%" />
+                        <button type="submit" class="btn btn-primary" style="width: 25%">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 ">
+                        <div class="box ">
+                            <div class="img-box">
+                                <img src="~/asset-home-layout/images/s2.png" />
+                            </div>
+                            <div class="detail-box" style="height: 100px">
+                                <a asp-action="NotificationDetails" asp-route-id="@item.Id">
+                                    <h5>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Include Phân Trang Partial View -->
+            @Html.Partial("_Pagination", Model)
+        </div>
+    </div>
+</section>
+
+<!-- end service section -->

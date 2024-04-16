@@ -2,12 +2,19 @@
 
 @{
     ViewData["Title"] = "Gửi liên hệ tới VNTC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .hero_area {
+        min-height: 5vh;
+    }
+</style>
 
 <div class="row">
     <div class="col-md-4">
         <div class="contact-firstcol p-2 h-100">
-            <img src="~/images/email.png" />
+            @*<img src="~/images/email.png" />*@
             <h1>LIÊN HỆ VNTC</h1>
             <p>Chúng tôi luôn lắng nghe các ý kiến của bạn !</p>
         </div>

@@ -10,7 +10,7 @@ using X.PagedList;
 
 namespace dotnetstartermvc.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize]
     [Route("/Services/[action]")]
     public class ServicesController : Controller
     {
@@ -31,7 +31,7 @@ namespace dotnetstartermvc.Controllers
         [TempData]
         public string StatusMessage { set; get; }
 
-        [AllowAnonymous]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
@@ -42,7 +42,7 @@ namespace dotnetstartermvc.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                services = services.Where(s => s.Title.Contains(searchString) || s.User.Firstname.Contains(searchString));
+                services = services.Where(s => s.Title.Contains(searchString) || s.Description.Contains(searchString) || s.User.Email.Contains(searchString));
             }
 
             services = services.OrderByDescending(s => s.CreatedDate);
@@ -53,7 +53,7 @@ namespace dotnetstartermvc.Controllers
             return View(pagedList);
         }
 
-
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Services == null)
@@ -72,17 +72,19 @@ namespace dotnetstartermvc.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
             return View();
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateServicesRequest request)
@@ -100,19 +102,20 @@ namespace dotnetstartermvc.Controllers
                 _context.Add(service);
                 await _context.SaveChangesAsync();
 
-                StatusMessage = "Tạo dịch vụ thành công!";
+                StatusMessage = "Tạo dịch vụ mới thành công!";
 
                 return RedirectToAction(nameof(Index));
             }
 
             if (user != null)
             {
-                ViewData["Username"] = user.Firstname;
+                ViewData["Username"] = user.Email;
             }
 
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Services == null)
@@ -129,6 +132,7 @@ namespace dotnetstartermvc.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditServicesRequest request)
@@ -158,6 +162,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Services == null)
@@ -176,6 +181,7 @@ namespace dotnetstartermvc.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

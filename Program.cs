@@ -18,9 +18,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.Configure<RazorViewEngineOptions>(options =>
 {
-    // /View/Controller/Action.cshtml
-    // /MyView/Controller/Action.cshtml
-
     // {0} -> ten Action
     // {1} -> ten Controller
     // {2} -> ten Area
@@ -58,7 +55,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
 
     // Cấu hình Lockout - khóa user
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); // Khóa 5 phút
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); // Khóa 1 phút
     options.Lockout.MaxFailedAccessAttempts = 5; // Thất bại 5 lần thì khóa
     options.Lockout.AllowedForNewUsers = true;
 
@@ -109,7 +106,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ViewManageMenu", builder =>
     {
         builder.RequireAuthenticatedUser();
-        builder.RequireRole(RoleName.Administrator);
+        builder.RequireRole(RoleName.SuperAdmin, RoleName.Administrator, RoleName.Manager, RoleName.Member);
     });
 });
 

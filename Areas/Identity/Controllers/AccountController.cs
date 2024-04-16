@@ -99,7 +99,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             _logger.LogInformation("User đăng xuất");
             return RedirectToAction("Index", "Home", new { area = "" });
         }
-        //
+
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
@@ -109,7 +109,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
-        //
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -252,7 +252,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             }
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -478,7 +477,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        //
+
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -520,7 +519,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-        //
+
         // GET: /Account/VerifyCode
         [HttpGet]
         [AllowAnonymous]
@@ -535,7 +534,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
@@ -615,7 +613,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
                 return View(model);
             }
         }
-        //
+
         // GET: /Account/UseRecoveryCode
         [HttpGet]
         [AllowAnonymous]
@@ -630,7 +628,6 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
             return View(new UseRecoveryCodeViewModel { ReturnUrl = returnUrl });
         }
 
-        //
         // POST: /Account/UseRecoveryCode
         [HttpPost]
         [AllowAnonymous]

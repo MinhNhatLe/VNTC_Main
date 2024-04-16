@@ -6,21 +6,24 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" asp-area="Identity" asp-controller="Manage" asp-action="Index" title="Manage">
-                    <i class="far fa-user"></i>
-                    Xin chào @UserManager.GetUserName(User)!
-                </a>
-            </li>
-            <li class="nav-item">
-                <button title="Đăng xuất" type="submit" class="btn btn-link navbar-btn navbar-link text-light">
-                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+    <div class="dropdown">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="managedropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            HỒ SƠ NGƯỜI DÙNG
+        </button>
+        <div class="dropdown-menu text-center" aria-labelledby="managedropdownmenu" style="width: 100%">
+            <a class="dropdown-item text-primary" asp-area="Identity" asp-controller="Manage" asp-action="Index" title="Manage">
+                Thông tin tài khoản
+                @*<b class="text-primary">
+                    @UserManager.GetUserName(User)
+                </b>*@
+            </a>
+            <form asp-area="Identity" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                <button class="dropdown-item text-danger" type="submit">
+                    <i class="fa fa-sign-out-alt"></i> Đăng xuất
                 </button>
-            </li>
-        </ul>
-    </form>
+            </form>
+        </div>
+    </div>
 }
 else
 {

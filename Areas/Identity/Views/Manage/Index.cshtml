@@ -41,7 +41,7 @@
                              class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3">@Html.DisplayFor(m => Model.profile.UserName)</h5>
                         @*<p class="text-muted mb-1">@Html.DisplayFor(m => Model.profile.UserEmail)</p>*@
-                        @*<p class="text-muted mb-4">Chúc bạn 1 ngày vui vẻ!</p>*@
+                        <p class="text-muted mb-4">VNTC chúc bạn ngày mới vui vẻ!</p>
                         <div class="d-flex justify-content-center mb-2">
                             <a class="btn btn-primary" asp-action="EditProfile">
                                 <i class="fa fa-wrench" aria-hidden="true"></i>
@@ -108,15 +108,6 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Họ & tên</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">@Html.DisplayFor(m => Model.profile.Lastname) @Html.DisplayFor(m => Model.profile.Firstname)</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
                                 <p class="mb-0">Số điện thoại</p>
                             </div>
                             <div class="col-sm-9">
@@ -165,6 +156,10 @@
                                         </form>
                                     }
                                 </div>
+
+
+
+                                @*Tính năng thêm số điện thoại để kích hoạt xác thực 2 yếu tố ( Chưa phát triển)
                                 <hr />
                                 <div>
                                     <p class="mb-1">
@@ -183,6 +178,10 @@
                                     }
                                     @(Model.PhoneNumber ?? "(Tính năng chưa phát triển)")
                                 </div>
+                                Tính năng thêm số điện thoại để kích hoạt xác thực 2 yếu tố ( Chưa phát triển)*@
+
+
+
                                 <hr />
                                 <div>
                                     <p class="mb-1">

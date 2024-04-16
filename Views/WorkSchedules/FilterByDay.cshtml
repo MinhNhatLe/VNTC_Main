@@ -1,5 +1,132 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using System.Globalization
+@using dotnetstartermvc.Menu
+@model IQueryable<dotnetstartermvc.Models.WorkSchedule>
+@inject AdminSidebarService _AdminSidebarService
+
 @{
+    ViewData["Title"] = "Danh sách lịch công tác theo ngày";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    string lastDateTime = "";
+    int stt = 1;
+}
+
+<style>
+    th, td {
+        word-wrap: break-word;
+        max-width: 200px;
+    }
+</style>
+
+<div class="">
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="cf-title-10">
+                <h3 class="text-center">LỊCH CÔNG TÁC VNTC</h3>
+                <h6 class="text-center">@ViewBag.CurrentDate.ToString("dddd, dd/MM/yyyy", new CultureInfo("vi-VN"))</h6>
+            </div>
+        </div>
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="row" style="margin-top:10px; margin-bottom:10px; ">
+                <div class="col-lg-3 col-sm-12 col-xs-12">
+                    <a class="btn btn-primary" asp-action="ListSchedule">Tất cả</a>
+                    <a class="btn btn-primary" asp-action="FilterByWeek">Lịch tuần</a>
+                    <a class="btn btn-outline-primary" asp-action="FilterByDay">Lịch ngày</a>
+                </div>
+                <div class="col-lg-7 col-sm-12 col-xs-12">
+                    <form asp-action="FilterByDay" method="get">
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="search" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Nhập nội dung cần tìm kiếm ..." style="display: inline-block; width: 70%">
+                            <button type="submit" class="btn btn-primary" style="width: 25%">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <table class="table table-striped">
+                <thead style="background-color: #4e73df; color: #fff">
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Thời gian
+                        </th>
+                        <th>
+                            Tên lịch công tác
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                        <th>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            Thành phần tham dự
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <b style="color: #4e73df">
+                                    @(stt++)
+                                </b>
+                            </td>
+                            <td>
+                                @{
+                                    if (item.ActionDate.HasValue)
+                                    {
+                                        var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                        if (timeString.Contains("SA"))
+                                        {
+                                            timeString = timeString.Replace("SA", "Sáng");
+                                        }
+                                        else if (timeString.Contains("CH"))
+                                        {
+                                            timeString = timeString.Replace("CH", "Chiều");
+                                        }
+                                        <text>@timeString</text>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Description)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Note)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Address)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Participants)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("WorkSchedules", "FilterByDay", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
 }

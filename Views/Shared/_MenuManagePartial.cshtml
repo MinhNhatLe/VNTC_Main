@@ -7,30 +7,17 @@
 
 @if (result.Succeeded)
 {
-    <div class="dropdown">
-        <a class="nav-link text-light" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP">
-            <i class="fas fa-cog"></i>  Quản trị
-        </a>
-        @*<a class="btn btn-outline-danger dropdown-toggle" href="#"
+    <a class="nav-link text-light" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP"> QUẢN TRỊ</a>
+    @*<div class="dropdown">
+        <a class="nav-link text-light" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP"> QUẢN TRỊ</a>
+        <a class="btn btn-outline-danger dropdown-toggle" href="#"
            id="managedropdownmenu" data-toggle="dropdown">
             Manage
         </a>
         <div class="dropdown-menu" aria-labelledby="managedropdownmenu">
-            <a class="dropdown-item" asp-action="Index" asp-controller="DbManage" asp-area="Database">
-                Database
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Contact" asp-area="Contact">
-                Quản lý liên hệ
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Role" asp-area="Identity">
-                Quản lý role (vai trò)
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Identity">
-                Quản lý thành viên
-            </a>
             <a target="_blank" class="dropdown-item" asp-action="Index" asp-controller="FileManager" asp-area="Files">
                 Quản lý files
             </a>
-        </div>*@
-    </div>
+        </div>
+    </div>*@
 }

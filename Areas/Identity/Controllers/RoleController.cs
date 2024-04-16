@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace dotnetstartermvc.Areas.Identity.Controllers
 {
-    [Authorize(Roles = RoleName.Administrator)]
+    [Authorize(Roles = $"{RoleName.SuperAdmin}")]
     [Area("Identity")]
     [Route("/Role/[action]")]
     public class RoleController : Controller

@@ -13,10 +13,9 @@ namespace dotnetstartermvc.Menu
         public AdminSidebarService(IUrlHelperFactory factory, IActionContextAccessor action)
         {
             UrlHelper = factory.GetUrlHelper(action.ActionContext);
-            // Khoi tao cac muc sidebar
 
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý chung" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý CSDL" });
 
             Items.Add(new SidebarItem()
             {
@@ -27,15 +26,27 @@ namespace dotnetstartermvc.Menu
                 Title = "Quản lý Database",
                 AwesomeIcon = "fas fa-database"
             });
+
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thống kê" });
+
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
-                Controller = "Contact",
-                Action = "Index",
-                Area = "Contact",
-                Title = "Quản lý liên hệ",
-                AwesomeIcon = "far fa-address-card"
+                Title = "Lịch & biểu đồ",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "allChartandSchedule",
+                Items = new List<SidebarItem>() {
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Chart",
+                                Action = "Index",
+                                Area = "",
+                                Title = "Danh sách biểu đồ"
+                        },
+                    },
             });
+
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thông tin người dùng" });
 
@@ -51,7 +62,7 @@ namespace dotnetstartermvc.Menu
                                 Controller = "Role",
                                 Action = "Index",
                                 Area = "Identity",
-                                Title = "Các vai trò (role)"
+                                Title = "Danh sách vai trò (role)"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
@@ -84,7 +95,7 @@ namespace dotnetstartermvc.Menu
                                 Controller = "Services",
                                 Action = "Index",
                                 Area = "",
-                                Title = "Các dịch vụ"
+                                Title = "Danh sách dịch vụ"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
@@ -108,7 +119,7 @@ namespace dotnetstartermvc.Menu
                                 Controller = "Notifications",
                                 Action = "Index",
                                 Area = "",
-                                Title = "Các thông báo"
+                                Title = "Danh sách thông báo"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
@@ -123,17 +134,34 @@ namespace dotnetstartermvc.Menu
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
+                Title = "Quản lý tuyển dụng",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "recruitment",
+                Items = new List<SidebarItem>() {
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Recruitments",
+                                Action = "Index",
+                                Area = "",
+                                Title = "Danh sách tuyển dụng"
+                        },
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Recruitments",
+                                Action = "Create",
+                                Area = "",
+                                Title = "Tạo tuyển dụng"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
                 Title = "Quản lý lịch công tác",
                 AwesomeIcon = "far fa-folder",
                 collapseID = "workschedule",
                 Items = new List<SidebarItem>() {
-                    new SidebarItem() {
-                                Type = SidebarItemType.NavItem,
-                                Controller = "WorkSchedules",
-                                Action = "ListSchedule",
-                                Area = "",
-                                Title = "Lịch công tác chung"
-                        },
                         new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
                                 Controller = "WorkSchedules",
@@ -154,43 +182,99 @@ namespace dotnetstartermvc.Menu
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
-                Title = "Quản lý tuyển dụng",
+                Title = "Quản lý nhiệm vụ",
                 AwesomeIcon = "far fa-folder",
-                collapseID = "recruitment",
+                collapseID = "assignments",
                 Items = new List<SidebarItem>() {
-                        new SidebarItem() {
+                    new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Recruitments",
+                                Controller = "Assignments",
                                 Action = "Index",
                                 Area = "",
-                                Title = "Các tuyển dụng"
+                                Title = "Danh sách nhiệm vụ"
                         },
                          new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Recruitments",
+                                Controller = "Assignments",
                                 Action = "Create",
                                 Area = "",
-                                Title = "Tạo tuyển dụng"
+                                Title = "Tạo nhiệm vụ"
                         },
                     },
             });
 
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Controller = "Contact",
+                Action = "Index",
+                Area = "Contact",
+                Title = "Quản lý liên hệ",
+                AwesomeIcon = "far fa-address-card"
+            });
+
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thống kê" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Lịch công tác & nhiệm vụ" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho nhân viên)" });
 
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
-                Title = "Lịch & biểu đồ",
+                Title = "Lịch công tác",
                 AwesomeIcon = "far fa-folder",
-                collapseID = "allChartandSchedule",
+                collapseID = "Schedule",
                 Items = new List<SidebarItem>() {
-                         new SidebarItem() {
+                        new SidebarItem() {
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Chart",
-                                Action = "Index",
+                                Controller = "WorkSchedules",
+                                Action = "ListSchedule",
                                 Area = "",
-                                Title = "Danh sách biểu đồ"
+                                Title = "Tất cả lịch công tác"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "WorkSchedules",
+                                Action = "FilterByDay",
+                                Area = "",
+                                Title = "Lịch công tác theo ngày"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "WorkSchedules",
+                                Action = "FilterByWeek",
+                                Area = "",
+                                Title = "Lịch công tác theo tuần"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Title = "Phân công nhiệm vụ",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "Task",
+                Items = new List<SidebarItem>() {
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Assignments",
+                                Action = "ListAssignments",
+                                Area = "",
+                                Title = "Tất cả nhiệm vụ"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Assignments",
+                                Action = "FilterByDay",
+                                Area = "",
+                                Title = "Nhiệm vụ theo ngày"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Assignments",
+                                Action = "FilterByWeek",
+                                Area = "",
+                                Title = "Nhiệm vụ theo tuần"
                         },
                     },
             });
@@ -230,7 +314,6 @@ namespace dotnetstartermvc.Menu
                                 childItem.IsActive = true;
                                 item.IsActive = true;
                                 return;
-
                             }
                         }
                     }

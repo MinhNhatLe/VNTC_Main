@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnetstartermvc.Areas.Database.Controllers
 {
+    [Authorize(Roles = $"{RoleName.SuperAdmin}")]
     [Area("Database")]
     [Route("/database-manage/[action]")]
     public class DbManageController : Controller
@@ -24,13 +25,13 @@ namespace dotnetstartermvc.Areas.Database.Controllers
             _signInManager = signInManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleName.Administrator)]
         public IActionResult DeleteDb()
         {
             return View();
@@ -40,7 +41,6 @@ namespace dotnetstartermvc.Areas.Database.Controllers
         public string StatusMessage { get; set; }
 
         [HttpPost]
-        [Authorize(Roles = RoleName.Administrator)]
         public async Task<IActionResult> DeleteDbAsync()
         {
             var success = await _dbContext.Database.EnsureDeletedAsync();
@@ -50,7 +50,6 @@ namespace dotnetstartermvc.Areas.Database.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Roles = RoleName.Administrator)]
         [HttpPost]
         public async Task<IActionResult> Migrate()
         {
@@ -61,6 +60,7 @@ namespace dotnetstartermvc.Areas.Database.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> SeedDataAsync()
         {
             // Create Roles
@@ -76,20 +76,18 @@ namespace dotnetstartermvc.Areas.Database.Controllers
             }
 
             // admin, pass=admin123, admin@example.com
-            var useradmin = await _userManager.FindByEmailAsync("dangngocdanh.vntc@gmail.com");
+            var useradmin = await _userManager.FindByEmailAsync("lmnhat.contact@gmail.com");
             if (useradmin == null)
             {
                 useradmin = new AppUser()
                 {
-                    UserName = "dangngocdanh",
-                    Email = "dangngocdanh.vntc@gmail.com",
-                    Firstname = "Danh",
-                    Lastname = "Dang Ngoc",
+                    UserName = "leminhnhat",
+                    Email = "lmnhat.contact@gmail.com",
                     EmailConfirmed = true,
                 };
 
-                await _userManager.CreateAsync(useradmin, "admin123");
-                await _userManager.AddToRoleAsync(useradmin, RoleName.Administrator);
+                await _userManager.CreateAsync(useradmin, "Leminhnhat@2k1");
+                await _userManager.AddToRoleAsync(useradmin, RoleName.SuperAdmin);
                 await _signInManager.SignInAsync(useradmin, false);
 
                 return RedirectToAction("SeedData");
@@ -101,7 +99,7 @@ namespace dotnetstartermvc.Areas.Database.Controllers
                 if (user == null) return this.Forbid();
                 var roles = await _userManager.GetRolesAsync(user);
 
-                if (!roles.Any(r => r == RoleName.Administrator))
+                if (!roles.Any(r => r == RoleName.SuperAdmin))
                 {
                     return this.Forbid();
                 }
