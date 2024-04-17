@@ -56,7 +56,7 @@
     <None Include="Areas\Identity\Views\User\SetPassword.cshtml" />
     <None Include="Areas\Identity\Views\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Views\_ViewStart.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_AlertMessage.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />

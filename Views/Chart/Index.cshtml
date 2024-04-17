@@ -5,6 +5,112 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<!-- Content Row -->
+<div class="row">
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Số lượng người dùng
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.UsersCount</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         style="width: @ViewBag.UsersCount%" aria-valuenow="@ViewBag.UsersCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Số lượng lịch công tác
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.WorkScheduleCount</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         style="width: @ViewBag.WorkScheduleCount%" aria-valuenow="@ViewBag.WorkScheduleCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Số lượng nhiệm vụ bàn giao
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.AssignmentCount</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                         style="width: @ViewBag.AssignmentCount%" aria-valuenow="@ViewBag.AssignmentCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Số lượng dịch vụ
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.ServicesCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-4 col-sm-4 col-xs-12">
         <div style="width:50%; margin: 0 auto;">
@@ -26,7 +132,7 @@
     </div>
 </div>
 
-<hr/>
+<hr />
 
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -50,7 +156,7 @@
                     data: [
         @ViewBag.RolesCount,
         @ViewBag.UsersCount,
-                            ],
+                    ],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.8)',   // Red
                         'rgba(54, 162, 235, 0.8)',   // Blue
@@ -165,7 +271,7 @@
         @ViewBag.JobCount,
         @ViewBag.WorkScheduleCount,
         @ViewBag.AssignmentCount,
-                            ],
+                    ],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',   // Red
                         'rgba(54, 162, 235, 0.2)',   // Blue

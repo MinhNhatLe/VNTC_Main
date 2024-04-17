@@ -93,7 +93,7 @@
   }
 
   .service_section .box .img-box {
-    justify-content: flex-start;
+    justify-content: center;
     margin-bottom: 15px;
   }
 }

@@ -72,8 +72,9 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="">
-    <title>@ViewData["Title"]</title>
+
+    <link rel="shortcut icon" type="image/png" href="~/images/bg-logo-vntc.png" />
+    <title>VNTC - @ViewData["Title"]</title>
 
     <!-- bootstrap core css -->
     <link href="~/asset-home-layout/css/bootstrap.css" rel="stylesheet" />
@@ -117,7 +118,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">
                         <span>
                             VNTC
                         </span>
@@ -130,7 +131,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">Trang chủ <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About"> Giới thiệu</a>
@@ -153,7 +154,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Contact" asp-controller="Contact" asp-action="SendContact"> Liên hệ</a>
                             </li>
-                            <partial name="_MenuManagePartial" />
                             <partial name="_LoginPartial" />
                         </ul>
                     </div>
@@ -161,7 +161,7 @@
             </div>
         </header>
         <!-- end header section -->
-        @if (ViewContext.RouteData.Values["action"].ToString().Equals("Index", StringComparison.OrdinalIgnoreCase))
+        @if (ViewContext.RouteData.Values["action"].ToString().Equals("Home", StringComparison.OrdinalIgnoreCase))
         {
             @Html.Partial("_SliderPartial")
         }
@@ -231,7 +231,7 @@
                             Truy cập
                         </h4>
                         <div class="info_links">
-                            <a class="active" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="active" asp-area="" asp-controller="Home" asp-action="Home">
                                 Trang chủ
                             </a>
                             <a class="active" asp-area="" asp-controller="Home" asp-action="About">
@@ -255,7 +255,7 @@
                     </h4>
                     <form action="#">
                         <input type="text" placeholder="Vui lòng nhập địa chỉ email ..." />
-                        <button type="submit">
+                        <button class="btn btn-primary" asp-area="Contact" asp-controller="Contact" asp-action="SendContact">
                             Gởi liên hệ
                         </button>
                     </form>
@@ -267,7 +267,7 @@
     <!-- end info section -->
     @await RenderSectionAsync("Scripts", required: false)
     <!-- jQery -->
- @*   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>*@
+    @*   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>*@
     <script src="~/asset-home-layout/js/jquery-3.4.1.min.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -280,8 +280,5 @@
     <!-- custom js -->
     @*<script type="text/javascript" src="js/custom.js"></script>*@
     <script src="~/asset-home-layout/js/custom.js"></script>
-    <!-- Google Map -->
-    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>*@
-    <!-- End Google Map -->
 </body>
 </html>

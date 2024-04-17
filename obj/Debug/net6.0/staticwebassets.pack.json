@@ -165,12 +165,12 @@
       "PackagePath": "staticwebassets\\images\\Logo_VNTC.png"
     },
     {
-      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\bg-logo-vntc.png",
-      "PackagePath": "staticwebassets\\images\\bg-logo-vntc.png"
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\Logo_VNTC_RemoveBackground.png",
+      "PackagePath": "staticwebassets\\images\\Logo_VNTC_RemoveBackground.png"
     },
     {
-      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\email.png",
-      "PackagePath": "staticwebassets\\images\\email.png"
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\bg-logo-vntc.png",
+      "PackagePath": "staticwebassets\\images\\bg-logo-vntc.png"
     },
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\js\\sb-admin-2.min.js",

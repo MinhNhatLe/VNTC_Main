@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pZ92/El5fmdwZ6rEor1WB/0KSYmScZ8P6buT/y2TbwA=",
+  "Hash": "OA2QbIFkc2f7NeYsYQdK6tNevuAUHnx93PJ6jP0ltgI=",
   "Source": "dotnetstartermvc",
   "BasePath": "_content/dotnetstartermvc",
   "Mode": "Default",
@@ -1751,23 +1751,6 @@
       "OriginalItemSpec": "wwwroot\\images\\bg-logo-vntc.png"
     },
     {
-      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\email.png",
-      "SourceId": "dotnetstartermvc",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
-      "BasePath": "_content/dotnetstartermvc",
-      "RelativePath": "images/email.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\email.png"
-    },
-    {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\Logo_VNTC.png",
       "SourceId": "dotnetstartermvc",
       "SourceType": "Discovered",
@@ -1783,6 +1766,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Logo_VNTC.png"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\images\\Logo_VNTC_RemoveBackground.png",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "images/Logo_VNTC_RemoveBackground.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Logo_VNTC_RemoveBackground.png"
     },
     {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\js\\sb-admin-2.min.js",

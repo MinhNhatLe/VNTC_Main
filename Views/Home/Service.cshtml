@@ -4,7 +4,7 @@
 @model X.PagedList.IPagedList<dotnetstartermvc.Models.Service>
 
 @{
-    ViewData["Title"] = "Danh sách dịch vụ";
+    ViewData["Title"] = "Dịch vụ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -47,7 +47,7 @@
                             <div class="img-box">
                                 <img src="~/asset-home-layout/images/s1.png" />
                             </div>
-                            <div class="detail-box" style="height: 100px">
+                            <div class="detail-box" style="height: 150px">
                                 <a asp-action="ServiceDetails" asp-route-id="@item.Id">
                                     <h5>
                                         @Html.DisplayFor(modelItem => item.Title)

@@ -157,17 +157,13 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Home}/{id?}");
 
 app.MapAreaControllerRoute(
                 name: "product",
                 pattern: "/{controller}/{action=Index}/{id?}",
                 areaName: "ProductManage"
             );
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

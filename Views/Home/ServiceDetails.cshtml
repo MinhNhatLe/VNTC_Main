@@ -38,13 +38,9 @@
     }
 
     .description-service {
-        padding: 40px;
-        font-family: 'Roboto', sans-serif;
         font-size: 16px;
         line-height: 1.6; /* Độ dài của dòng */
-        color: #333333; /* Màu chữ */
     }
-
 </style>
 
 <div class="row p-5">
@@ -61,7 +57,7 @@
                 @Html.Raw(Model.DetailService.Description)
             </div>
         </div>
-        <div class="row" style="margin-bottom:10px;">
+        <div class="row" style="margin-bottom:10px; margin-top:10px;">
             <a asp-action="Service" class="btn btn-outline-dark">
                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 Quay lại trang chủ

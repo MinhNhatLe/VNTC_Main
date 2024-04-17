@@ -2,10 +2,26 @@
     ViewData["Title"] = "Xác thực email";
 }
 
-<h1>@ViewData["Title"].</h1>
-<div>
-    <p>
-        Bạn đã hoàn thành xác thực email. 
-        Hãy <a asp-controller="Account" asp-action="Login">bấm vào đây để đăng nhập</a>.
-    </p>
-</div>
+<style>
+    .hero_area {
+        min-height: 5vh;
+    }
+</style>
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <h2 class="heading_container heading_center" style="margin-bottom: 40px;">@ViewData["Title"]</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            Bạn đã hoàn thành xác thực email.
+                            Hãy <a asp-controller="Account" asp-action="Login">bấm vào đây để đăng nhập</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

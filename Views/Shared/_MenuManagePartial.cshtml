@@ -7,7 +7,9 @@
 
 @if (result.Succeeded)
 {
-    <a class="nav-link text-light" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP"> QUẢN TRỊ</a>
+    <a class="dropdown-item text-success" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP">
+        <i class="fa fa-cogs" aria-hidden="true"></i> Quản trị hệ thống
+    </a>
     @*<div class="dropdown">
         <a class="nav-link text-light" asp-action="Index" asp-controller="AdminCP" asp-area="AdminCP"> QUẢN TRỊ</a>
         <a class="btn btn-outline-danger dropdown-toggle" href="#"

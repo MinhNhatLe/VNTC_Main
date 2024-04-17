@@ -1,6 +1,5 @@
 ﻿using dotnetstartermvc.Dtos;
 using dotnetstartermvc.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -11,15 +10,13 @@ namespace dotnetstartermvc.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly UserManager<AppUser> _userManager;
 
-        public HomeController(AppDbContext context, UserManager<AppUser> userManager)
+        public HomeController(AppDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Home()
         {
             var services = await _context.Services.Include(s => s.User).OrderByDescending(s => s.CreatedDate).Take(3).ToListAsync();
 
@@ -166,7 +163,18 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(recruitment);
+            var notifications = await _context.Notifications
+                                    .OrderByDescending(n => n.CreatedDate)
+                                    .Take(10)
+                                    .ToListAsync();
+
+            var viewModel = new DetailRecruitmentAndListNotification
+            {
+                DetailRecruitment = recruitment,
+                ListNotifications = notifications
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult WhyUs()

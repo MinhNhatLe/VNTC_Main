@@ -1,28 +1,23 @@
 ﻿@using System.Globalization;
 @model IndexViewModel
 @{
-    ViewData["Title"] = "Hồ sơ cá nhân";
+    ViewData["Title"] = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     var mgs = ViewData["StatusMessage"] as string;
 }
 
-<h2 class="text-center">@ViewData["Title"] </h2>
+<style>
+    .hero_area {
+        min-height: 5vh;
+    }
+</style>
+
 @*<p class="text-success">@ViewData["StatusMessage"]</p>*@
-<hr />
 
 <section style="background-color: #eee;">
     <div class="container py-5">
-        <div class="row">
-            <div class="col">
-                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="#">Hồ sơ</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Hồ sơ cá nhân</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-
+        <h2 class="heading_container heading_center" style="margin-bottom: 40px;">@ViewData["Title"]</h2>
         @if (!String.IsNullOrEmpty(mgs))
         {
             var statusMessageClass = mgs.StartsWith("Error") ? "danger" : "warning";
@@ -37,7 +32,9 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                        @*<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">*@
+                        <img src="~/images/bg-logo-vntc.png" alt="avatar"
                              class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3">@Html.DisplayFor(m => Model.profile.UserName)</h5>
                         @*<p class="text-muted mb-1">@Html.DisplayFor(m => Model.profile.UserEmail)</p>*@
@@ -62,23 +59,23 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <i class="fa fa-globe fa-lg text-warning"></i>
                                 <p class="mb-0">https://mdbootstrap.com</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <i class="fa fa-github fa-lg" style="color: #333333;"></i>
                                 <p class="mb-0">leminhnhat</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <i class="fa fa-twitter fa-lg" style="color: #55acee;"></i>
                                 <p class="mb-0">leminhnhat</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                <i class="fa fa-instagram fa-lg" style="color: #ac2bac;"></i>
                                 <p class="mb-0">leminhnhat</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                <i class="fa fa-facebook-f fa-lg" style="color: #3b5998;"></i>
                                 <p class="mb-0">leminhnhat</p>
                             </li>
                         </ul>
@@ -162,21 +159,21 @@
                                 @*Tính năng thêm số điện thoại để kích hoạt xác thực 2 yếu tố ( Chưa phát triển)
                                 <hr />
                                 <div>
-                                    <p class="mb-1">
-                                        Sử dụng số điện thoại dùng để xác thực hai yêu tố:
-                                    </p>
-                                    @if (Model.PhoneNumber != null)
-                                    {
-                                        <a asp-controller="Manage" asp-action="AddPhoneNumber">Thay đổi</a>
-                                        <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post" role="form">
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Loại bỏ số điện thoại</button>
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn btn-primary btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Thêm số điện thoại</a>
-                                    }
-                                    @(Model.PhoneNumber ?? "(Tính năng chưa phát triển)")
+                                <p class="mb-1">
+                                Sử dụng số điện thoại dùng để xác thực hai yêu tố:
+                                </p>
+                                @if (Model.PhoneNumber != null)
+                                {
+                                <a asp-controller="Manage" asp-action="AddPhoneNumber">Thay đổi</a>
+                                <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post" role="form">
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Loại bỏ số điện thoại</button>
+                                </form>
+                                }
+                                else
+                                {
+                                <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn btn-primary btn-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Thêm số điện thoại</a>
+                                }
+                                @(Model.PhoneNumber ?? "(Tính năng chưa phát triển)")
                                 </div>
                                 Tính năng thêm số điện thoại để kích hoạt xác thực 2 yếu tố ( Chưa phát triển)*@
 
@@ -215,7 +212,7 @@
                                 </p>
                                 <div>
                                     <p class="mb-1">Hiện tại có <b>@Model.Logins.Count</b> liên kết:</p>
-                                    <a asp-controller="Manage" asp-action="ManageLogins" class="btn btn-primary btn-sm"><i class="fa fa-wrench" aria-hidden="true"></i> Quản lí liên kết ngoài</a>
+                                    <a asp-controller="Manage" asp-action="ManageLogins" class="btn btn-primary btn-sm"><i class="fa fa-wrench" aria-hidden="true"></i> Quản lý liên kết ngoài</a>
                                 </div>
                             </div>
                         </div>

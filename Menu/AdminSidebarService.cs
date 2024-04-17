@@ -34,7 +34,7 @@ namespace dotnetstartermvc.Menu
             {
                 Type = SidebarItemType.NavItem,
                 Title = "Lịch & biểu đồ",
-                AwesomeIcon = "far fa-folder",
+                AwesomeIcon = "far fa-chart-bar",
                 collapseID = "allChartandSchedule",
                 Items = new List<SidebarItem>() {
                          new SidebarItem() {
@@ -54,7 +54,7 @@ namespace dotnetstartermvc.Menu
             {
                 Type = SidebarItemType.NavItem,
                 Title = "Phân quyền, thành viên",
-                AwesomeIcon = "far fa-folder",
+                AwesomeIcon = "far fa-user-circle",
                 collapseID = "role",
                 Items = new List<SidebarItem>() {
                         new SidebarItem() {
@@ -213,6 +213,16 @@ namespace dotnetstartermvc.Menu
                 AwesomeIcon = "far fa-address-card"
             });
 
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Controller = "FileManager",
+                Action = "Index",
+                Area = "Files",
+                Title = "Quản lý files",
+                AwesomeIcon = "far fa-file-image"
+            });
+
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Lịch công tác & nhiệm vụ" });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho nhân viên)" });
@@ -221,7 +231,7 @@ namespace dotnetstartermvc.Menu
             {
                 Type = SidebarItemType.NavItem,
                 Title = "Lịch công tác",
-                AwesomeIcon = "far fa-folder",
+                AwesomeIcon = "far fa-calendar-check",
                 collapseID = "Schedule",
                 Items = new List<SidebarItem>() {
                         new SidebarItem() {
@@ -252,7 +262,7 @@ namespace dotnetstartermvc.Menu
             {
                 Type = SidebarItemType.NavItem,
                 Title = "Phân công nhiệm vụ",
-                AwesomeIcon = "far fa-folder",
+                AwesomeIcon = "fas fa-tasks",
                 collapseID = "Task",
                 Items = new List<SidebarItem>() {
                         new SidebarItem() {

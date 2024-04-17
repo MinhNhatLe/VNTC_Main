@@ -97,7 +97,7 @@ namespace dotnetstartermvc.Areas.Identity.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User đăng xuất");
-            return RedirectToAction("Index", "Home", new { area = "" });
+            return RedirectToAction("Home", "Home", new { area = "" });
         }
 
         // GET: /Account/Register

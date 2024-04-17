@@ -1,54 +1,272 @@
 ﻿@model dotnetstartermvc.Models.Contacts.Contact
-
 @{
     ViewData["Title"] = "Gửi liên hệ tới VNTC";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <style>
     .hero_area {
         min-height: 5vh;
     }
+
+    .contact_section {
+        position: relative;
+    }
+
+        .contact_section form {
+            margin-top: 45px;
+        }
+
+        .contact_section input {
+            width: 100%;
+            border: none;
+            height: 50px;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            background-color: transparent;
+            outline: none;
+            color: #000000;
+            border: 1px solid #a5a5a5;
+        }
+
+            .contact_section input::-webkit-input-placeholder {
+                color: #1c1b1b;
+            }
+
+            .contact_section input:-ms-input-placeholder {
+                color: #1c1b1b;
+            }
+
+            .contact_section input::-ms-input-placeholder {
+                color: #1c1b1b;
+            }
+
+            .contact_section input::placeholder {
+                color: #1c1b1b;
+            }
+
+            .contact_section input.message-box {
+                height: 120px;
+            }
+
+        .contact_section button {
+            font-family: "Poppins", sans-serif;
+            display: inline-block;
+            padding: 10px 65px;
+            background-color: #7335b7;
+            color: #ffffff;
+            border-radius: 3px;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            border: 1px solid #7335b7;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+            .contact_section button:hover {
+                color: #ffffff;
+                -webkit-transform: translateY(-3px);
+                transform: translateY(-3px);
+            }
+
+        .contact_section .map_container {
+            height: 100%;
+            min-height: 325px;
+            overflow: hidden;
+            margin-left: 45px;
+        }
+
+            .contact_section .map_container .map {
+                height: 100%;
+            }
+
+                .contact_section .map_container .map #googleMap {
+                    height: 100%;
+                }
+
+    .footer_container {
+        background-color: #7335b7;
+        color: #ffffff;
+        border-radius: 350px 0 0 0;
+        padding-top: 145px;
+    }
+
+    /* info section */
+    .info_section h4 {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .info_section .info_contact .contact_link_box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+        .info_section .info_contact .contact_link_box a {
+            margin: 5px 0;
+            color: #ffffff;
+        }
+
+            .info_section .info_contact .contact_link_box a i {
+                margin-right: 5px;
+            }
+
+            .info_section .info_contact .contact_link_box a:hover {
+                color: #f8842b;
+            }
+
+    .info_section .info_social {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 20px;
+    }
+
+        .info_section .info_social a {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            color: #ffffff;
+            border-radius: 100%;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+            .info_section .info_social a:hover {
+                color: #f8842b;
+            }
+
+    .info_section .info_links {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+        .info_section .info_links a {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+            .info_section .info_links a:hover {
+                color: #f8842b;
+            }
+
+    .info_section form input {
+        border: none;
+        border-bottom: 1px solid #ffffff;
+        background-color: transparent;
+        width: 100%;
+        height: 45px;
+        color: #ffffff;
+        outline: none;
+    }
+
+        .info_section form input::-webkit-input-placeholder {
+            color: #ffffff;
+        }
+
+        .info_section form input:-ms-input-placeholder {
+            color: #ffffff;
+        }
+
+        .info_section form input::-ms-input-placeholder {
+            color: #ffffff;
+        }
+
+        .info_section form input::placeholder {
+            color: #ffffff;
+        }
+
+    .info_section form button {
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        padding: 10px 55px;
+        background-color: #f8842b;
+        color: #ffffff;
+        border-radius: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border: 1px solid #f8842b;
+        margin-top: 15px;
+    }
+
+        .info_section form button:hover {
+            color: #ffffff;
+            -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+        }
 </style>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="contact-firstcol p-2 h-100">
-            @*<img src="~/images/email.png" />*@
-            <h1>LIÊN HỆ VNTC</h1>
-            <p>Chúng tôi luôn lắng nghe các ý kiến của bạn !</p>
+<!-- contact section -->
+
+<section class="contact_section layout_padding">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5 col-sm-5 col-xs-12">
+                <div class="form_container">
+                    <div class="heading_container">
+                        <h2>
+                            Liên hệ với chúng tôi
+                        </h2>
+                    </div>
+                    <form asp-action="SendContact">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                            <input asp-for="FullName" class="form-control" placeholder="Họ và tên" />
+                        </div>
+                        <div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Email" class="form-control" placeholder="Địa chỉ email" />
+                        </div>
+                        <div>
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                            <input asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
+                        </div>
+                        <div>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                            <textarea rows="5" asp-for="Message" class="form-control" placeholder="Nhập nội dung cần gửi ..."></textarea>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit">Gửi liên hệ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-7 col-sm-7 col-xs-12">
+                <div class="map_container">
+                    <div class="map">
+                        <div id="">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1159719986663!2d106.71590194499426!3d10.802428904119635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175297196406153%3A0xd9abdfc2f3490462!2sT%C3%B2a%20nh%C3%A0%20Wilton%20Tower!5e0!3m2!1svi!2s!4v1709715552099!5m2!1svi!2s" width="100%" height="500" style="border-radius:5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <form asp-action="SendContact" class="formcontact">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label">Họ và tên</label>
-                <input asp-for="FullName" class="form-control" placeholder="Họ và tên" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Email</label>
-                <input asp-for="Email" class="form-control" placeholder="Địa chỉ email" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+</section>
 
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label">Số điện thoại</label>
-                <input asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Message" class="control-label">Nội dung</label>
-                <textarea rows="5" asp-for="Message" class="form-control" placeholder="Nhập nội dung cần gửi ..."></textarea>
-                <span asp-validation-for="Message" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Gửi liên hệ" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
+<!-- end contact section -->

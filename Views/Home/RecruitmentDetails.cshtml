@@ -1,4 +1,5 @@
-﻿@model dotnetstartermvc.Models.Recruitment
+﻿@using System.Globalization;
+@model dotnetstartermvc.Dtos.DetailRecruitmentAndListNotification
 
 @{
     ViewData["Title"] = "Chi tiết tuyển dụng";
@@ -8,11 +9,6 @@
 <style>
     .hero_area {
         min-height: 5vh;
-    }
-
-    .layout-bg {
-        padding: 30px;
-        font-family: 'Roboto', sans-serif;
     }
 
     .cf-title-10 h3 {
@@ -30,49 +26,93 @@
             width: 42px;
             margin-bottom: 1.25rem;
         }
+
+    .title-service {
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        color: black; /* Màu chữ hồng */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .description-service {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.6; /* Độ dài của dòng */
+    }
 </style>
 
-<div class="container">
-    <div class="row layout-bg">
-        <div class="col-lg-12 col-sm-12 col-xs-12">
-            <div class="cf-title-10">
-                <h3>Chi tiết công việc</h3>
-            </div>
-        </div>
-        <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: 30px;">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <dl class="row">
-                        <dt class="col-sm-3">
-                            Tên công việc
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Title)
-                        </dd>
-                        <dt class="col-sm-3">
-                            Số lượng
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Quantity)
-                        </dd>
-                        <dt class="col-sm-3">
-                            Mô tả thông tin công việc
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.Raw(Model.Description)
-                        </dd>
-                        <dt class="col-sm-3">
-                            Người đảm nhiệm
-                        </dt>
-                    </dl>
+<div class="row p-5">
+    <div class="col-lg-8 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="cf-title-10">
+                    <h3 class="title-service">@Html.DisplayFor(model => model.DetailRecruitment.Title)</h3>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-bottom:10px;">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <b>
+                    Số lượng: @Html.DisplayFor(model => model.DetailRecruitment.Quantity) nhân viên
+                </b>
+            </div>
+        </div>
+        <div class="row description-service">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                @Html.Raw(Model.DetailRecruitment.Description)
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:10px; margin-top:10px;">
             <a asp-action="Recruitments" class="btn btn-outline-dark">
                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 Quay lại trang chủ
             </a>
         </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+        <table class="table table-striped">
+            <thead class="sticky-thead" style="background-color: #337ab7; color: #fff">
+                <tr class="text-center">
+                    <th>
+                        Thông báo
+                    </th>
+                    <th>
+                        Ngày đăng
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListNotifications)
+                {
+                    <tr>
+                        <td style="width: 70%">
+                            <a asp-action="NotificationDetails" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </a>
+                        </td>
+                        <td style="width: 30%" class="text-center">
+                            @{
+                                if (item.CreatedDate.HasValue)
+                                {
+                                    var timeString = item.CreatedDate.Value.ToString("dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                    if (timeString.Contains("SA"))
+                                    {
+                                        timeString = timeString.Replace("SA", "Sáng");
+                                    }
+                                    else if (timeString.Contains("CH"))
+                                    {
+                                        timeString = timeString.Replace("CH", "Chiều");
+                                    }
+                                    <text>@timeString</text>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

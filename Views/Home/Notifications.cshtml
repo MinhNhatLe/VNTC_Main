@@ -4,7 +4,7 @@
 @model X.PagedList.IPagedList<dotnetstartermvc.Models.Notification>
 
 @{
-    ViewData["Title"] = "Danh sách tin tức";
+    ViewData["Title"] = "Tin tức";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -50,7 +50,7 @@
                             <div class="img-box">
                                 <img src="~/asset-home-layout/images/s2.png" />
                             </div>
-                            <div class="detail-box" style="height: 100px">
+                            <div class="detail-box" style="height: 150px">
                                 <a asp-action="NotificationDetails" asp-route-id="@item.Id">
                                     <h5>
                                         @Html.DisplayFor(modelItem => item.Title)
