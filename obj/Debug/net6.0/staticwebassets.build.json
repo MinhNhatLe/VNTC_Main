@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OA2QbIFkc2f7NeYsYQdK6tNevuAUHnx93PJ6jP0ltgI=",
+  "Hash": "SXa/RbidLqgdj/7vMvZwaOW0K+ADE124ISwgNCxVBRU=",
   "Source": "dotnetstartermvc",
   "BasePath": "_content/dotnetstartermvc",
   "Mode": "Default",
@@ -1105,6 +1105,23 @@
       "OriginalItemSpec": "wwwroot\\asset-home-layout\\css\\font-awesome.min.css"
     },
     {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\owl.carousel.min.css",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/css/owl.carousel.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\css\\owl.carousel.min.css"
+    },
+    {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\responsive.css",
       "SourceId": "dotnetstartermvc",
       "SourceType": "Discovered",
@@ -1222,6 +1239,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\asset-home-layout\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontNunito.css",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/fonts/fontNunito.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\fonts\\fontNunito.css"
     },
     {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\about-img.jpg",
@@ -1683,6 +1717,40 @@
       "OriginalItemSpec": "wwwroot\\asset-home-layout\\js\\jquery-3.4.1.min.js"
     },
     {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\owl.carousel.min.js",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/js/owl.carousel.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\js\\owl.carousel.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\popper.min.js",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/js/popper.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\js\\popper.min.js"
+    },
+    {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\css\\sb-admin-2.min.css",
       "SourceId": "dotnetstartermvc",
       "SourceType": "Discovered",
@@ -1817,6 +1885,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\bootstrap462.bundle.min.js",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "lib/bootstrap/bootstrap462.bundle.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\bootstrap462.bundle.min.js"
     },
     {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
@@ -2582,6 +2667,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\chart\\chart.js",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "lib/chart/chart.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\chart\\chart.js"
     },
     {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\elfinder\\css\\elfinder.full.css",

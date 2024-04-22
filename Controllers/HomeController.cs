@@ -83,7 +83,7 @@ namespace dotnetstartermvc.Controllers
             var pageSize = 6; // Số lượng item trên mỗi trang
 
             var notifications = from n in _context.Notifications.Include(s => s.User)
-                       select n;
+                                select n;
 
             if (!string.IsNullOrEmpty(searchString))
             {

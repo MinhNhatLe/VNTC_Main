@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnetstartermvc.Models
 {
-    // App.Models.AppDbContext
     public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

@@ -57,9 +57,6 @@
                 Ngày đăng
             </th>
             <th>
-                Người tạo
-            </th>
-            <th>
                 Chức năng
             </th>
         </tr>
@@ -92,9 +89,6 @@
                             <text>@timeString</text>
                         }
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">

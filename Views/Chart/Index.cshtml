@@ -39,27 +39,29 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-danger shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Số lượng lịch công tác
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.WorkScheduleCount</div>
+                <a asp-action="Index" asp-controller="WorkSchedules">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Số lượng lịch công tác
                             </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                         style="width: @ViewBag.WorkScheduleCount%" aria-valuenow="@ViewBag.WorkScheduleCount" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.WorkScheduleCount</div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: @ViewBag.WorkScheduleCount%" aria-valuenow="@ViewBag.WorkScheduleCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -67,27 +69,29 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Số lượng nhiệm vụ bàn giao
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.AssignmentCount</div>
+                <a asp-action="Index" asp-controller="Assignments">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Số lượng nhiệm vụ bàn giao
                             </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                         style="width: @ViewBag.AssignmentCount%" aria-valuenow="@ViewBag.AssignmentCount" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.AssignmentCount</div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: @ViewBag.AssignmentCount%" aria-valuenow="@ViewBag.AssignmentCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -95,17 +99,19 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Số lượng dịch vụ
+                <a asp-action="Index" asp-controller="Services">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Số lượng dịch vụ
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.ServicesCount</div>
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.ServicesCount</div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -144,7 +150,7 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/lib/chart/chart.js"></script>
     <script>
         var ctx1 = document.getElementById('myPie1').getContext('2d');
         var myPie1 = new Chart(ctx1, {
@@ -192,8 +198,6 @@
         @ViewBag.ServicesCount,
         @ViewBag.NotificationsCount,
         @ViewBag.JobCount,
-        @ViewBag.WorkScheduleCount,
-        @ViewBag.AssignmentCount,
                     ],
                     backgroundColor: [
                         'rgba(255, 206, 86, 0.2)',   // Yellow

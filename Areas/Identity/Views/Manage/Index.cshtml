@@ -33,7 +33,7 @@
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         @*<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                             class="rounded-circle img-fluid" style="width: 150px;">*@
+                        class="rounded-circle img-fluid" style="width: 150px;">*@
                         <img src="~/images/bg-logo-vntc.png" alt="avatar"
                              class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3">@Html.DisplayFor(m => Model.profile.UserName)</h5>
@@ -60,23 +60,33 @@
                         <ul class="list-group list-group-flush rounded-3">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fa fa-globe fa-lg text-warning"></i>
-                                <p class="mb-0">https://mdbootstrap.com</p>
+                                <a asp-area="" asp-controller="Home" asp-action="Home">
+                                    <p class="mb-0">Trang chủ</p>
+                                </a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fa fa-github fa-lg" style="color: #333333;"></i>
-                                <p class="mb-0">leminhnhat</p>
+                                <i class="fa fa-solid fa-building fa-lg" style="color: #ac2bac;"></i>
+                                <a asp-area="" asp-controller="Home" asp-action="About">
+                                    <p class="mb-0">Giới thiệu</p>
+                                </a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fa fa-twitter fa-lg" style="color: #55acee;"></i>
-                                <p class="mb-0">leminhnhat</p>
+                                <i class="fa fa-brands fa-product-hunt fa-lg" style="color: #55acee;"></i>
+                                <a asp-area="" asp-controller="Home" asp-action="Service">
+                                    <p class="mb-0">Dịch vụ</p>
+                                </a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fa fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                <p class="mb-0">leminhnhat</p>
+                                <i class="fa fa-solid fa-envelope fa-lg" style="color: lawngreen;"></i>
+                                <a asp-area="" asp-controller="Home" asp-action="Notifications">
+                                    <p class="mb-0">Tin tức</p>
+                                </a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fa fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                <p class="mb-0">leminhnhat</p>
+                                <i class="fa fa-solid fa-phone fa-lg" style="color: #3b5998;"></i>
+                                <a asp-area="Contact" asp-controller="Contact" asp-action="SendContact">
+                                    <p class="mb-0">Liên hệ</p>
+                                </a>
                             </li>
                         </ul>
                     </div>

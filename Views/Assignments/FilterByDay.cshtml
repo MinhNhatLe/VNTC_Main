@@ -16,6 +16,10 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+
+    td {
+        color: #0D0D0D;
+    }
 </style>
 
 <div class="">
@@ -66,7 +70,7 @@
                             Ghi chú
                         </th>
                         <th>
-                            Tiến độ hoàn thành
+                            Tiến độ
                         </th>
                         <th>
                             Người tạo
@@ -112,17 +116,19 @@
                                 <a asp-action="EditIsComplete" asp-route-id="@item.Id">
                                     @if (item.IsComplete == true)
                                     {
-                                        <span class="text-success">
+                                        <span class="text-success btn btn-outline-primary">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
                                             <b>
-                                                Đã hoàn thành
+                                                Xong
                                             </b>
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="text-danger">
+                                        <span class="text-danger btn btn-outline-primary">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
                                             <b>
-                                                Chưa hoàn thành
+                                                Chưa
                                             </b>
                                         </span>
                                     }

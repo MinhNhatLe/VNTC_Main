@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\asset-home-layout\\css\\font-awesome.min.css"
     },
     {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\css\\owl.carousel.min.css"
+    },
+    {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\responsive.css",
       "PackagePath": "staticwebassets\\asset-home-layout\\css\\responsive.css"
     },
@@ -27,6 +31,10 @@
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\css\\style.scss",
       "PackagePath": "staticwebassets\\asset-home-layout\\css\\style.scss"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontNunito.css",
+      "PackagePath": "staticwebassets\\asset-home-layout\\fonts\\fontNunito.css"
     },
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\fonts\\fontawesome-webfont.ttf",
@@ -149,6 +157,14 @@
       "PackagePath": "staticwebassets\\asset-home-layout\\js\\jquery-3.4.1.min.js"
     },
     {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\asset-home-layout\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\asset-home-layout\\js\\popper.min.js"
+    },
+    {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\css\\sb-admin-2.min.css",
       "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
     },
@@ -183,6 +199,10 @@
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\bootstrap462.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\bootstrap462.bundle.min.js"
     },
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
@@ -359,6 +379,10 @@
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\chart\\chart.js",
+      "PackagePath": "staticwebassets\\lib\\chart\\chart.js"
     },
     {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\lib\\elfinder\\css\\elfinder.full.css",

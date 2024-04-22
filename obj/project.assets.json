@@ -133,16 +133,16 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authentication/2.2.0": {
+      "Microsoft.AspNetCore.Authentication/2.1.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
-          "Microsoft.AspNetCore.DataProtection": "2.2.0",
-          "Microsoft.AspNetCore.Http": "2.2.0",
-          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
-          "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
-          "Microsoft.Extensions.Options": "2.2.0",
-          "Microsoft.Extensions.WebEncoders": "2.2.0"
+          "Microsoft.AspNetCore.Authentication.Core": "2.1.1",
+          "Microsoft.AspNetCore.DataProtection": "2.1.1",
+          "Microsoft.AspNetCore.Http": "2.1.1",
+          "Microsoft.AspNetCore.Http.Extensions": "2.1.1",
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.1",
+          "Microsoft.Extensions.Options": "2.1.1",
+          "Microsoft.Extensions.WebEncoders": "2.1.1"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.dll": {
@@ -173,10 +173,10 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authentication.Cookies/2.2.0": {
+      "Microsoft.AspNetCore.Authentication.Cookies/2.1.34": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication": "2.2.0"
+          "Microsoft.AspNetCore.Authentication": "2.1.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.dll": {
@@ -274,10 +274,10 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.Authentication.OAuth/2.2.0": {
+      "Microsoft.AspNetCore.Authentication.OAuth/2.1.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication": "2.2.0",
+          "Microsoft.AspNetCore.Authentication": "2.1.2",
           "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
@@ -4932,16 +4932,16 @@
         "microsoft.aspnetcore.antiforgery.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Authentication/2.2.0": {
-      "sha512": "b0R9X7L6zMqNsssKDvhYHuNi5x0s4DyHTeXybIAyGaitKiW1Q5aAGKdV2codHPiePv9yHfC9hAMyScXQ/xXhPw==",
+    "Microsoft.AspNetCore.Authentication/2.1.2": {
+      "sha512": "RYM3HHMm/MNwsbUh1xnrhosAGNeZV2Q/FmNQrblgytIK1HIZ6UqNMorFI+kz2MW7gNKHKn6TBLTUXPRmqC6iRQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authentication/2.2.0",
+      "path": "microsoft.aspnetcore.authentication/2.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.xml",
-        "microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.2.1.2.nupkg.sha512",
         "microsoft.aspnetcore.authentication.nuspec"
       ]
     },
@@ -4958,16 +4958,16 @@
         "microsoft.aspnetcore.authentication.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Authentication.Cookies/2.2.0": {
-      "sha512": "Iar9VFlBHkZGdSG9ZUTmn6Q8Qg+6CtW5G/TyJI2F8B432TOH+nZlkU7O0W0byow6xsxqOYeTviSHz4cCJ3amfQ==",
+    "Microsoft.AspNetCore.Authentication.Cookies/2.1.34": {
+      "sha512": "NpzkvGdyRCyVSRKMgfvuZ/hLlNkWU25FpA7FavqwP4Isfg3ATw8KWEeSCkApomeCD6aEt97JvFsPEZJ/TlmbGw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authentication.cookies/2.2.0",
+      "path": "microsoft.aspnetcore.authentication.cookies/2.1.34",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.xml",
-        "microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.cookies.2.1.34.nupkg.sha512",
         "microsoft.aspnetcore.authentication.cookies.nuspec"
       ]
     },
@@ -5044,16 +5044,16 @@
         "microsoft.aspnetcore.authentication.microsoftaccount.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Authentication.OAuth/2.2.0": {
-      "sha512": "i33SSdJd0g3ENRnHczgzrOlru3ciPsyYHMgAh90sbURS8wuBx0Y4xXfRQcYfu1W0/uiHQO832KNb/ICINWqLzA==",
+    "Microsoft.AspNetCore.Authentication.OAuth/2.1.2": {
+      "sha512": "oY0gzBiLXjfbJJYK3zDh8KjqYzvje+kKrK6ZpbojWNy826XO2KVLapjmk1/olrjg2bAKLTL6HHVk0xmZhPRBRA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authentication.oauth/2.2.0",
+      "path": "microsoft.aspnetcore.authentication.oauth/2.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.OAuth.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.OAuth.xml",
-        "microsoft.aspnetcore.authentication.oauth.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.oauth.2.1.2.nupkg.sha512",
         "microsoft.aspnetcore.authentication.oauth.nuspec"
       ]
     },
@@ -12677,13 +12677,13 @@
     "net6.0": [
       "DocX >= 3.0.0",
       "MailKit >= 4.4.0",
-      "Microsoft.AspNetCore.Authentication >= 2.2.0",
-      "Microsoft.AspNetCore.Authentication.Cookies >= 2.2.0",
+      "Microsoft.AspNetCore.Authentication >= 2.1.2",
+      "Microsoft.AspNetCore.Authentication.Cookies >= 2.1.34",
       "Microsoft.AspNetCore.Authentication.Facebook >= 6.0.10",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.10",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.10",
       "Microsoft.AspNetCore.Authentication.MicrosoftAccount >= 6.0.10",
-      "Microsoft.AspNetCore.Authentication.OAuth >= 2.2.0",
+      "Microsoft.AspNetCore.Authentication.OAuth >= 2.1.2",
       "Microsoft.AspNetCore.Authentication.OpenIdConnect >= 6.0.10",
       "Microsoft.AspNetCore.Authentication.Twitter >= 6.0.10",
       "Microsoft.AspNetCore.Http.Abstractions >= 2.2.0",
@@ -12752,11 +12752,11 @@
           },
           "Microsoft.AspNetCore.Authentication": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.1.2, )"
           },
           "Microsoft.AspNetCore.Authentication.Cookies": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.1.34, )"
           },
           "Microsoft.AspNetCore.Authentication.Facebook": {
             "target": "Package",
@@ -12776,7 +12776,7 @@
           },
           "Microsoft.AspNetCore.Authentication.OAuth": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.1.2, )"
           },
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
             "target": "Package",

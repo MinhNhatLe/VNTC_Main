@@ -83,7 +83,8 @@ namespace dotnetstartermvc.Areas.Contact.Controllers
 
                 StatusMessage = "Liên hệ của bạn đã được gửi thành công!";
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("", "Contact");
+                //return View(contact);
             }
 
             return View(contact);

@@ -19,6 +19,10 @@
         word-wrap: break-word;
         max-width: 750px;
     }
+
+    td {
+        color: #0D0D0D;
+    }
 </style>
 
 <partial name="_AlertMessage" />
@@ -63,13 +67,10 @@
                 Ghi chú
             </th>
             <th>
-                Tiến độ hoàn thành
+                Tiến độ
             </th>
             <th>
                 Ngày tạo
-            </th>
-            <th>
-                Người tạo
             </th>
             <th>
                 Tác vụ
@@ -116,7 +117,7 @@
                     {
                         <span class="text-success">
                             <b>
-                                Đã hoàn thành
+                                Xong
                             </b>
                         </span>
                     }
@@ -124,7 +125,7 @@
                     {
                         <span class="text-danger">
                             <b>
-                                Chưa hoàn thành
+                                Chưa
                             </b>
                         </span>
                     }
@@ -145,9 +146,6 @@
                             <text>@timeString</text>
                         }
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">

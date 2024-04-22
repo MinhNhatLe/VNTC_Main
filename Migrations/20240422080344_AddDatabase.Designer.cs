@@ -12,7 +12,7 @@ using dotnetstartermvc.Models;
 namespace dotnetstartermvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240416033623_AddDatabase")]
+    [Migration("20240422080344_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="dropdown">
+    <div class="dropdown text-center">
         <button class="btn btn-danger dropdown-toggle" type="button" id="managedropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             HỒ SƠ NGƯỜI DÙNG
         </button>
@@ -14,8 +14,8 @@
             <a class="dropdown-item text-primary" asp-area="Identity" asp-controller="Manage" asp-action="Index" title="Manage">
                 <i class="fa fa-user-circle" aria-hidden="true"></i> Thông tin tài khoản
                 @*<b class="text-primary">
-                    @UserManager.GetUserName(User)
-                </b>*@
+            @UserManager.GetUserName(User)
+            </b>*@
             </a>
             <partial name="_MenuManagePartial" />
             <form asp-area="Identity" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
@@ -28,7 +28,7 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-center" style="display: contents;">
         <li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">Đăng ký</a>
         </li>
