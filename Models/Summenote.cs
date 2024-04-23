@@ -14,17 +14,30 @@
 
         public int height { get; set; } = 120;
 
+        //public string toolbar { get; set; } = @"
+        //    [
+        //        ['style', ['style']],
+        //        ['font', ['bold', 'underline', 'clear']],
+        //        ['color', ['color']],
+        //        ['para', ['ul', 'ol', 'paragraph']],
+        //        ['table', ['table']],
+        //        ['insert', ['link', 'picture', 'video', 'elfinder']],
+        //        ['height', ['height']],
+        //        ['view', ['fullscreen', 'codeview', 'help']]
+        //    ]       
+        //";
         public string toolbar { get; set; } = @"
-            [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video', 'elfinder']],
-                ['height', ['height']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]       
-        ";
+        [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video', 'elfinder']],
+            ['height', ['height']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    ";
     }
 }

@@ -155,6 +155,7 @@ namespace dotnetstartermvc.Controllers
             {
                 assignment.Title = request.Title;
                 assignment.Description = request.Description;
+                assignment.Note = request.Note;
                 assignment.ActionDate = request.ActionDate;
                 assignment.IsComplete = request.IsComplete;
                 assignment.CreatedDate = DateTime.Now;

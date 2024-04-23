@@ -17,12 +17,13 @@
 <style>
     th, td {
         word-wrap: break-word;
-        max-width: 750px;
+        max-width: 300px;
     }
 
     td {
         color: #0D0D0D;
     }
+
 </style>
 
 <partial name="_AlertMessage" />
@@ -70,9 +71,6 @@
                 Tiến độ
             </th>
             <th>
-                Ngày tạo
-            </th>
-            <th>
                 Tác vụ
             </th>
         </tr>
@@ -86,7 +84,7 @@
                         @(stt++)
                     </b>
                 </td>
-                <td>
+                <td style="max-width: 100px;">
                     @{
                         if (item.ActionDate.HasValue)
                         {
@@ -103,13 +101,13 @@
                         }
                     }
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.Raw(item.Description)
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.Raw(item.Note)
                 </td>
                 <td>
@@ -128,23 +126,6 @@
                                 Chưa
                             </b>
                         </span>
-                    }
-                </td>
-                <td>
-                    @{
-                        if (item.CreatedDate.HasValue)
-                        {
-                            var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
-                            {
-                                timeString = timeString.Replace("SA", "Sáng");
-                            }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
-                        }
                     }
                 </td>
                 <td>

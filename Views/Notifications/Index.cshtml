@@ -17,7 +17,7 @@
 <style>
     th, td {
         word-wrap: break-word;
-        max-width: 750px;
+        max-width: 300px;
     }
 </style>
 
@@ -57,7 +57,7 @@
                 Ngày đăng
             </th>
             <th>
-                Chức năng
+                Tác vụ
             </th>
         </tr>
     </thead>
@@ -70,7 +70,7 @@
                         @(stt++)
                     </b>
                 </td>
-                <td>
+                <td style="max-width: 500px;">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>

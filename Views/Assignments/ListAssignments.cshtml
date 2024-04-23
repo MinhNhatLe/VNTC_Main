@@ -17,7 +17,7 @@
 <style>
     th, td {
         word-wrap: break-word;
-        max-width: 750px;
+        max-width: 300px;
     }
 
     td {
@@ -89,7 +89,7 @@
                         @(stt++)
                     </b>
                 </td>
-                <td>
+                <td style="max-width: 100px;">
                     @{
                         if (item.ActionDate.HasValue)
                         {
@@ -106,13 +106,13 @@
                         }
                     }
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.Raw(item.Description)
                 </td>
-                <td>
+                <td style="max-width: 300px;">
                     @Html.Raw(item.Note)
                 </td>
                 <td>
