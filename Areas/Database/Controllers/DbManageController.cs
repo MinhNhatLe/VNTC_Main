@@ -86,7 +86,7 @@ namespace dotnetstartermvc.Areas.Database.Controllers
                     EmailConfirmed = true,
                 };
 
-                await _userManager.CreateAsync(useradmin, "Leminhnhat@2k1");
+                await _userManager.CreateAsync(useradmin, "Leminhnhat@123");
                 await _userManager.AddToRoleAsync(useradmin, RoleName.SuperAdmin);
                 await _signInManager.SignInAsync(useradmin, false);
 

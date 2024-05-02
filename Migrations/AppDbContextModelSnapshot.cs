@@ -110,6 +110,9 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 

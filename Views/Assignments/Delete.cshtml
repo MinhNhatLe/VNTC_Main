@@ -49,6 +49,33 @@
             @Html.Raw(Model.Note)
         </dd>
         <dt class="col-sm-3">
+            Tiến độ
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.IsComplete == true)
+            {
+                <span class="text-success">
+                    <b>
+                        Xong
+                    </b>
+                </span>
+            }
+            else
+            {
+                <span class="text-danger">
+                    <b>
+                        Chưa
+                    </b>
+                </span>
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Phàn hồi
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Feedback)
+        </dd>
+        <dt class="col-sm-3">
             Ngày đăng
         </dt>
         <dd class="col-sm-9">

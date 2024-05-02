@@ -71,6 +71,9 @@
                 Tiến độ
             </th>
             <th>
+                Phản hồi
+            </th>
+            <th>
                 Tác vụ
             </th>
         </tr>
@@ -101,16 +104,16 @@
                         }
                     }
                 </td>
-                <td style="max-width: 300px;">
+                <td style="max-width: 250px;">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td style="max-width: 300px;">
+                <td style="max-width: 270px;">
                     @Html.Raw(item.Description)
                 </td>
-                <td style="max-width: 300px;">
+                <td style="max-width: 270px;">
                     @Html.Raw(item.Note)
                 </td>
-                <td>
+                <td style="max-width: 150px;">
                     @if (item.IsComplete == true)
                     {
                         <span class="text-success">
@@ -128,16 +131,19 @@
                         </span>
                     }
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                <td style="max-width: 250px;">
+                    @Html.Raw(item.Feedback)
+                </td>
+                <td style="max-width: 150px;">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" style="width: 150px;">
                         <i class="fa fa-wrench" aria-hidden="true"></i>
                         Cập nhật
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary" style="width: 150px;">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         Chi tiết
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" style="width: 150px;">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Xóa
                     </a>

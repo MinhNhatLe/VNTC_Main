@@ -7,18 +7,22 @@
     .hero_area {
         min-height: 5vh;
     }
+
+    .justify-text {
+        text-align: justify;
+    }
 </style>
 
 <section class="about_section layout_padding">
     <div class="container  ">
-        <div class="heading_container heading_center">
+        @*<div class="heading_container heading_center">
             <h2>
                 Giới thiệu về <span>VNTC</span>
             </h2>
             <p>
                 CÔNG TY CỔ PHẦN TƯ VẤN VÀ ĐÀO TẠO CÔNG NGHỆ VIỆT NAM
             </p>
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-md-4">
                 <div class="img-box">
@@ -27,22 +31,30 @@
             </div>
             <div class="col-md-8">
                 <div class="detail-box">
-                    <h3 class="text-center">
+                    <div class="heading_container heading_center">
+                        <h2>
+                            Giới thiệu về <span>VNTC</span>
+                        </h2>
+                        <p>
+                            CÔNG TY CỔ PHẦN TƯ VẤN VÀ ĐÀO TẠO CÔNG NGHỆ VIỆT NAM
+                        </p>
+                    </div>
+                    @*<h3 class="text-center">
                         Tư vấn và Đào tạo Công nghệ Việt Nam
-                    </h3>
-                    <p>
+                    </h3>*@
+                    <p class="justify-text">
                         Công ty chúng tôi, Công ty Cổ phần Tư vấn và Đào tạo Công nghệ Việt Nam (VNTC), đã có một hành trình đầy thú vị từ khi thành lập vào năm 2017. Chúng tôi tự hào là một đơn vị chuyên cung cấp các dịch vụ tư vấn kỹ thuật và quản trị doanh nghiệp chất lượng cao, đáp ứng nhu cầu đa dạng của các doanh nghiệp, cơ quan, và trường học.
                     </p>
-                    <p>
+                    <p class="justify-text">
                         Trong lĩnh vực tư vấn, chúng tôi cung cấp các dịch vụ đa dạng như tư vấn lập dự án với các báo cáo nghiên cứu khả thi, báo cáo đầu tư chi tiết, và thuyết minh mua sắm. Chúng tôi cũng có kinh nghiệm trong việc tư vấn lập thiết kế bản vẽ thi công, quản lý dự án, giám sát công trình, kiểm định và đánh giá hệ thống, ứng dụng. Đội ngũ chuyên gia của chúng tôi không ngừng nỗ lực để mang lại giải pháp tối ưu nhất cho các dự án của khách hàng.
                     </p>
-                    <p>
+                    <p class="justify-text">
                         Ngoài ra, chúng tôi còn hoạt động trong lĩnh vực lập trình ứng dụng, cung cấp dịch vụ tư vấn thiết kế và lập trình phần mềm ứng dụng chuyên ngành. Với sự hiểu biết sâu sắc về công nghệ và kinh nghiệm thực tiễn, chúng tôi cam kết mang lại sản phẩm phần mềm chất lượng và hiệu quả cho khách hàng.
                     </p>
-                    <p>
+                    <p class="justify-text">
                         Tất cả những gì chúng tôi làm đều dựa trên phương châm "Lắng nghe – Am tường – Tuân thủ". Chúng tôi luôn lắng nghe ý kiến của khách hàng, am tường với yêu cầu và mong muốn của họ, và tuân thủ cam kết đem lại giải pháp tốt nhất. Điều này giúp chúng tôi xây dựng mối quan hệ đáng tin cậy và lâu dài với khách hàng, từng bước phát triển và khẳng định vị thế của mình trên thị trường.
                     </p>
-                    <p>
+                    <p class="justify-text">
                         Nếu bạn đang tìm kiếm một đối tác đáng tin cậy trong lĩnh vực tư vấn kỹ thuật và lập trình ứng dụng, hãy đến với chúng tôi - VNTC, nơi bạn có thể tin tưởng và chia sẻ ý tưởng để cùng nhau thành công.
                     </p>
                     <a asp-area="Contact" asp-controller="Contact" asp-action="SendContact">

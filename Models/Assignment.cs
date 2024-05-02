@@ -12,6 +12,8 @@ namespace dotnetstartermvc.Models
 
         public string? Note { get; set; }
 
+        public string? Feedback { get; set; }
+
         public bool IsComplete { get; set; }
 
         public DateTime? ActionDate { get; set; }

@@ -46,6 +46,7 @@ namespace dotnetstartermvc.Controllers
                 assignments = assignments.Where(s => s.Title.Contains(searchString)
                 || s.Description.Contains(searchString)
                 || s.Note.Contains(searchString)
+                || s.Feedback.Contains(searchString)
                 || s.User.Email.Contains(searchString));
             }
 
@@ -232,6 +233,7 @@ namespace dotnetstartermvc.Controllers
                 assignments = assignments.Where(s => s.Title.Contains(searchString)
                 || s.Description.Contains(searchString)
                 || s.Note.Contains(searchString)
+                || s.Feedback.Contains(searchString)
                 || s.User.Email.Contains(searchString));
             }
 
@@ -260,6 +262,7 @@ namespace dotnetstartermvc.Controllers
                 assignments = assignments.Where(s => s.Title.Contains(searchString)
                 || s.Description.Contains(searchString)
                 || s.Note.Contains(searchString)
+                || s.Feedback.Contains(searchString)
                 || s.User.Email.Contains(searchString));
             }
 
@@ -293,6 +296,7 @@ namespace dotnetstartermvc.Controllers
                 assignments = assignments.Where(s => s.Title.Contains(searchString)
                 || s.Description.Contains(searchString)
                 || s.Note.Contains(searchString)
+                || s.Feedback.Contains(searchString)
                 || s.User.Email.Contains(searchString));
             }
 
@@ -332,6 +336,7 @@ namespace dotnetstartermvc.Controllers
             if (ModelState.IsValid)
             {
                 assignment.IsComplete = request.IsComplete;
+                assignment.Feedback = request.Feedback;
 
                 _context.Update(assignment);
                 await _context.SaveChangesAsync();

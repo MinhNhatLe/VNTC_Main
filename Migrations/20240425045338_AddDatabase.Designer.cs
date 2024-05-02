@@ -12,7 +12,7 @@ using dotnetstartermvc.Models;
 namespace dotnetstartermvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422080344_AddDatabase")]
+    [Migration("20240425045338_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,9 @@ namespace dotnetstartermvc.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Feedback")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsComplete")
