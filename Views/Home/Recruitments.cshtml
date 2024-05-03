@@ -46,12 +46,12 @@
                 {
                     <div class="col-md-4 ">
                         <div class="box ">
-                            <div class="img-box">
+                            @*<div class="img-box">
                                 <img src="~/asset-home-layout/images/s1.png" />
-                            </div>
-                            <div class="detail-box" style="height: 150px">
+                            </div>*@
+                            <div class="detail-box" style="height: 110px">
                                 <a asp-action="RecruitmentDetails" asp-route-id="@item.Id">
-                                    <h5>
+                                    <h5 style="font-size: 1rem">
                                         @Html.DisplayFor(modelItem => item.Title)
                                     </h5>
                                 </a>

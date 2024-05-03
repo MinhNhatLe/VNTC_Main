@@ -131,7 +131,16 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(recruitment);
+            var recruitmentEdit = new EditRecruitmentRequest
+            {
+                Id = recruitment.Id,
+                Title = recruitment.Title,
+                Quantity = recruitment.Quantity,
+                Description = recruitment.Description,
+                CreatedDate = recruitment.CreatedDate,
+            };
+
+            return View(recruitmentEdit);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]

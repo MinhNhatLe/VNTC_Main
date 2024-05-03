@@ -336,6 +336,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Notifications/UploadPhoto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xVcGxvYWRQaG90by5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Recruitments/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -374,6 +378,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Services/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Services/UploadPhoto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcVXBsb2FkUGhvdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Shared/Error.cshtml]

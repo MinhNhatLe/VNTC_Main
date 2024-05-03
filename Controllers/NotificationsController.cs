@@ -62,6 +62,7 @@ namespace dotnetstartermvc.Controllers
 
             var @new = await _context.Notifications
                 .Include(s => s.User)
+                .Include(s => s.NotificationPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@new == null)
             {
@@ -128,7 +129,15 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(notifications);
+            var notificationEdit = new EditNotificationRequest
+            {
+                Id = notifications.Id,
+                Title = notifications.Title,
+                Description = notifications.Description,
+                CreatedDate = notifications.CreatedDate,
+            };
+
+            return View(notificationEdit);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
@@ -171,6 +180,7 @@ namespace dotnetstartermvc.Controllers
 
             var notification = await _context.Notifications
                 .Include(s => s.User)
+                .Include(s => s.NotificationPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notification == null)
             {
@@ -205,6 +215,145 @@ namespace dotnetstartermvc.Controllers
         private bool NotificationExists(Guid id)
         {
             return (_context.Notifications?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpGet]
+        public IActionResult UploadPhoto(Guid id)
+        {
+            var notification = _context.Notifications.Where(e => e.Id == id)
+                            .Include(p => p.NotificationPhotos)
+                            .FirstOrDefault();
+
+            if (notification == null)
+            {
+                return NotFound("Không có thông báo");
+            }
+
+            ViewData["notification"] = notification;
+            return View(new UploadOneFile());
+        }
+
+        [HttpPost, ActionName("UploadPhoto")]
+        public async Task<IActionResult> UploadPhotoAsync(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var notification = _context.Notifications.Where(e => e.Id == id)
+                .Include(p => p.NotificationPhotos)
+                .FirstOrDefault();
+
+            if (notification == null)
+            {
+                return NotFound("Không có thông báo");
+            }
+
+            ViewData["notification"] = notification;
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Notifications", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new NotificationPhoto()
+                {
+                    NotificationId = notification.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return View(f);
+        }
+
+        [HttpPost]
+        public IActionResult ListPhotos(Guid id)
+        {
+            var notification = _context.Notifications.Where(e => e.Id == id)
+                .Include(p => p.NotificationPhotos)
+                .FirstOrDefault();
+
+            if (notification == null)
+            {
+                return Json(
+                    new
+                    {
+                        success = 0,
+                        message = "Notification not found",
+                    }
+                );
+            }
+
+            var listphotos = notification.NotificationPhotos.Select(photo => new
+            {
+                id = photo.Id,
+                path = "/contents/Notifications/" + photo.FileName
+            });
+
+            return Json(
+                new
+                {
+                    success = 1,
+                    photos = listphotos
+                }
+            );
+        }
+
+        [HttpPost]
+        public IActionResult DeletePhoto(Guid id)
+        {
+            var photo = _context.NotificationPhotos.Where(p => p.Id == id).FirstOrDefault();
+            if (photo != null)
+            {
+                _context.Remove(photo);
+                _context.SaveChanges();
+
+                var filename = "Uploads/Notifications/" + photo.FileName;
+                System.IO.File.Delete(filename);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadPhotoApi(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var notification = _context.Notifications.Where(e => e.Id == id)
+                .Include(p => p.NotificationPhotos)
+                .FirstOrDefault();
+
+            if (notification == null)
+            {
+                return NotFound("Không có thông báo");
+            }
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Notifications", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new NotificationPhoto()
+                {
+                    NotificationId = notification.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
         }
     }
 }

@@ -12,7 +12,7 @@ using dotnetstartermvc.Models;
 namespace dotnetstartermvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240425045338_AddDatabase")]
+    [Migration("20240502080039_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,6 +199,26 @@ namespace dotnetstartermvc.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.NotificationPhoto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("NotificationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.ToTable("NotificationPhotos");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.Recruitment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -258,6 +278,26 @@ namespace dotnetstartermvc.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.ServicePhoto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServicePhotos");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.WorkSchedule", b =>
@@ -455,6 +495,17 @@ namespace dotnetstartermvc.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.NotificationPhoto", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Notification", "Notification")
+                        .WithMany()
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Notification");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.Recruitment", b =>
                 {
                     b.HasOne("dotnetstartermvc.Models.AppUser", "User")
@@ -475,6 +526,17 @@ namespace dotnetstartermvc.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.ServicePhoto", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Service", "Service")
+                        .WithMany("ServicePhotos")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.WorkSchedule", b =>
@@ -537,6 +599,11 @@ namespace dotnetstartermvc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Service", b =>
+                {
+                    b.Navigation("ServicePhotos");
                 });
 #pragma warning restore 612, 618
         }

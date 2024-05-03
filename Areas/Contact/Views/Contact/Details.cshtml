@@ -26,7 +26,19 @@
             Ngày gởi
         </dt>
         <dd class="col-sm-10">
-            <text>@Model.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>
+            @*<text>@Model.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"))</text>*@
+            @{
+                var timeString = Model.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                if (timeString.Contains("SA"))
+                {
+                    timeString = timeString.Replace("SA", "Sáng");
+                }
+                else if (timeString.Contains("CH"))
+                {
+                    timeString = timeString.Replace("CH", "Chiều");
+                }
+                <text>@timeString</text>
+            }
         </dd>
         <dt class="col-sm-2">
             Nội dung

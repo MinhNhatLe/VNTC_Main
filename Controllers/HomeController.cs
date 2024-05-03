@@ -18,7 +18,7 @@ namespace dotnetstartermvc.Controllers
 
         public async Task<IActionResult> Home()
         {
-            var services = await _context.Services.Include(s => s.User).OrderByDescending(s => s.CreatedDate).Take(3).ToListAsync();
+            var services = await _context.Services.Include(s => s.User).Include(s => s.ServicePhotos).OrderByDescending(s => s.CreatedDate).Take(3).ToListAsync();
 
             return View(services);
         }
@@ -33,7 +33,7 @@ namespace dotnetstartermvc.Controllers
             var pageNumber = page ?? 1; // Trang hiện tại
             var pageSize = 6; // Số lượng item trên mỗi trang
 
-            var services = from s in _context.Services.Include(s => s.User)
+            var services = from s in _context.Services.Include(s => s.User).Include(s => s.ServicePhotos)
                            select s;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -57,6 +57,7 @@ namespace dotnetstartermvc.Controllers
 
             var service = await _context.Services
                 .Include(s => s.User)
+                .Include(s => s.ServicePhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (service == null)
             {
@@ -64,6 +65,7 @@ namespace dotnetstartermvc.Controllers
             }
 
             var notifications = await _context.Notifications
+                                    .Include(s => s.NotificationPhotos)
                                     .OrderByDescending(n => n.CreatedDate)
                                     .Take(10)
                                     .ToListAsync();
@@ -82,7 +84,7 @@ namespace dotnetstartermvc.Controllers
             var pageNumber = page ?? 1; // Trang hiện tại
             var pageSize = 6; // Số lượng item trên mỗi trang
 
-            var notifications = from n in _context.Notifications.Include(s => s.User)
+            var notifications = from n in _context.Notifications.Include(s => s.User).Include(s => s.NotificationPhotos)
                                 select n;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -107,6 +109,7 @@ namespace dotnetstartermvc.Controllers
 
             var notification = await _context.Notifications
                 .Include(s => s.User)
+                .Include(s => s.NotificationPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notification == null)
             {
@@ -114,6 +117,7 @@ namespace dotnetstartermvc.Controllers
             }
 
             var notifications = await _context.Notifications
+                                    .Include(s => s.NotificationPhotos)
                                     .OrderByDescending(n => n.CreatedDate)
                                     .Take(10)
                                     .ToListAsync();
@@ -164,6 +168,7 @@ namespace dotnetstartermvc.Controllers
             }
 
             var notifications = await _context.Notifications
+                                    .Include(s => s.NotificationPhotos)
                                     .OrderByDescending(n => n.CreatedDate)
                                     .Take(10)
                                     .ToListAsync();

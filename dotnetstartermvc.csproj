@@ -100,7 +100,8 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="smssave\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\Notifications\" />
+    <Folder Include="Uploads\Services\" />
   </ItemGroup>
 
 </Project>

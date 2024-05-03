@@ -46,12 +46,22 @@
                 {
                     <div class="col-md-4 ">
                         <div class="box ">
-                            <div class="img-box">
-                                <img src="~/asset-home-layout/images/s1.png" />
+                            <div>
+                                @if (item.ServicePhotos.Count > 0)
+                                {
+                                    foreach (var photo in item.ServicePhotos)
+                                    {
+                                        <img style="height: 200px; width: 100%; border-radius: 10px;" src="/contents/Services/@photo.FileName" />
+                                    }
+                                }
+                                else
+                                {
+                                    <img style="height: 200px; width: 100%; border-radius: 10px;" src="~/images/bg-logo-vntc.png" />
+                                }
                             </div>
-                            <div class="detail-box" style="height: 150px">
+                            <div class="detail-box" style="height: 110px; margin-top: 20px;">
                                 <a asp-action="ServiceDetails" asp-route-id="@item.Id">
-                                    <h5>
+                                    <h5 style="font-size: 1rem">
                                         @Html.DisplayFor(modelItem => item.Title)
                                     </h5>
                                 </a>

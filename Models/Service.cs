@@ -20,5 +20,7 @@ namespace dotnetstartermvc.Models
         [ForeignKey("UserId")]
         [Required]
         public AppUser? User { get; set; }
+
+        public List<ServicePhoto>? ServicePhotos { get; set; }
     }
 }

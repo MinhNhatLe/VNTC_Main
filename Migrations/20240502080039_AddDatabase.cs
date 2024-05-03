@@ -287,10 +287,53 @@ namespace dotnetstartermvc.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NotificationPhotos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationPhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NotificationPhotos_Notifications_NotificationId",
+                        column: x => x.NotificationId,
+                        principalTable: "Notifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServicePhotos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServicePhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServicePhotos_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_UserId",
                 table: "Assignments",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotificationPhotos_NotificationId",
+                table: "NotificationPhotos",
+                column: "NotificationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_UserId",
@@ -313,6 +356,11 @@ namespace dotnetstartermvc.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServicePhotos_ServiceId",
+                table: "ServicePhotos",
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_UserId",
@@ -361,7 +409,7 @@ namespace dotnetstartermvc.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Notifications");
+                name: "NotificationPhotos");
 
             migrationBuilder.DropTable(
                 name: "Recruitments");
@@ -370,7 +418,7 @@ namespace dotnetstartermvc.Migrations
                 name: "RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "ServicePhotos");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -386,6 +434,12 @@ namespace dotnetstartermvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkSchedules");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "Roles");

@@ -38,6 +38,7 @@
     }
 
     .description-service {
+        margin-top: 20px;
         font-size: 16px;
         line-height: 1.6; /* Độ dài của dòng */
     }
@@ -57,6 +58,34 @@
                 @Html.Raw(Model.DetailNotifications.Description)
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <p>
+                    <b>Ngày tạo: </b>
+                    @{
+                        if (Model.DetailNotifications.CreatedDate.HasValue)
+                        {
+                            var timeString = Model.DetailNotifications.CreatedDate.Value.ToString("dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            if (timeString.Contains("SA"))
+                            {
+                                timeString = timeString.Replace("SA", "Sáng");
+                            }
+                            else if (timeString.Contains("CH"))
+                            {
+                                timeString = timeString.Replace("CH", "Chiều");
+                            }
+                            <text>@timeString</text>
+                        }
+                    }
+                </p>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <p style="float: right;">
+                    <b>Tác giả: </b>
+                    @Html.DisplayFor(model => model.DetailNotifications.User.Email)
+                </p>
+            </div>
+        </div>
         <div class="row" style="margin-bottom:10px; margin-top:10px;">
             <a asp-action="Service" class="btn btn-outline-dark">
                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
@@ -69,6 +98,9 @@
             <thead class="sticky-thead" style="background-color: #337ab7; color: #fff">
                 <tr class="text-center">
                     <th>
+
+                    </th>
+                    <th>
                         Thông báo
                     </th>
                     <th>
@@ -80,12 +112,25 @@
                 @foreach (var item in Model.ListNotifications)
                 {
                     <tr>
-                        <td style="width: 70%">
+                        <td style="width: 20%">
+                            @if (item.NotificationPhotos.Count > 0)
+                            {
+                                foreach (var photo in item.NotificationPhotos)
+                                {
+                                    <img style="height: 60px; width: 100%; border-radius: 10px;" src="/contents/Notifications/@photo.FileName" />
+                                }
+                            }
+                            else
+                            {
+                                <img style="height: 60px; width: 100%; border-radius: 10px;" src="~/asset-home-layout/images/s2.png" />
+                            }
+                        </td>
+                        <td style="width: 60%">
                             <a asp-action="NotificationDetails" asp-route-id="@item.Id">
                                 @Html.DisplayFor(modelItem => item.Title)
                             </a>
                         </td>
-                        <td style="width: 30%" class="text-center">
+                        <td style="width: 20%" class="text-center">
                             @{
                                 if (item.CreatedDate.HasValue)
                                 {

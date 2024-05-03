@@ -137,7 +137,17 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(assignment);
+            var assignmentEdit = new EditAssignmentRequest
+            {
+                Id = assignment.Id,
+                Title = assignment.Title,
+                Description = assignment.Description,
+                Note = assignment.Note,
+                ActionDate = assignment.ActionDate,
+                IsComplete = assignment.IsComplete,
+            };
+
+            return View(assignmentEdit);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]

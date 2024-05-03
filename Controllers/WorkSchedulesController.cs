@@ -139,7 +139,18 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(workSchedule);
+            var workScheduleEdit = new EditWorkScheduleRequest
+            {
+                Id = workSchedule.Id,
+                Title = workSchedule.Title,
+                Description = workSchedule.Description,
+                Note = workSchedule.Note,
+                Address = workSchedule.Address,
+                Participants = workSchedule.Participants,
+                ActionDate = workSchedule.ActionDate,
+            };
+
+            return View(workScheduleEdit);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]

@@ -24,7 +24,12 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.ViewLocationFormats.Add("/MyView/{1}/{0}" + RazorViewEngine.ViewExtension);
 
     options.AreaViewLocationFormats.Add("/MyAreas/{2}/Views/{1}/{0}.cshtml");
+});
 
+builder.Services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+builder.Services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
+    cfg.Cookie.Name = "appmvc";                 // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+    cfg.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
 });
 
 // dang ky dich vu email
@@ -55,7 +60,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
 
     // Cấu hình Lockout - khóa user
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); // Khóa 1 phút
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2); // Khóa 2 phút
     options.Lockout.MaxFailedAccessAttempts = 5; // Thất bại 5 lần thì khóa
     options.Lockout.AllowedForNewUsers = true;
 
@@ -69,7 +74,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
     options.SignIn.RequireConfirmedPhoneNumber = false;     // Xác thực số điện thoại
     options.SignIn.RequireConfirmedAccount = true;
-
 });
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -134,8 +138,8 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = "/contents"
 });
 
-app.AddStatusCodePage(); // Tuy bien Response loi: 400 - 599
 app.UseSession();
+app.AddStatusCodePage(); // Tuy bien Response loi: 400 - 599
 
 app.UseRouting();
 

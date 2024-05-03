@@ -9,7 +9,7 @@ namespace dotnetstartermvc.ModelsRequest.RecruitmentRequest
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập số lượng")]
-        [Range(0, 100, ErrorMessage = "Vui lòng nhập số lượng từ 0 đến 100.")]
+        [Range(1, 100, ErrorMessage = "Vui lòng nhập số lượng từ 1 đến 100.")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập nội dung công việc")]

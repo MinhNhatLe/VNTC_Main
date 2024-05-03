@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnetstartermvc.ModelsRequest.AssignmentRequest
 {
     public class EditAssignmentRequest
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập tên nhiệm vụ")]
         [StringLength(200, MinimumLength = 3, ErrorMessage = "Vui lòng nhập tên nhiệm vụ từ 3 đến 200 kí tự")]
         public string? Title { get; set; }

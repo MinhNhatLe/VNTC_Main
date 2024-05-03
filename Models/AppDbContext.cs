@@ -36,5 +36,7 @@ namespace dotnetstartermvc.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<WorkSchedule> WorkSchedules { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<ServicePhoto> ServicePhotos { get; set; }
+        public DbSet<NotificationPhoto> NotificationPhotos { get; set; }
     }
 }

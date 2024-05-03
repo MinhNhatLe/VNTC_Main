@@ -63,6 +63,7 @@ namespace dotnetstartermvc.Controllers
 
             var service = await _context.Services
                 .Include(s => s.User)
+                .Include(s => s.ServicePhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (service == null)
             {
@@ -129,7 +130,15 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            return View(service);
+            var serviceEdit = new EditServicesRequest
+            {
+                Id = service.Id,
+                Title = service.Title,
+                Description = service.Description,
+                CreatedDate = service.CreatedDate,
+            };
+
+            return View(serviceEdit);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
@@ -172,6 +181,7 @@ namespace dotnetstartermvc.Controllers
 
             var service = await _context.Services
                 .Include(s => s.User)
+                .Include(s => s.ServicePhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (service == null)
             {
@@ -206,6 +216,145 @@ namespace dotnetstartermvc.Controllers
         private bool ServiceExists(Guid id)
         {
             return (_context.Services?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpGet]
+        public IActionResult UploadPhoto(Guid id)
+        {
+            var service = _context.Services.Where(e => e.Id == id)
+                            .Include(p => p.ServicePhotos)
+                            .FirstOrDefault();
+
+            if (service == null)
+            {
+                return NotFound("Không có dịch vụ");
+            }
+
+            ViewData["service"] = service;
+            return View(new UploadOneFile());
+        }
+
+        [HttpPost, ActionName("UploadPhoto")]
+        public async Task<IActionResult> UploadPhotoAsync(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var service = _context.Services.Where(e => e.Id == id)
+                .Include(p => p.ServicePhotos)
+                .FirstOrDefault();
+
+            if (service == null)
+            {
+                return NotFound("Không có dịch vụ");
+            }
+
+            ViewData["service"] = service;
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Services", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new ServicePhoto()
+                {
+                    ServiceId = service.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return View(f);
+        }
+
+        [HttpPost]
+        public IActionResult ListPhotos(Guid id)
+        {
+            var service = _context.Services.Where(e => e.Id == id)
+                .Include(p => p.ServicePhotos)
+                .FirstOrDefault();
+
+            if (service == null)
+            {
+                return Json(
+                    new
+                    {
+                        success = 0,
+                        message = "Service not found",
+                    }
+                );
+            }
+
+            var listphotos = service.ServicePhotos.Select(photo => new
+            {
+                id = photo.Id,
+                path = "/contents/Services/" + photo.FileName
+            });
+
+            return Json(
+                new
+                {
+                    success = 1,
+                    photos = listphotos
+                }
+            );
+        }
+
+        [HttpPost]
+        public IActionResult DeletePhoto(Guid id)
+        {
+            var photo = _context.ServicePhotos.Where(p => p.Id == id).FirstOrDefault();
+            if (photo != null)
+            {
+                _context.Remove(photo);
+                _context.SaveChanges();
+
+                var filename = "Uploads/Services/" + photo.FileName;
+                System.IO.File.Delete(filename);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadPhotoApi(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var service = _context.Services.Where(e => e.Id == id)
+                .Include(p => p.ServicePhotos)
+                .FirstOrDefault();
+
+            if (service == null)
+            {
+                return NotFound("Không có dịch vụ");
+            }
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Services", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new ServicePhoto()
+                {
+                    ServiceId = service.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
         }
     }
 }
