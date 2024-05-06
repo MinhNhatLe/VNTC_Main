@@ -1,0 +1,99 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.DutyRequest.EditDutyRequest
+
+@{
+    ViewData["Title"] = "Sửa thông tin nhiệm vụ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ActionDate" class="control-label">Thời gian <b style="color: red">*</b></label>
+                <input asp-for="ActionDate" class="form-control" />
+                <span asp-validation-for="ActionDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tên nhiệm vụ <b style="color: red">*</b></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Nội dung nhiệm vụ</label>
+                <textarea asp-for="Description" class="form-control" id="summernoteEditor"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Note" class="control-label">Ghi chú</label>
+                <textarea asp-for="Note" class="form-control" id="summernoteEditor2"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsComplete" class="control-label">Tiến độ nhiệm vụ</label>
+                <div class="form-check">
+                    <input asp-for="IsComplete" class="form-check-input" type="checkbox" />
+                    <label class="form-check-label" asp-for="IsComplete">Click nếu đã hoàn thành</label>
+                </div>
+                <span asp-validation-for="IsComplete" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Emails">Giao nhiệm vụ cho người dùng:</label>
+                <select asp-for="Emails" asp-items="@((IEnumerable<SelectListItem>)ViewBag.allEmails)" id="id-select-emails" class="w-100" multiple></select>
+            </div>
+
+            <div class="form-group" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Cập nhật nhiệm vụ
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các nhiệm vụ</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+        <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+
+        <script>
+            $("#id-select-emails").multipleSelect({
+                selectAll: false,
+                keepOpen: false,
+                isOpen: false,
+            });
+        </script>
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 300
+            };
+    var summernote2 = new dotnetstartermvc.Models.Summernote("#summernoteEditor2", false);
+}
+<partial name="_Summernote" model="summernote" />
+<partial name="_Summernote" model="summernote2" />
+
+@{
+    _AdminSidebarService.SetActive("Assignments", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

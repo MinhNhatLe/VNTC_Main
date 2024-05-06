@@ -17,6 +17,15 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt class="col-sm-3">
+            Ảnh đại điện tuyển dụng
+        </dt>
+        <dd class="col-sm-9">
+            @foreach (var photo in Model.RecruitmentPhotos)
+            {
+                <img class="avatar-img" src="/contents/Services/@photo.FileName" />
+            }
+        </dd>
+        <dt class="col-sm-3">
             Số lượng
         </dt>
         <dd class="col-sm-9">
@@ -29,13 +38,33 @@
             @Html.Raw(Model.Description)
         </dd>
         <dt class="col-sm-3">
-            Ngày đăng
+            Ngày tạo
         </dt>
         <dd class="col-sm-9">
             @{
                 if (Model.CreatedDate.HasValue)
                 {
                     var timeString = Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Ngày sửa
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.UpdatedDate.HasValue)
+                {
+                    var timeString = Model.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
                     if (timeString.Contains("SA"))
                     {
                         timeString = timeString.Replace("SA", "Sáng");

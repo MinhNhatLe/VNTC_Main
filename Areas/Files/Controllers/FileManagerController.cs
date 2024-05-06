@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace dotnetstartermvc.Areas.Files.Controllers
 {
     [Area("Files")]
-    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
     public class FileManagerController : Controller
     {
         [Route("/file-manager")]

@@ -73,7 +73,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Số lượng nhiệm vụ bàn giao
+                                Số lượng nhiệm vụ chung bàn giao
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
@@ -132,7 +132,7 @@
     </div>
     <div class="col-lg-4 col-sm-4 col-xs-12">
         <div style="width: 50%; margin: 0 auto;">
-            <h5 class="text-center">Biểu đồ lịch công tác & nhiệm vụ</h5>
+            <h5 class="text-center">Biểu đồ lịch công tác & nhiệm vụ chung</h5>
             <canvas id="myPie3" width="200" height="200"></canvas>
         </div>
     </div>
@@ -229,7 +229,7 @@
         var myPie3 = new Chart(ctx3, {
             type: 'pie',
             data: {
-                labels: ['Lịch công tác', 'Nhiệm vụ'],
+                labels: ['Lịch công tác', 'Nhiệm vụ chung'],
                 datasets: [{
                     label: 'Số lượng',
                     data: [
@@ -264,7 +264,7 @@
         var myChartBar = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Vai trò', 'Người dùng', 'Dịch vụ', 'Tin tức', 'Tuyển dụng', 'Lịch công tác', 'Nhiệm vụ'],
+                labels: ['Vai trò', 'Người dùng', 'Dịch vụ', 'Tin tức', 'Tuyển dụng', 'Lịch công tác', 'Nhiệm vụ chung'],
                 datasets: [{
                     label: 'Số lượng',
                     data: [

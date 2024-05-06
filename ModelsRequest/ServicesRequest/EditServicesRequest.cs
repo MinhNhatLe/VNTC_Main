@@ -15,8 +15,5 @@ namespace dotnetstartermvc.ModelsRequest.ServicesRequest
 
         [Required(ErrorMessage = "Vui lòng nhập nội dung dịch vụ")]
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng chọn ngày đăng")]
-        public DateTime? CreatedDate { get; set; }
     }
 }

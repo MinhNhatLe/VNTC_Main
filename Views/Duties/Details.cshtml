@@ -1,0 +1,149 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.DutyRequest.DutyViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết nhiệm vụ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Thời gian
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Duty.ActionDate.HasValue)
+                {
+                    var timeString = Model.Duty.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Tên nhiệm vụ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Duty.Title)
+        </dd>
+        <dt class="col-sm-3">
+            Nội dung
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Duty.Description)
+        </dd>
+        <dt class="col-sm-3">
+            Ghi chú
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Duty.Note)
+        </dd>
+        <dt class="col-sm-3">
+            Tiến độ
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.Duty.IsComplete == true)
+            {
+                <span class="text-success">
+                    <b>
+                        Xong
+                    </b>
+                </span>
+            }
+            else
+            {
+                <span class="text-danger">
+                    <b>
+                        Chưa
+                    </b>
+                </span>
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Phàn hồi
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Duty.Feedback)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày tạo
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Duty.CreatedDate.HasValue)
+                {
+                    var timeString = Model.Duty.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Ngày sửa
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Duty.UpdatedDate.HasValue)
+                {
+                    var timeString = Model.Duty.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Người đảm nhiệm
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.UserDuties.Any())
+            {
+                @foreach (var userDuty in Model.UserDuties)
+                {
+                    @userDuty.User.Email
+                    <br />
+                }
+            }
+            else
+            {
+                <span style="color: red;">Chưa có người đảm nhiệm</span>
+            }
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-dark"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các nhiệm vụ</a>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("Duties", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

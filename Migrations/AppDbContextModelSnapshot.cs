@@ -37,6 +37,9 @@ namespace dotnetstartermvc.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("DutyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -83,6 +86,8 @@ namespace dotnetstartermvc.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DutyId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -122,6 +127,10 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -168,6 +177,44 @@ namespace dotnetstartermvc.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.Duty", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ActionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Duties");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.Notification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -185,6 +232,10 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -238,6 +289,10 @@ namespace dotnetstartermvc.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -247,6 +302,26 @@ namespace dotnetstartermvc.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Recruitments");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.RecruitmentPhoto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RecruitmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecruitmentId");
+
+                    b.ToTable("RecruitmentPhotos");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.Service", b =>
@@ -266,6 +341,10 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -298,6 +377,21 @@ namespace dotnetstartermvc.Migrations
                     b.ToTable("ServicePhotos");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.UserDuty", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("DutyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "DutyId");
+
+                    b.HasIndex("DutyId");
+
+                    b.ToTable("UserDuties");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.WorkSchedule", b =>
                 {
                     b.Property<Guid>("Id")
@@ -326,6 +420,10 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -471,6 +569,13 @@ namespace dotnetstartermvc.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.AppUser", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Duty", null)
+                        .WithMany("Users")
+                        .HasForeignKey("DutyId");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.Assignment", b =>
                 {
                     b.HasOne("dotnetstartermvc.Models.AppUser", "User")
@@ -496,7 +601,7 @@ namespace dotnetstartermvc.Migrations
             modelBuilder.Entity("dotnetstartermvc.Models.NotificationPhoto", b =>
                 {
                     b.HasOne("dotnetstartermvc.Models.Notification", "Notification")
-                        .WithMany()
+                        .WithMany("NotificationPhotos")
                         .HasForeignKey("NotificationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -513,6 +618,17 @@ namespace dotnetstartermvc.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.RecruitmentPhoto", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Recruitment", "Recruitment")
+                        .WithMany("RecruitmentPhotos")
+                        .HasForeignKey("RecruitmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recruitment");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.Service", b =>
@@ -535,6 +651,25 @@ namespace dotnetstartermvc.Migrations
                         .IsRequired();
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.UserDuty", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Duty", "Duty")
+                        .WithMany()
+                        .HasForeignKey("DutyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("dotnetstartermvc.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Duty");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.WorkSchedule", b =>
@@ -597,6 +732,21 @@ namespace dotnetstartermvc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Duty", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Notification", b =>
+                {
+                    b.Navigation("NotificationPhotos");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Recruitment", b =>
+                {
+                    b.Navigation("RecruitmentPhotos");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.Service", b =>

@@ -57,7 +57,10 @@
                 Số lượng
             </th>
             <th>
-                Ngày đăng
+                Ngày tạo
+            </th>
+            <th>
+                Ngày sửa
             </th>
             <th>
                 Tác vụ
@@ -84,6 +87,23 @@
                         if (item.CreatedDate.HasValue)
                         {
                             var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            if (timeString.Contains("SA"))
+                            {
+                                timeString = timeString.Replace("SA", "Sáng");
+                            }
+                            else if (timeString.Contains("CH"))
+                            {
+                                timeString = timeString.Replace("CH", "Chiều");
+                            }
+                            <text>@timeString</text>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.UpdatedDate.HasValue)
+                        {
+                            var timeString = item.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
                             if (timeString.Contains("SA"))
                             {
                                 timeString = timeString.Replace("SA", "Sáng");

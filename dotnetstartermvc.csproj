@@ -99,7 +99,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="mailssave\" />
     <Folder Include="smssave\" />
+    <Folder Include="Uploads\Recruitments\" />
     <Folder Include="Uploads\Notifications\" />
     <Folder Include="Uploads\Services\" />
   </ItemGroup>

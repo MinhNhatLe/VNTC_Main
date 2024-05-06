@@ -1,0 +1,186 @@
+﻿@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+@using System.Globalization
+@using dotnetstartermvc.Menu
+@using dotnetstartermvc.Models;
+@using dotnetstartermvc.ModelsRequest.DutyRequest;
+@inject AdminSidebarService _AdminSidebarService
+@model X.PagedList.IPagedList<DutyViewModel>
+
+@{
+    ViewData["Title"] = "Quản lý nhiệm vụ riêng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
+}
+
+<style>
+    th, td {
+        word-wrap: break-word;
+        max-width: 300px;
+    }
+
+    td {
+        color: #0D0D0D;
+    }
+
+</style>
+
+<partial name="_AlertMessage" />
+
+<div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-0">
+    </div>
+    <div class="col-lg-8 col-sm-8 col-xs-12">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Nhập nội dung cần tìm kiếm ..." style="display: inline-block; width: 70%">
+                <button type="submit" class="btn btn-primary" style="width: 25%">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Tạo nhiệm vụ
+    </a>
+</p>
+<table class="table table-striped">
+    <thead style="background-color: #4e73df; color: #fff">
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Thời gian
+            </th>
+            <th>
+                Tên nhiệm vụ
+            </th>
+            <th>
+                Nội dung
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>
+                Tiến độ
+            </th>
+            <th>
+                Phản hồi
+            </th>
+            <th>
+                Người đảm nhiệm
+            </th>
+            <th>
+                Tác vụ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <b style="color: #4e73df">
+                        @(stt++)
+                    </b>
+                </td>
+                <td style="max-width: 100px;">
+                    @{
+                        if (item.Duty.ActionDate.HasValue)
+                        {
+                            var timeString = item.Duty.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            if (timeString.Contains("SA"))
+                            {
+                                timeString = timeString.Replace("SA", "Sáng");
+                            }
+                            else if (timeString.Contains("CH"))
+                            {
+                                timeString = timeString.Replace("CH", "Chiều");
+                            }
+                            <text>@timeString</text>
+                        }
+                    }
+                </td>
+                <td style="max-width: 200px;">
+                    @Html.DisplayFor(modelItem => item.Duty.Title)
+                </td>
+                <td style="max-width: 250px;">
+                    @Html.Raw(item.Duty.Description)
+                </td>
+                <td style="max-width: 200px;">
+                    @Html.Raw(item.Duty.Note)
+                </td>
+                <td style="max-width: 150px;">
+                    @if (item.Duty.IsComplete == true)
+                    {
+                        <span class="text-success">
+                            <b>
+                                Xong
+                            </b>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">
+                            <b>
+                                Chưa
+                            </b>
+                        </span>
+                    }
+                </td>
+                <td style="max-width: 200px;">
+                    @Html.Raw(item.Duty.Feedback)
+                </td>
+
+                <td style="max-width: 250px;">
+                    @if (item.UserDuties.Any())
+                    {
+                        @foreach (var userDuty in item.UserDuties)
+                        {
+                            @userDuty.User.Email
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                        <span style="color: red;">Chưa có người đảm nhiệm</span>
+                    }
+                </td>
+
+
+                <td style="max-width: 150px;">
+                    <a asp-action="Edit" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary" style="width: 150px;">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        Cập nhật
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary" style="width: 150px;">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        Chi tiết
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Duty.Id" class="btn btn-outline-danger" style="width: 150px;">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Pagination", Model)
+
+@{
+    _AdminSidebarService.SetActive("Duties", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

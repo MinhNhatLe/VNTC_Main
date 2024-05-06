@@ -136,7 +136,7 @@ namespace dotnetstartermvc.Controllers
             var pageNumber = page ?? 1; // Trang hiện tại
             var pageSize = 6; // Số lượng item trên mỗi trang
 
-            var recruitments = from n in _context.Recruitments.Include(s => s.User)
+            var recruitments = from n in _context.Recruitments.Include(s => s.User).Include(s => s.RecruitmentPhotos)
                                select n;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -161,6 +161,7 @@ namespace dotnetstartermvc.Controllers
 
             var recruitment = await _context.Recruitments
                 .Include(s => s.User)
+                .Include(s => s.RecruitmentPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recruitment == null)
             {

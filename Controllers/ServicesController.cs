@@ -97,7 +97,8 @@ namespace dotnetstartermvc.Controllers
                 {
                     Title = request.Title,
                     Description = request.Description,
-                    CreatedDate = request.CreatedDate,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
                     UserId = user.Id,
                 };
                 _context.Add(service);
@@ -135,7 +136,6 @@ namespace dotnetstartermvc.Controllers
                 Id = service.Id,
                 Title = service.Title,
                 Description = service.Description,
-                CreatedDate = service.CreatedDate,
             };
 
             return View(serviceEdit);
@@ -157,7 +157,7 @@ namespace dotnetstartermvc.Controllers
             {
                 service.Title = request.Title;
                 service.Description = request.Description;
-                service.CreatedDate = request.CreatedDate;
+                service.UpdatedDate = DateTime.Now;
                 service.UserId = user.Id;
 
                 _context.Update(service);

@@ -27,6 +27,25 @@ namespace dotnetstartermvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Duties",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Feedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsComplete = table.Column<bool>(type: "bit", nullable: false),
+                    ActionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Duties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -47,6 +66,7 @@ namespace dotnetstartermvc.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HomeAdress = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DutyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -65,6 +85,11 @@ namespace dotnetstartermvc.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Duties_DutyId",
+                        column: x => x.DutyId,
+                        principalTable: "Duties",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -100,6 +125,7 @@ namespace dotnetstartermvc.Migrations
                     IsComplete = table.Column<bool>(type: "bit", nullable: false),
                     ActionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -121,6 +147,7 @@ namespace dotnetstartermvc.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -143,6 +170,7 @@ namespace dotnetstartermvc.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -164,6 +192,7 @@ namespace dotnetstartermvc.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -192,6 +221,30 @@ namespace dotnetstartermvc.Migrations
                     table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserDuties",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DutyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDuties", x => new { x.UserId, x.DutyId });
+                    table.ForeignKey(
+                        name: "FK_UserDuties_Duties_DutyId",
+                        column: x => x.DutyId,
+                        principalTable: "Duties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserDuties_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -274,6 +327,7 @@ namespace dotnetstartermvc.Migrations
                     Participants = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ActionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -302,6 +356,25 @@ namespace dotnetstartermvc.Migrations
                         name: "FK_NotificationPhotos_Notifications_NotificationId",
                         column: x => x.NotificationId,
                         principalTable: "Notifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecruitmentPhotos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RecruitmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecruitmentPhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecruitmentPhotos_Recruitments_RecruitmentId",
+                        column: x => x.RecruitmentId,
+                        principalTable: "Recruitments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -341,6 +414,11 @@ namespace dotnetstartermvc.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RecruitmentPhotos_RecruitmentId",
+                table: "RecruitmentPhotos",
+                column: "RecruitmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Recruitments_UserId",
                 table: "Recruitments",
                 column: "UserId");
@@ -373,6 +451,11 @@ namespace dotnetstartermvc.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserDuties_DutyId",
+                table: "UserDuties",
+                column: "DutyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserLogins_UserId",
                 table: "UserLogins",
                 column: "UserId");
@@ -386,6 +469,11 @@ namespace dotnetstartermvc.Migrations
                 name: "EmailIndex",
                 table: "Users",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_DutyId",
+                table: "Users",
+                column: "DutyId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -412,7 +500,7 @@ namespace dotnetstartermvc.Migrations
                 name: "NotificationPhotos");
 
             migrationBuilder.DropTable(
-                name: "Recruitments");
+                name: "RecruitmentPhotos");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -422,6 +510,9 @@ namespace dotnetstartermvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserDuties");
 
             migrationBuilder.DropTable(
                 name: "UserLogins");
@@ -439,6 +530,9 @@ namespace dotnetstartermvc.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
+                name: "Recruitments");
+
+            migrationBuilder.DropTable(
                 name: "Services");
 
             migrationBuilder.DropTable(
@@ -446,6 +540,9 @@ namespace dotnetstartermvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Duties");
         }
     }
 }

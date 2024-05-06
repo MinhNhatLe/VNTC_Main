@@ -14,8 +14,5 @@ namespace dotnetstartermvc.ModelsRequest.RecruitmentRequest
 
         [Required(ErrorMessage = "Vui lòng nhập nội dung công việc")]
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng chọn ngày đăng")]
-        public DateTime CreatedDate { get; set; }
     }
 }

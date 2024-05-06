@@ -16,8 +16,5 @@ namespace dotnetstartermvc.ModelsRequest.NotificationRequest
 
         [Required(ErrorMessage = "Vui lòng nhập nội dung tin tức")]
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng chọn ngày đăng")]
-        public DateTime? CreatedDate { get; set; }
     }
 }

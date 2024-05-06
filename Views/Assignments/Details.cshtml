@@ -96,6 +96,26 @@
             }
         </dd>
         <dt class="col-sm-3">
+            Ngày sửa
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.UpdatedDate.HasValue)
+                {
+                    var timeString = Model.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
             Người tạo
         </dt>
         <dd class="col-sm-9">

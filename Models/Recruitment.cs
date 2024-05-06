@@ -18,10 +18,15 @@ namespace dotnetstartermvc.Models
         public DateTime? CreatedDate { get; set; }
 
         [Required]
+        public DateTime? UpdatedDate { get; set; }
+
+        [Required]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
         [Required]
         public AppUser? User { get; set; }
+
+        public List<RecruitmentPhoto>? RecruitmentPhotos { get; set; }
     }
 }

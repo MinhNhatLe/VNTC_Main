@@ -32,7 +32,7 @@ namespace dotnetstartermvc.Controllers
         [TempData]
         public string StatusMessage { set; get; }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Index(int? page, string searchString)
         {
             var pageNumber = page ?? 1; // Trang hiện tại
@@ -58,7 +58,7 @@ namespace dotnetstartermvc.Controllers
             return View(pagedList);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Assignments == null)
@@ -77,7 +77,7 @@ namespace dotnetstartermvc.Controllers
             return View(assignment);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -89,7 +89,7 @@ namespace dotnetstartermvc.Controllers
             return View();
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateAssignmentRequest request)
@@ -105,6 +105,7 @@ namespace dotnetstartermvc.Controllers
                     ActionDate = request.ActionDate,
                     IsComplete = false,
                     CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
                     UserId = user.Id,
                 };
                 _context.Add(assignment);
@@ -123,7 +124,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Assignments == null)
@@ -150,7 +151,7 @@ namespace dotnetstartermvc.Controllers
             return View(assignmentEdit);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditAssignmentRequest request)
@@ -169,7 +170,7 @@ namespace dotnetstartermvc.Controllers
                 assignment.Note = request.Note;
                 assignment.ActionDate = request.ActionDate;
                 assignment.IsComplete = request.IsComplete;
-                assignment.CreatedDate = DateTime.Now;
+                assignment.UpdatedDate = DateTime.Now;
                 assignment.UserId = user.Id;
 
                 _context.Update(assignment);
@@ -183,7 +184,7 @@ namespace dotnetstartermvc.Controllers
             return View(request);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Assignments == null)
@@ -202,7 +203,7 @@ namespace dotnetstartermvc.Controllers
             return View(assignment);
         }
 
-        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -285,13 +286,10 @@ namespace dotnetstartermvc.Controllers
         public async Task<IActionResult> FilterByWeek(string searchString)
         {
 
-            var currentDate = DateTime.Now.Date; // Lấy ngày hiện tại
-                                                 //var startOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday); // Tính ngày đầu tiên của tuần là thứ Hai
-                                                 //var endOfWeek = startOfWeek.AddDays(6); // Tính ngày cuối của tuần là Chủ Nhật
+            var currentDate = DateTime.Now.Date;
             var startOfWeek = currentDate.AddDays(-(7 + (int)currentDate.DayOfWeek - (int)DayOfWeek.Monday) % 7);
             var endOfWeek = startOfWeek.AddDays(6);
 
-            // Tính toán số tuần
             var weekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
 
             ViewBag.StartOfWeek = startOfWeek;

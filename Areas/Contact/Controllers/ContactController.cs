@@ -9,7 +9,7 @@ using ContactModel = dotnetstartermvc.Models.Contacts.Contact;
 namespace dotnetstartermvc.Areas.Contact.Controllers
 {
     [Area("Contact")]
-    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager}")]
+    [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
     public class ContactController : Controller
     {
         private readonly AppDbContext _context;

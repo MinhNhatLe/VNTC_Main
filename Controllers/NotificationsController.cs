@@ -96,7 +96,8 @@ namespace dotnetstartermvc.Controllers
                 {
                     Title = request.Title,
                     Description = request.Description,
-                    CreatedDate = request.CreatedDate,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
                     UserId = user.Id,
                 };
                 _context.Add(notifications);
@@ -134,7 +135,6 @@ namespace dotnetstartermvc.Controllers
                 Id = notifications.Id,
                 Title = notifications.Title,
                 Description = notifications.Description,
-                CreatedDate = notifications.CreatedDate,
             };
 
             return View(notificationEdit);
@@ -156,7 +156,7 @@ namespace dotnetstartermvc.Controllers
             {
                 notifications.Title = request.Title;
                 notifications.Description = request.Description;
-                notifications.CreatedDate = request.CreatedDate;
+                notifications.UpdatedDate = DateTime.Now;
                 notifications.UserId = user.Id;
 
                 _context.Update(notifications);

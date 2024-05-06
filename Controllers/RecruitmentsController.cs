@@ -63,6 +63,7 @@ namespace dotnetstartermvc.Controllers
 
             var recruitment = await _context.Recruitments
                 .Include(s => s.User)
+                .Include(s => s.RecruitmentPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recruitment == null)
             {
@@ -97,7 +98,8 @@ namespace dotnetstartermvc.Controllers
                     Title = request.Title,
                     Quantity = request.Quantity,
                     Description = request.Description,
-                    CreatedDate = request.CreatedDate,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
                     UserId = user.Id,
 
                 };
@@ -137,7 +139,6 @@ namespace dotnetstartermvc.Controllers
                 Title = recruitment.Title,
                 Quantity = recruitment.Quantity,
                 Description = recruitment.Description,
-                CreatedDate = recruitment.CreatedDate,
             };
 
             return View(recruitmentEdit);
@@ -160,7 +161,7 @@ namespace dotnetstartermvc.Controllers
                 recruitment.Title = request.Title;
                 recruitment.Quantity = request.Quantity;
                 recruitment.Description = request.Description;
-                recruitment.CreatedDate = request.CreatedDate;
+                recruitment.UpdatedDate = DateTime.Now;
                 recruitment.UserId = user.Id;
 
                 _context.Update(recruitment);
@@ -183,6 +184,7 @@ namespace dotnetstartermvc.Controllers
 
             var recruitment = await _context.Recruitments
                 .Include(s => s.User)
+                .Include(s => s.RecruitmentPhotos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recruitment == null)
             {
@@ -218,6 +220,145 @@ namespace dotnetstartermvc.Controllers
         private bool RecruitmentExists(Guid id)
         {
             return (_context.Recruitments?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpGet]
+        public IActionResult UploadPhoto(Guid id)
+        {
+            var recruitment = _context.Recruitments.Where(e => e.Id == id)
+                            .Include(p => p.RecruitmentPhotos)
+                            .FirstOrDefault();
+
+            if (recruitment == null)
+            {
+                return NotFound("Không có tuyển dụng");
+            }
+
+            ViewData["recruitment"] = recruitment;
+            return View(new UploadOneFile());
+        }
+
+        [HttpPost, ActionName("UploadPhoto")]
+        public async Task<IActionResult> UploadPhotoAsync(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var recruitment = _context.Recruitments.Where(e => e.Id == id)
+                .Include(p => p.RecruitmentPhotos)
+                .FirstOrDefault();
+
+            if (recruitment == null)
+            {
+                return NotFound("Không có tuyển dụng");
+            }
+
+            ViewData["recruitment"] = recruitment;
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Recruitments", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new RecruitmentPhoto()
+                {
+                    RecruitmentId = recruitment.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return View(f);
+        }
+
+        [HttpPost]
+        public IActionResult ListPhotos(Guid id)
+        {
+            var recruitment = _context.Recruitments.Where(e => e.Id == id)
+                .Include(p => p.RecruitmentPhotos)
+                .FirstOrDefault();
+
+            if (recruitment == null)
+            {
+                return Json(
+                    new
+                    {
+                        success = 0,
+                        message = "Recruitment not found",
+                    }
+                );
+            }
+
+            var listphotos = recruitment.RecruitmentPhotos.Select(photo => new
+            {
+                id = photo.Id,
+                path = "/contents/Recruitments/" + photo.FileName
+            });
+
+            return Json(
+                new
+                {
+                    success = 1,
+                    photos = listphotos
+                }
+            );
+        }
+
+        [HttpPost]
+        public IActionResult DeletePhoto(Guid id)
+        {
+            var photo = _context.RecruitmentPhotos.Where(p => p.Id == id).FirstOrDefault();
+            if (photo != null)
+            {
+                _context.Remove(photo);
+                _context.SaveChanges();
+
+                var filename = "Uploads/Recruitments/" + photo.FileName;
+                System.IO.File.Delete(filename);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadPhotoApi(Guid id, [Bind("FileUpload")] UploadOneFile f)
+        {
+            var recruitment = _context.Recruitments.Where(e => e.Id == id)
+                .Include(p => p.RecruitmentPhotos)
+                .FirstOrDefault();
+
+            if (recruitment == null)
+            {
+                return NotFound("Không có tuyển dụng");
+            }
+
+            if (f != null)
+            {
+                var file1 = Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                            + Path.GetExtension(f.FileUpload.FileName);
+
+                var file = Path.Combine("Uploads", "Recruitments", file1);
+
+                using (var filestream = new FileStream(file, FileMode.Create))
+                {
+                    await f.FileUpload.CopyToAsync(filestream);
+                }
+
+                _context.Add(new RecruitmentPhoto()
+                {
+                    RecruitmentId = recruitment.Id,
+                    FileName = file1
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
         }
     }
 }

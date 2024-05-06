@@ -276,6 +276,42 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/EditIsComplete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXEVkaXRJc0NvbXBsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/FilterByDay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXEZpbHRlckJ5RGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/FilterByWeek.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXEZpbHRlckJ5V2Vlay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Duties/ListDuties.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHV0aWVzXExpc3REdXRpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -358,6 +394,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Recruitments/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Recruitments/UploadPhoto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRzXFVwbG9hZFBob3RvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Services/Create.cshtml]
