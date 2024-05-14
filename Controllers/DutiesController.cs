@@ -385,7 +385,6 @@ namespace dotnetstartermvc.Controllers
             ViewBag.WeekNumber = weekNumber;
             ViewBag.CurrentFilter = searchString;
 
-
             var duties = from s in _context.Duties
                          join ud in _context.UserDuties on s.Id equals ud.DutyId
                          where ud.UserId == user.Id && s.ActionDate >= startOfWeek && s.ActionDate <= endOfWeek.AddDays(1)

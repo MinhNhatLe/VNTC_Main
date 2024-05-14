@@ -14,18 +14,18 @@ namespace dotnetstartermvc.Menu
         {
             UrlHelper = factory.GetUrlHelper(action.ActionContext);
 
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý CSDL" });
+            //Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            //Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý CSDL" });
 
-            Items.Add(new SidebarItem()
-            {
-                Type = SidebarItemType.NavItem,
-                Controller = "DbManage",
-                Action = "Index",
-                Area = "Database",
-                Title = "Quản lý Database",
-                AwesomeIcon = "fas fa-database"
-            });
+            //Items.Add(new SidebarItem()
+            //{
+            //    Type = SidebarItemType.NavItem,
+            //    Controller = "DbManage",
+            //    Action = "Index",
+            //    Area = "Database",
+            //    Title = "Quản lý Database",
+            //    AwesomeIcon = "fas fa-database"
+            //});
 
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thống kê" });
