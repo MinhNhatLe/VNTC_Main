@@ -285,7 +285,6 @@ namespace dotnetstartermvc.Controllers
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
         public async Task<IActionResult> FilterByWeek(string searchString)
         {
-
             var currentDate = DateTime.Now.Date;
             var startOfWeek = currentDate.AddDays(-(7 + (int)currentDate.DayOfWeek - (int)DayOfWeek.Monday) % 7);
             var endOfWeek = startOfWeek.AddDays(6);

@@ -28,69 +28,71 @@
     </div>
 </div>
 
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>
-                STT
-            </th>
-            <th>
-                Họ và tên
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Số điện thoại
-            </th>
-            <th>
-                Ngày gởi
-            </th>
-            <th>
-                Tác vụ
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @{
-                        var timeString = item.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                        if (timeString.Contains("SA"))
-                        {
-                            timeString = timeString.Replace("SA", "Sáng");
-                        }
-                        else if (timeString.Contains("CH"))
-                        {
-                            timeString = timeString.Replace("CH", "Chiều");
-                        }
-                        <text>@timeString</text>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" aria-hidden="true"></i> Chi tiết</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
-                </td>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Họ và tên
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Ngày gởi
+                </th>
+                <th>
+                    Tác vụ
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @{
+                            var timeString = item.DateSent.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                            if (timeString.Contains("SA"))
+                            {
+                                timeString = timeString.Replace("SA", "Sáng");
+                            }
+                            else if (timeString.Contains("CH"))
+                            {
+                                timeString = timeString.Replace("CH", "Chiều");
+                            }
+                            <text>@timeString</text>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" aria-hidden="true"></i> Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @Html.Partial("_Pagination", Model)
 

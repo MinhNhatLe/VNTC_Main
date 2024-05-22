@@ -109,6 +109,14 @@
       "PackagePath": "staticwebassets\\asset-home-layout\\images\\slider-img.png"
     },
     {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider_1.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\slider_1.png"
+    },
+    {
+      "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider_2.png",
+      "PackagePath": "staticwebassets\\asset-home-layout\\images\\slider_2.png"
+    },
+    {
       "Id": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\team-1.jpg",
       "PackagePath": "staticwebassets\\asset-home-layout\\images\\team-1.jpg"
     },

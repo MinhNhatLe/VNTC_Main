@@ -48,94 +48,97 @@
         Tạo lịch công tác
     </a>
 </p>
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>
-                STT
-            </th>
-            <th>
-                Thời gian
-            </th>
-            <th>
-                Tên lịch công tác
-            </th>
-            <th>
-                Nội dung
-            </th>
-            <th>
-                Ghi chú
-            </th>
-            <th>
-                Địa chỉ
-            </th>
-            <th>
-                Thành phần tham dự
-            </th>
-            <th>
-                Tác vụ
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td style="max-width: 100px;">
-                    @{
-                        if (item.ActionDate.HasValue)
-                        {
-                            var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
-                            {
-                                timeString = timeString.Replace("SA", "Sáng");
-                            }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
-                        }
-                    }
-                </td>
-                <td style="max-width: 200px;">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td style="max-width: 250px;">
-                    @Html.Raw(item.Description)
-                </td>
-                <td style="max-width: 200px;">
-                    @Html.Raw(item.Note)
-                </td>
-                <td style="max-width: 150px;">
-                    @Html.Raw(item.Address)
-                </td>
-                <td style="max-width: 100px;">
-                    @Html.Raw(item.Participants)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Cập nhật
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Xóa
-                    </a>
-                </td>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Thời gian
+                </th>
+                <th>
+                    Tên lịch công tác
+                </th>
+                <th>
+                    Nội dung
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Thành phần tham dự
+                </th>
+                <th>
+                    Tác vụ
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td style="max-width: 100px;">
+                        @{
+                            if (item.ActionDate.HasValue)
+                            {
+                                var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td style="max-width: 200px;">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td style="max-width: 250px;">
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td style="max-width: 200px;">
+                        @Html.Raw(item.Note)
+                    </td>
+                    <td style="max-width: 150px;">
+                        @Html.Raw(item.Address)
+                    </td>
+                    <td style="max-width: 100px;">
+                        @Html.Raw(item.Participants)
+                    </td>
+                    <td style="max-width: 150px;">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" style="width: 130px;">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Cập nhật
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary" style="width: 130px;">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            Chi tiết
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" style="width: 130px;">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @Html.Partial("_Pagination", Model)
 

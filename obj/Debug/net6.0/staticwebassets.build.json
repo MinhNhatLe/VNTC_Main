@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SXa/RbidLqgdj/7vMvZwaOW0K+ADE124ISwgNCxVBRU=",
+  "Hash": "xASPVd8ltjhZMzSO2R7dzxWWOE+Zuhf5/0L9xRj0b68=",
   "Source": "dotnetstartermvc",
   "BasePath": "_content/dotnetstartermvc",
   "Mode": "Default",
@@ -1477,6 +1477,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\asset-home-layout\\images\\s3.png"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider_1.png",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/images/slider_1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\images\\slider_1.png"
+    },
+    {
+      "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider_2.png",
+      "SourceId": "dotnetstartermvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\",
+      "BasePath": "_content/dotnetstartermvc",
+      "RelativePath": "asset-home-layout/images/slider_2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset-home-layout\\images\\slider_2.png"
     },
     {
       "Identity": "C:\\Users\\Minh Nhat\\Desktop\\VNTC\\dotnetstartermvc\\dotnetstartermvc\\wwwroot\\asset-home-layout\\images\\slider-bg.jpg",

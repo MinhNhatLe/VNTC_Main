@@ -14,13 +14,6 @@
     int stt = 1;
 }
 
-<style>
-    th, td {
-        word-wrap: break-word;
-        max-width: 300px;
-    }
-</style>
-
 <partial name="_AlertMessage" />
 
 <div class="row">
@@ -38,96 +31,100 @@
         </form>
     </div>
 </div>
+
 <p>
     <a asp-action="Create" class="btn btn-primary">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
         Tạo dịch vụ
     </a>
 </p>
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>
-                STT
-            </th>
-            <th>
-                Tên dịch vụ
-            </th>
-            <th>
-                Ngày tạo
-            </th>
-            <th>
-                Ngày sửa
-            </th>
-            <th>
-                Tác vụ
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td style="max-width: 500px;">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @{
-                        if (item.CreatedDate.HasValue)
-                        {
-                            var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
-                            {
-                                timeString = timeString.Replace("SA", "Sáng");
-                            }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
-                        }
-                    }
-                </td>
-                <td>
-                    @{
-                        if (item.UpdatedDate.HasValue)
-                        {
-                            var timeString = item.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
-                            {
-                                timeString = timeString.Replace("SA", "Sáng");
-                            }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
-                        }
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Cập nhật
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Xóa
-                    </a>
-                </td>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Tên dịch vụ
+                </th>
+                <th>
+                    Ngày tạo
+                </th>
+                <th>
+                    Ngày sửa
+                </th>
+                <th>
+                    Tác vụ
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td style="max-width: 600px;">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @{
+                            if (item.CreatedDate.HasValue)
+                            {
+                                var timeString = item.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (item.UpdatedDate.HasValue)
+                            {
+                                var timeString = item.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Cập nhật
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            Chi tiết
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @Html.Partial("_Pagination", Model)
 

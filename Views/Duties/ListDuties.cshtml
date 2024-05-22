@@ -55,113 +55,116 @@
         </div>
     </div>
 </div>
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>
-                STT
-            </th>
-            <th>
-                Thời gian
-            </th>
-            <th>
-                Tên nhiệm vụ
-            </th>
-            <th>
-                Nội dung
-            </th>
-            <th>
-                Ghi chú
-            </th>
-            <th>
-                Tiến độ
-            </th>
-            <th>
-                Phản hồi
-            </th>
-            <th>
-                Người đảm nhiệm
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td style="max-width: 100px;">
-                    @{
-                        if (item.Duty.ActionDate.HasValue)
-                        {
-                            var timeString = item.Duty.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
+                <th>
+                    STT
+                </th>
+                <th>
+                    Thời gian
+                </th>
+                <th>
+                    Tên nhiệm vụ
+                </th>
+                <th>
+                    Nội dung
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th>
+                    Tiến độ
+                </th>
+                <th>
+                    Phản hồi
+                </th>
+                <th>
+                    Người đảm nhiệm
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td style="max-width: 100px;">
+                        @{
+                            if (item.Duty.ActionDate.HasValue)
                             {
-                                timeString = timeString.Replace("SA", "Sáng");
+                                var timeString = item.Duty.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
                             }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
                         }
-                    }
-                </td>
-                <td style="max-width: 250px;">
-                    @Html.DisplayFor(modelItem => item.Duty.Title)
-                </td>
-                <td style="max-width: 270px;">
-                    @Html.Raw(item.Duty.Description)
-                </td>
-                <td style="max-width: 270px;">
-                    @Html.Raw(item.Duty.Note)
-                </td>
-                <td>
-                    <a asp-action="EditIsComplete" asp-route-id="@item.Duty.Id">
-                        @if (item.Duty.IsComplete == true)
+                    </td>
+                    <td style="max-width: 250px;">
+                        @Html.DisplayFor(modelItem => item.Duty.Title)
+                    </td>
+                    <td style="max-width: 270px;">
+                        @Html.Raw(item.Duty.Description)
+                    </td>
+                    <td style="max-width: 270px;">
+                        @Html.Raw(item.Duty.Note)
+                    </td>
+                    <td>
+                        <a asp-action="EditIsComplete" asp-route-id="@item.Duty.Id">
+                            @if (item.Duty.IsComplete == true)
+                            {
+                                <span class="text-success btn btn-outline-primary">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    <b>
+                                        Xong
+                                    </b>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-danger btn btn-outline-primary">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                    <b>
+                                        Chưa
+                                    </b>
+                                </span>
+                            }
+                        </a>
+                    </td>
+                    <td style="max-width: 250px;">
+                        @Html.Raw(item.Duty.Feedback)
+                    </td>
+                    <td style="max-width: 250px;">
+                        @if (item.UserDuties.Any())
                         {
-                            <span class="text-success btn btn-outline-primary">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                <b>
-                                    Xong
-                                </b>
-                            </span>
+                            @foreach (var userDuty in item.UserDuties)
+                            {
+                                @userDuty.User.Email
+                                <br />
+                            }
                         }
                         else
                         {
-                            <span class="text-danger btn btn-outline-primary">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                <b>
-                                    Chưa
-                                </b>
-                            </span>
+                            <span style="color: red;">Chưa có người đảm nhiệm</span>
                         }
-                    </a>
-                </td>
-                <td style="max-width: 250px;">
-                    @Html.Raw(item.Duty.Feedback)
-                </td>
-                <td style="max-width: 250px;">
-                    @if (item.UserDuties.Any())
-                    {
-                        @foreach (var userDuty in item.UserDuties)
-                        {
-                            @userDuty.User.Email
-                            <br />
-                        }
-                    }
-                    else
-                    {
-                        <span style="color: red;">Chưa có người đảm nhiệm</span>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @Html.Partial("_Pagination", Model)
 

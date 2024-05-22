@@ -54,102 +54,105 @@
         </div>
     </div>
 </div>
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>
-                STT
-            </th>
-            <th>
-                Thời gian
-            </th>
-            <th>
-                Tên nhiệm vụ
-            </th>
-            <th>
-                Nội dung
-            </th>
-            <th>
-                Ghi chú
-            </th>
-            <th>
-                Tiến độ
-            </th>
-            <th>
-                Phản hồi
-            </th>
-            <th>
-                Người tạo
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td style="max-width: 100px;">
-                    @{
-                        if (item.ActionDate.HasValue)
-                        {
-                            var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
-                            if (timeString.Contains("SA"))
-                            {
-                                timeString = timeString.Replace("SA", "Sáng");
-                            }
-                            else if (timeString.Contains("CH"))
-                            {
-                                timeString = timeString.Replace("CH", "Chiều");
-                            }
-                            <text>@timeString</text>
-                        }
-                    }
-                </td>
-                <td style="max-width: 250px;">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td style="max-width: 270px;">
-                    @Html.Raw(item.Description)
-                </td>
-                <td style="max-width: 270px;">
-                    @Html.Raw(item.Note)
-                </td>
-                <td>
-                    <a asp-action="EditIsComplete" asp-route-id="@item.Id">
-                        @if (item.IsComplete == true)
-                        {
-                            <span class="text-success btn btn-outline-primary">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                <b>
-                                    Xong
-                                </b>
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="text-danger btn btn-outline-primary">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                <b>
-                                    Chưa
-                                </b>
-                            </span>
-                        }
-                    </a>
-                </td>
-                <td style="max-width: 250px;">
-                    @Html.Raw(item.Feedback)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
-                </td>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Thời gian
+                </th>
+                <th>
+                    Tên nhiệm vụ
+                </th>
+                <th>
+                    Nội dung
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th>
+                    Tiến độ
+                </th>
+                <th>
+                    Phản hồi
+                </th>
+                <th>
+                    Người tạo
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td style="max-width: 100px;">
+                        @{
+                            if (item.ActionDate.HasValue)
+                            {
+                                var timeString = item.ActionDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td style="max-width: 250px;">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td style="max-width: 270px;">
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td style="max-width: 270px;">
+                        @Html.Raw(item.Note)
+                    </td>
+                    <td>
+                        <a asp-action="EditIsComplete" asp-route-id="@item.Id">
+                            @if (item.IsComplete == true)
+                            {
+                                <span class="text-success btn btn-outline-primary">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    <b>
+                                        Xong
+                                    </b>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-danger btn btn-outline-primary">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                    <b>
+                                        Chưa
+                                    </b>
+                                </span>
+                            }
+                        </a>
+                    </td>
+                    <td style="max-width: 250px;">
+                        @Html.Raw(item.Feedback)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @Html.Partial("_Pagination", Model)
 
