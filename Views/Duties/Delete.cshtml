@@ -76,6 +76,28 @@
             @Html.Raw(Model.Duty.Feedback)
         </dd>
         <dt class="col-sm-3">
+            Người đảm nhiệm
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.UserDuties.Any())
+            {
+                @foreach (var userDuty in Model.UserDuties)
+                {
+                    @userDuty.User.Email
+                    <br />
+                }
+            }
+            else
+            {
+                <span style="color: red;">Chưa có người đảm nhiệm</span>
+            }
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
             Ngày tạo
         </dt>
         <dd class="col-sm-9">
@@ -113,23 +135,6 @@
                     }
                     <text>@timeString</text>
                 }
-            }
-        </dd>
-        <dt class="col-sm-3">
-            Người đảm nhiệm
-        </dt>
-        <dd class="col-sm-9">
-            @if (Model.UserDuties.Any())
-            {
-                @foreach (var userDuty in Model.UserDuties)
-                {
-                    @userDuty.User.Email
-                    <br />
-                }
-            }
-            else
-            {
-                <span style="color: red;">Chưa có người đảm nhiệm</span>
             }
         </dd>
     </dl>

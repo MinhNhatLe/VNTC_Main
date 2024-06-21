@@ -9,53 +9,93 @@
     int stt = 1;
 }
 
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
+    th, td {
+        word-wrap: break-word;
+    }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Tên tài khoản */
+        th:nth-child(2), td:nth-child(2) {
+            width: 200px;
+        }
+
+        /* Tên vai trò */
+        th:nth-child(3), td:nth-child(3) {
+            width: 200px;
+        }
+
+        /* 	Tác vụ */
+        th:nth-child(4), td:nth-child(4) {
+            width: 100px;
+        }
+
+    td {
+        color: #0D0D0D;
+    }
+</style>
+
 <partial name="_StatusMessage"></partial>
 <p>
-    Tổng số thành viên: 
+    Tổng số thành viên:
     <b style="color: #4e73df">
         @Model.totalUsers
     </b>
 </p>
 
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>STT</th>
-            <th>Tên tài khoản</th>
-            <th>Vai trò (Role)</th>
-            <th>Tác vụ</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.users)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td>@user.UserName</td>
-                <td>
-                    @if (string.IsNullOrEmpty(user.RoleNames))
-                    {
-                        <a class="text-dark" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm vai trò (Roles)</a>
-                    }
-                    else
-                    {
-                        <a asp-action="AddRole" asp-route-id="@user.Id">@user.RoleNames</a>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-outline-primary" asp-action="SetPassword" asp-route-id="@user.Id">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Đặt mật khẩu
-                    </a>
-                </td>
+                <th>STT</th>
+                <th>Tên tài khoản</th>
+                <th>Vai trò (Role)</th>
+                <th>Tác vụ</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.users)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td>@user.UserName</td>
+                    <td>
+                        @if (string.IsNullOrEmpty(user.RoleNames))
+                        {
+                            <a class="text-dark" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm vai trò (Roles)</a>
+                        }
+                        else
+                        {
+                            <a asp-action="AddRole" asp-route-id="@user.Id">@user.RoleNames</a>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" asp-action="SetPassword" asp-route-id="@user.Id">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Đặt mật khẩu
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 @{
     var pagingmodel = new PagingModel()
             {

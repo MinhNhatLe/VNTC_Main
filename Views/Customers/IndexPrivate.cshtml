@@ -1,0 +1,360 @@
+﻿@using X.PagedList.Mvc.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+@using System.Globalization
+@using dotnetstartermvc.Menu
+@using dotnetstartermvc.Models;
+@using dotnetstartermvc.ModelsRequest.CustomerRequest;
+@inject AdminSidebarService _AdminSidebarService
+@model X.PagedList.IPagedList<CustomerViewModel>
+
+@{
+    ViewData["Title"] = "Q/lý d/s khách hàng cá nhân";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
+}
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
+    th, td {
+        word-wrap: break-word;
+    }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Tên công ty */
+        th:nth-child(2), td:nth-child(2) {
+            width: 200px;
+        }
+
+        /* Địa chỉ */
+        th:nth-child(3), td:nth-child(3) {
+            width: 300px;
+        }
+
+        /* Tỉnh / Thành phố */
+        th:nth-child(4), td:nth-child(4) {
+            width: 170px;
+        }
+
+        /* SĐT công ty */
+        th:nth-child(5), td:nth-child(5) {
+            width: 150px;
+        }
+
+        /* Người liên hệ */
+        th:nth-child(6), td:nth-child(6) {
+            width: 150px;
+        }
+
+        /* Chức vụ */
+        th:nth-child(7), td:nth-child(7) {
+            width: 150px;
+        }
+
+        /* SĐT người liên hệ */
+        th:nth-child(8), td:nth-child(8) {
+            width: 200px;
+        }
+
+        /* Email */
+        th:nth-child(9), td:nth-child(9) {
+            width: 250px;
+        }
+
+        /* Tên gói thầu */
+        th:nth-child(10), td:nth-child(10) {
+            width: 350px;
+        }
+
+        /* Giá trị dự án */
+        th:nth-child(11), td:nth-child(11) {
+            width: 250px;
+        }
+
+        /* Ngày bắt đầu */
+        th:nth-child(12), td:nth-child(12) {
+            width: 150px;
+        }
+
+        /* Ngày kết thúc */
+        th:nth-child(13), td:nth-child(13) {
+            width: 150px;
+        }
+
+        /* Tiến độ */
+        th:nth-child(14), td:nth-child(14) {
+            width: 100px;
+        }
+
+        /* Phản hồi */
+        th:nth-child(15), td:nth-child(15) {
+            width: 250px;
+        }
+
+        /* Nguồn cơ hội */
+        th:nth-child(16), td:nth-child(16) {
+            width: 250px;
+        }
+
+        /* Người phụ trách */
+        th:nth-child(17), td:nth-child(17) {
+            width: 250px;
+        }
+
+        /* Ghi chú */
+        th:nth-child(18), td:nth-child(18) {
+            width: 250px;
+        }
+
+        /* Tác vụ */
+        th:nth-child(19), td:nth-child(19) {
+            width: 150px;
+        }
+
+    td {
+        color: #0D0D0D;
+    }
+</style>
+
+<partial name="_AlertMessage" />
+<div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-0">
+    </div>
+    <div class="col-lg-8 col-sm-8 col-xs-12">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Nhập nội dung cần tìm kiếm ..." style="display: inline-block; width: 70%">
+                <button type="submit" class="btn btn-primary" style="width: 25%">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>
+    <a asp-action="CreatePrivate" class="btn btn-primary">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Tạo khách hàng mới
+    </a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
+            <tr>
+                <th>
+                    STT
+                </th>
+                <th>
+                    Tên công ty
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Tỉnh / Thành phố
+                </th>
+                <th>
+                    SĐT công ty
+                </th>
+                <th>
+                    Người liên hệ
+                </th>
+                <th>
+                    Chức vụ
+                </th>
+                <th>
+                    SĐT người liên hệ
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Tên gói thầu
+                </th>
+                <th>
+                    Giá trị dự án
+                </th>
+                <th>
+                    Ngày bắt đầu
+                </th>
+                <th>
+                    Ngày kết thúc
+                </th>
+                <th>
+                    Tiến độ
+                </th>
+                <th>
+                    Phản hồi
+                </th>
+                <th>
+                    Nguồn cơ hội
+                </th>
+                <th>
+                    Người phụ trách
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th>
+                    Tác vụ
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ProvinceOrCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CompanyPhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ContactPersonName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ContactPersonPhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.BidPackageName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ProjectValue)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Customer.StartDate.HasValue)
+                            {
+                                var timeString = item.Customer.StartDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (item.Customer.EndDate.HasValue)
+                            {
+                                var timeString = item.Customer.EndDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                                if (timeString.Contains("SA"))
+                                {
+                                    timeString = timeString.Replace("SA", "Sáng");
+                                }
+                                else if (timeString.Contains("CH"))
+                                {
+                                    timeString = timeString.Replace("CH", "Chiều");
+                                }
+                                <text>@timeString</text>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (item.Customer.IsComplete == true)
+                        {
+                            <span class="text-success">
+                                <b>
+                                    Xong
+                                </b>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                <b>
+                                    Chưa
+                                </b>
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.Customer.Feedback)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Customer.OpportunitySource)
+                    </td>
+                    <td>
+                        @if (item.UserCustomers.Any())
+                        {
+                            @foreach (var userCustomer in item.UserCustomers)
+                            {
+                                @userCustomer.User.Email
+                                <br />
+                            }
+                        }
+                        else
+                        {
+                            <span style="color: red;">Chưa có người đảm nhiệm</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.Raw(item.Customer.Notes)
+                    </td>
+
+                    <td style="max-width: 150px;">
+                        <a asp-action="EditPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary" style="width: 130px;">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Cập nhật
+                        </a>
+                        <a asp-action="DetailsPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary" style="width: 130px;">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            Chi tiết
+                        </a>
+                        <a asp-action="DeletePrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-danger" style="width: 130px;">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Partial("_Pagination", Model)
+
+@{
+    _AdminSidebarService.SetActive("Customers", "IndexPrivate", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

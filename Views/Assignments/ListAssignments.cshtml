@@ -15,10 +15,56 @@
 }
 
 <style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
     th, td {
         word-wrap: break-word;
-        max-width: 300px;
     }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Thời gian */
+        th:nth-child(2), td:nth-child(2) {
+            width: 150px;
+        }
+
+        /* 	Tên nhiệm vụ */
+        th:nth-child(3), td:nth-child(3) {
+            width: 250px;
+        }
+
+        /* 	Nội dung */
+        th:nth-child(4), td:nth-child(4) {
+            width: 300px;
+        }
+
+        /* 	Ghi chú */
+        th:nth-child(5), td:nth-child(5) {
+            width: 250px;
+        }
+
+        /*  Tiến độ */
+        th:nth-child(6), td:nth-child(6) {
+            width: 100px;
+        }
+
+        /* 	Phản hồi */
+        th:nth-child(7), td:nth-child(7) {
+            width: 250px;
+        }
+
+        /* 	Người tạo */
+        th:nth-child(8), td:nth-child(8) {
+            width: 320px;
+        }
 
     td {
         color: #0D0D0D;
@@ -94,7 +140,7 @@
                             @(stt++)
                         </b>
                     </td>
-                    <td style="max-width: 100px;">
+                    <td>
                         @{
                             if (item.ActionDate.HasValue)
                             {
@@ -111,13 +157,13 @@
                             }
                         }
                     </td>
-                    <td style="max-width: 250px;">
+                    <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
-                    <td style="max-width: 270px;">
+                    <td>
                         @Html.Raw(item.Description)
                     </td>
-                    <td style="max-width: 270px;">
+                    <td>
                         @Html.Raw(item.Note)
                     </td>
                     <td>
@@ -142,7 +188,7 @@
                             }
                         </a>
                     </td>
-                    <td style="max-width: 250px;">
+                    <td>
                         @Html.Raw(item.Feedback)
                     </td>
                     <td>

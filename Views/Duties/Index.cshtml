@@ -16,15 +16,65 @@
 }
 
 <style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
     th, td {
         word-wrap: break-word;
-        max-width: 300px;
     }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Thời gian */
+        th:nth-child(2), td:nth-child(2) {
+            width: 150px;
+        }
+
+        /* 	Tên nhiệm vụ */
+        th:nth-child(3), td:nth-child(3) {
+            width: 250px;
+        }
+
+        /* 	Nội dung */
+        th:nth-child(4), td:nth-child(4) {
+            width: 300px;
+        }
+
+        /* 	Ghi chú */
+        th:nth-child(5), td:nth-child(5) {
+            width: 250px;
+        }
+
+        /*  Tiến độ */
+        th:nth-child(6), td:nth-child(6) {
+            width: 100px;
+        }
+
+        /* 	Phản hồi */
+        th:nth-child(7), td:nth-child(7) {
+            width: 250px;
+        }
+
+        /* 	Người đảm nhiệm */
+        th:nth-child(8), td:nth-child(8) {
+            width: 300px;
+        }
+
+        /* 	Tác vụ */
+        th:nth-child(9), td:nth-child(9) {
+            width: 320px;
+        }
 
     td {
         color: #0D0D0D;
     }
-
 </style>
 
 <partial name="_AlertMessage" />
@@ -93,7 +143,7 @@
                             @(stt++)
                         </b>
                     </td>
-                    <td style="max-width: 100px;">
+                    <td>
                         @{
                             if (item.Duty.ActionDate.HasValue)
                             {
@@ -110,16 +160,16 @@
                             }
                         }
                     </td>
-                    <td style="max-width: 200px;">
+                    <td>
                         @Html.DisplayFor(modelItem => item.Duty.Title)
                     </td>
-                    <td style="max-width: 250px;">
+                    <td>
                         @Html.Raw(item.Duty.Description)
                     </td>
-                    <td style="max-width: 200px;">
+                    <td>
                         @Html.Raw(item.Duty.Note)
                     </td>
-                    <td style="max-width: 150px;">
+                    <td>
                         @if (item.Duty.IsComplete == true)
                         {
                             <span class="text-success">
@@ -137,11 +187,10 @@
                             </span>
                         }
                     </td>
-                    <td style="max-width: 200px;">
+                    <td>
                         @Html.Raw(item.Duty.Feedback)
                     </td>
-
-                    <td style="max-width: 250px;">
+                    <td>
                         @if (item.UserDuties.Any())
                         {
                             @foreach (var userDuty in item.UserDuties)
@@ -157,16 +206,16 @@
                     </td>
 
 
-                    <td style="max-width: 150px;">
-                        <a asp-action="Edit" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary" style="width: 130px;">
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary">
                             <i class="fa fa-wrench" aria-hidden="true"></i>
                             Cập nhật
                         </a>
-                        <a asp-action="Details" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary" style="width: 130px;">
+                        <a asp-action="Details" asp-route-id="@item.Duty.Id" class="btn btn-outline-primary">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                             Chi tiết
                         </a>
-                        <a asp-action="Delete" asp-route-id="@item.Duty.Id" class="btn btn-outline-danger" style="width: 130px;">
+                        <a asp-action="Delete" asp-route-id="@item.Duty.Id" class="btn btn-outline-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Xóa
                         </a>

@@ -27,6 +27,36 @@ namespace dotnetstartermvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceOrCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPersonName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPersonPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsComplete = table.Column<bool>(type: "bit", nullable: false),
+                    Feedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BidPackageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OpportunitySource = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Duties",
                 columns: table => new
                 {
@@ -66,6 +96,7 @@ namespace dotnetstartermvc.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HomeAdress = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DutyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -85,6 +116,11 @@ namespace dotnetstartermvc.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Duties_DutyId",
                         column: x => x.DutyId,
@@ -221,6 +257,30 @@ namespace dotnetstartermvc.Migrations
                     table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserCustomers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCustomers", x => new { x.UserId, x.CustomerId });
+                    table.ForeignKey(
+                        name: "FK_UserCustomers_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserCustomers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -451,6 +511,11 @@ namespace dotnetstartermvc.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserCustomers_CustomerId",
+                table: "UserCustomers",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserDuties_DutyId",
                 table: "UserDuties",
                 column: "DutyId");
@@ -469,6 +534,11 @@ namespace dotnetstartermvc.Migrations
                 name: "EmailIndex",
                 table: "Users",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_CustomerId",
+                table: "Users",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_DutyId",
@@ -512,6 +582,9 @@ namespace dotnetstartermvc.Migrations
                 name: "UserClaims");
 
             migrationBuilder.DropTable(
+                name: "UserCustomers");
+
+            migrationBuilder.DropTable(
                 name: "UserDuties");
 
             migrationBuilder.DropTable(
@@ -540,6 +613,9 @@ namespace dotnetstartermvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Duties");

@@ -1,0 +1,64 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.Models.Customer
+
+@{
+    ViewData["Title"] = "Cập nhật tiến độ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="EditIsComplete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="IsComplete" class="control-label">Cập nhật tiến độ hoàn thành</label>
+                <div class="form-check">
+                    <input asp-for="IsComplete" class="form-check-input" type="checkbox" />
+                    <label class="form-check-label" asp-for="IsComplete">Click nếu đã hoàn thành</label>
+                </div>
+                <span asp-validation-for="IsComplete" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Feedback" class="control-label">Phản hồi/Nhận xét của bạn</label>
+                <textarea asp-for="Feedback" class="form-control" id="summernoteEditor"></textarea>
+                <span asp-validation-for="Feedback" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Cập nhật tiến độ
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="ListCustomers"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách các khách hàng</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 300
+            };
+}
+<partial name="_Summernote" model="summernote" />
+
+@{
+    _AdminSidebarService.SetActive("Customer", "ListCustomers", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

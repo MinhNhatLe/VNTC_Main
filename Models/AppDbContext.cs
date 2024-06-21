@@ -29,6 +29,7 @@ namespace dotnetstartermvc.Models
             }
 
             modelBuilder.Entity<UserDuty>().HasKey(ud => new { ud.UserId, ud.DutyId });
+            modelBuilder.Entity<UserCustomer>().HasKey(ud => new { ud.UserId, ud.CustomerId });
         }
 
         public DbSet<Contact> Contacts { get; set; }
@@ -41,6 +42,8 @@ namespace dotnetstartermvc.Models
         public DbSet<NotificationPhoto> NotificationPhotos { get; set; }
         public DbSet<RecruitmentPhoto> RecruitmentPhotos { get; set; }
         public DbSet<Duty> Duties { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<UserDuty> UserDuties { get; set; }
+        public DbSet<UserCustomer> UserCustomers { get; set; }
     }
 }

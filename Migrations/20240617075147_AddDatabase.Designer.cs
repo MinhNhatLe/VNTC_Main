@@ -12,7 +12,7 @@ using dotnetstartermvc.Models;
 namespace dotnetstartermvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240506065117_AddDatabase")]
+    [Migration("20240617075147_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace dotnetstartermvc.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DutyId")
                         .HasColumnType("uniqueidentifier");
@@ -87,6 +90,8 @@ namespace dotnetstartermvc.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("DutyId");
 
@@ -177,6 +182,81 @@ namespace dotnetstartermvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BidPackageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPersonName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPersonPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpportunitySource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProvinceOrCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.Duty", b =>
@@ -379,6 +459,21 @@ namespace dotnetstartermvc.Migrations
                     b.ToTable("ServicePhotos");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.UserCustomer", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "CustomerId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("UserCustomers");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.UserDuty", b =>
                 {
                     b.Property<string>("UserId")
@@ -573,6 +668,10 @@ namespace dotnetstartermvc.Migrations
 
             modelBuilder.Entity("dotnetstartermvc.Models.AppUser", b =>
                 {
+                    b.HasOne("dotnetstartermvc.Models.Customer", null)
+                        .WithMany("Users")
+                        .HasForeignKey("CustomerId");
+
                     b.HasOne("dotnetstartermvc.Models.Duty", null)
                         .WithMany("Users")
                         .HasForeignKey("DutyId");
@@ -655,6 +754,25 @@ namespace dotnetstartermvc.Migrations
                     b.Navigation("Service");
                 });
 
+            modelBuilder.Entity("dotnetstartermvc.Models.UserCustomer", b =>
+                {
+                    b.HasOne("dotnetstartermvc.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("dotnetstartermvc.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("dotnetstartermvc.Models.UserDuty", b =>
                 {
                     b.HasOne("dotnetstartermvc.Models.Duty", "Duty")
@@ -734,6 +852,11 @@ namespace dotnetstartermvc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetstartermvc.Models.Customer", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("dotnetstartermvc.Models.Duty", b =>

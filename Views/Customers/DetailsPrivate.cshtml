@@ -1,0 +1,244 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.CustomerRequest.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Tên công ty
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.CompanyName)
+        </dd>
+        <dt class="col-sm-3">
+            Địa chỉ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.Address)
+        </dd>
+        <dt class="col-sm-3">
+            Tỉnh / Thành phố
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.ProvinceOrCity)
+        </dd>
+        <dt class="col-sm-3">
+            SĐT công ty
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.CompanyPhoneNumber)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Người liên hệ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.ContactPersonName)
+        </dd>
+        <dt class="col-sm-3">
+            Chức vụ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.Position)
+        </dd>
+        <dt class="col-sm-3">
+            SĐT người liên hệ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.ContactPersonPhoneNumber)
+        </dd>
+        <dt class="col-sm-3">
+            Email
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Tên gói thầu
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.BidPackageName)
+        </dd>
+        <dt class="col-sm-3">
+            Giá trị dự án
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.ProjectValue)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày bắt đầu
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Customer.StartDate.HasValue)
+                {
+                    var timeString = Model.Customer.StartDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Ngày kết thúc
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Customer.EndDate.HasValue)
+                {
+                    var timeString = Model.Customer.EndDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Nguồn cơ hội
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Customer.OpportunitySource)
+        </dd>
+        <dt class="col-sm-3">
+            Ghi chú
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Customer.Notes)
+        </dd>
+        <dt class="col-sm-3">
+            Người phụ trách
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.UserCustomers.Any())
+            {
+                @foreach (var userCustomer in Model.UserCustomers)
+                {
+                    @userCustomer.User.Email
+                    <br />
+                }
+            }
+            else
+            {
+                <span style="color: red;">Chưa có người đảm nhiệm</span>
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Tiến độ
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.Customer.IsComplete == true)
+            {
+                <span class="text-success">
+                    <b>
+                        Xong
+                    </b>
+                </span>
+            }
+            else
+            {
+                <span class="text-danger">
+                    <b>
+                        Chưa
+                    </b>
+                </span>
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Phản hồi
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Customer.Feedback)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Người tạo
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Customer.UserId)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày tạo
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Customer.CreatedDate.HasValue)
+                {
+                    var timeString = Model.Customer.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Ngày sửa
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.Customer.UpdatedDate.HasValue)
+                {
+                    var timeString = Model.Customer.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="IndexPrivate" class="btn btn-outline-dark"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
+</div>
+
+@{
+    _AdminSidebarService.SetActive("Customer", "IndexPrivate", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

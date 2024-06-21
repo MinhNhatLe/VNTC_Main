@@ -1,0 +1,160 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.CustomerRequest.EditCustomerRequest
+
+@{
+    ViewData["Title"] = "Sửa thông tin khách hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="EditPrivate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="CompanyName" class="control-label">Tên công ty <b style="color: red">*</b></label>
+                        <input asp-for="CompanyName" class="form-control" />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label">Địa chỉ</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProvinceOrCity" class="control-label">Tỉnh / Thành phố</label>
+                        <input asp-for="ProvinceOrCity" class="form-control" />
+                        <span asp-validation-for="ProvinceOrCity" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CompanyPhoneNumber" class="control-label">SĐT công ty</label>
+                        <input asp-for="CompanyPhoneNumber" class="form-control" />
+                        <span asp-validation-for="CompanyPhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="ContactPersonName" class="control-label">Người liên hệ <b style="color: red">*</b></label>
+                        <input asp-for="ContactPersonName" class="form-control" />
+                        <span asp-validation-for="ContactPersonName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Position" class="control-label">Chức vụ</label>
+                        <input asp-for="Position" class="form-control" />
+                        <span asp-validation-for="Position" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ContactPersonPhoneNumber" class="control-label">SĐT người liên hệ</label>
+                        <input asp-for="ContactPersonPhoneNumber" class="form-control" />
+                        <span asp-validation-for="ContactPersonPhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="BidPackageName" class="control-label">Tên gói thầu <b style="color: red">*</b></label>
+                        <input asp-for="BidPackageName" class="form-control" />
+                        <span asp-validation-for="BidPackageName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProjectValue" class="control-label">Giá trị dự án <b style="color: red">*</b></label>
+                        <input asp-for="ProjectValue" class="form-control" />
+                        <span asp-validation-for="ProjectValue" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Ngày bắt đầu</label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label">Ngày kết thúc</label>
+                        <input asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="OpportunitySource" class="control-label">Nguồn cơ hội</label>
+                        <textarea asp-for="OpportunitySource" class="form-control" id="summernoteEditor"></textarea>
+                        <span asp-validation-for="OpportunitySource" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="Emails">Người phụ trách:</label>
+                        <select asp-for="Emails" asp-items="@((IEnumerable<SelectListItem>)ViewBag.allEmails)" id="id-select-emails" class="w-100" multiple></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label">Ghi chú</label>
+                        <textarea asp-for="Notes" class="form-control" id="summernoteEditor2"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Cập nhật khách hàng
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="IndexPrivate"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+        <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+
+        <script>
+            $("#id-select-emails").multipleSelect({
+                selectAll: false,
+                keepOpen: false,
+                isOpen: false,
+            });
+        </script>
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 100
+            };
+    var summernote2 = new dotnetstartermvc.Models.Summernote("#summernoteEditor2", false)
+            {
+                height = 370
+            };
+}
+<partial name="_Summernote" model="summernote" />
+<partial name="_Summernote" model="summernote2" />
+
+@{
+    _AdminSidebarService.SetActive("Customer", "IndexPrivate", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

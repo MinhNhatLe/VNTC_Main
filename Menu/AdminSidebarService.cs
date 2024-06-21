@@ -49,6 +49,7 @@ namespace dotnetstartermvc.Menu
 
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thông tin người dùng" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Bộ phận quản lý hệ thống)" });
 
             Items.Add(new SidebarItem()
             {
@@ -82,6 +83,7 @@ namespace dotnetstartermvc.Menu
             });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý các dịch vụ website" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho bộ phận quản lý)" });
 
             Items.Add(new SidebarItem()
             {
@@ -154,6 +156,10 @@ namespace dotnetstartermvc.Menu
                         },
                     },
             });
+
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý thông tin nội bộ" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho bộ phận quản lý)" });
 
             Items.Add(new SidebarItem()
             {
@@ -230,6 +236,30 @@ namespace dotnetstartermvc.Menu
             Items.Add(new SidebarItem()
             {
                 Type = SidebarItemType.NavItem,
+                Title = "Quản lý d/s toàn bộ khách hàng",
+                AwesomeIcon = "far fa-folder",
+                collapseID = "Customers",
+                Items = new List<SidebarItem>() {
+                    new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Customers",
+                                Action = "Index",
+                                Area = "",
+                                Title = "D/s toàn bộ khách hàng"
+                        },
+                         new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Customers",
+                                Action = "Create",
+                                Area = "",
+                                Title = "Tạo khách hàng mới"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
                 Controller = "Contact",
                 Action = "Index",
                 Area = "Contact",
@@ -249,7 +279,7 @@ namespace dotnetstartermvc.Menu
 
             Items.Add(new SidebarItem() { Type = SidebarItemType.Divider });
             Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Lịch công tác & nhiệm vụ" });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho nhân viên)" });
+            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "(Dành cho nhân viên - VNTC)" });
 
             Items.Add(new SidebarItem()
             {
@@ -340,6 +370,37 @@ namespace dotnetstartermvc.Menu
                                 Action = "FilterByWeek",
                                 Area = "",
                                 Title = "Nhiệm vụ theo tuần"
+                        },
+                    },
+            });
+
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Title = "Quản lý d/s khách hàng cá nhân",
+                AwesomeIcon = "fas fa-tasks",
+                collapseID = "CustomerList",
+                Items = new List<SidebarItem>() {
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Customers",
+                                Action = "ListCustomers",
+                                Area = "",
+                                Title = "D/s khách hàng được giao"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Customers",
+                                Action = "IndexPrivate",
+                                Area = "",
+                                Title = "Q/lý d/s khách hàng"
+                        },
+                        new SidebarItem() {
+                                Type = SidebarItemType.NavItem,
+                                Controller = "Customers",
+                                Action = "CreatePrivate",
+                                Area = "",
+                                Title = "Tạo khách hàng mới"
                         },
                     },
             });

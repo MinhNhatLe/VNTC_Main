@@ -8,6 +8,38 @@
     int stt = 1;
 }
 
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
+    th, td {
+        word-wrap: break-word;
+    }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Tên vai trò */
+        th:nth-child(2), td:nth-child(2) {
+            width: 200px;
+        }
+
+        /* 	Tác vụ */
+        th:nth-child(3), td:nth-child(3) {
+            width: 220px;
+        }
+
+    td {
+        color: #0D0D0D;
+    }
+</style>
+
 <partial name="_StatusMessage"></partial>
 
 <div class="mb-2">
@@ -15,43 +47,45 @@
     <a class="btn btn-info" asp-action="Index" asp-controller="User"><i class="fa fa-info-circle" aria-hidden="true"></i> Danh sách thành viên</a>
 </div>
 
-<table class="table table-striped">
-    <thead style="background-color: #4e73df; color: #fff">
-        <tr>
-            <th>STT</th>
-            <th>Tên vai trò (Role)</th>
-            <th>Tác vụ</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var role in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead style="background-color: #4e73df; color: #fff">
             <tr>
-                <td>
-                    <b style="color: #4e73df">
-                        @(stt++)
-                    </b>
-                </td>
-                <td>
-                    <p>@role.Name</p>
-                    @foreach (var claim in @role.Claims)
-                    {
-                        <small>@claim</small>
-
-                        <br>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-roleid="@role.Id">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Cập nhật
-                    </a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-roleid="@role.Id"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
-                </td>
+                <th>STT</th>
+                <th>Tên vai trò (Role)</th>
+                <th>Tác vụ</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>
+                        <b style="color: #4e73df">
+                            @(stt++)
+                        </b>
+                    </td>
+                    <td>
+                        <p>@role.Name</p>
+                        @foreach (var claim in @role.Claims)
+                        {
+                            <small>@claim</small>
+
+                            <br>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-roleid="@role.Id">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            Cập nhật
+                        </a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-roleid="@role.Id"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @{
     _AdminSidebarService.SetActive("Role", "Index", "Identity");

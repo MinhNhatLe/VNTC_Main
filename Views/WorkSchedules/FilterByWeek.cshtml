@@ -11,10 +11,56 @@
 }
 
 <style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
     th, td {
         word-wrap: break-word;
-        max-width: 200px;
     }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Thời gian */
+        th:nth-child(2), td:nth-child(2) {
+            width: 150px;
+        }
+
+        /* Tên lịch công tác */
+        th:nth-child(3), td:nth-child(3) {
+            width: 250px;
+        }
+
+        /* 	Nội dung */
+        th:nth-child(4), td:nth-child(4) {
+            width: 300px;
+        }
+
+        /* 	Ghi chú */
+        th:nth-child(5), td:nth-child(5) {
+            width: 250px;
+        }
+
+        /*  Địa chỉ */
+        th:nth-child(6), td:nth-child(6) {
+            width: 250px;
+        }
+
+        /* 	Thành phần tham dự */
+        th:nth-child(7), td:nth-child(7) {
+            width: 200px;
+        }
+
+        /* 	Tác vụ */
+        th:nth-child(8), td:nth-child(8) {
+            width: 320px;
+        }
 
     td {
         color: #0D0D0D;
@@ -86,7 +132,7 @@
                                         @(stt++)
                                     </b>
                                 </td>
-                                <td style="max-width: 100px;">
+                                <td>
                                     @{
                                         if (item.ActionDate.HasValue)
                                         {
@@ -103,19 +149,19 @@
                                         }
                                     }
                                 </td>
-                                <td style="max-width: 200px;">
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
-                                <td style="max-width: 250px;">
+                                <td>
                                     @Html.Raw(item.Description)
                                 </td>
-                                <td style="max-width: 200px;">
+                                <td>
                                     @Html.Raw(item.Note)
                                 </td>
-                                <td style="max-width: 150px;">
+                                <td>
                                     @Html.Raw(item.Address)
                                 </td>
-                                <td style="max-width: 100px;">
+                                <td>
                                     @Html.Raw(item.Participants)
                                 </td>
                             </tr>
