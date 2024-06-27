@@ -60,5 +60,7 @@ namespace dotnetstartermvc.Models
 
         [Required]
         public string UserId { get; set; }
+
+        public List<BidPackage>? BidPackages { get; set; }
     }
 }

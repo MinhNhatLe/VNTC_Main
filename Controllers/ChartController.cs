@@ -29,6 +29,7 @@ namespace dotnetstartermvc.Controllers
             var jobCount = await _context.Recruitments.CountAsync();
             var workScheduleCount = await _context.WorkSchedules.CountAsync();
             var assignmentCount = await _context.Assignments.CountAsync();
+            var customerCount = await _context.Customers.CountAsync();
 
             ViewBag.RolesCount = rolesCount;
             ViewBag.UsersCount = usersCount;
@@ -37,6 +38,7 @@ namespace dotnetstartermvc.Controllers
             ViewBag.JobCount = jobCount;
             ViewBag.WorkScheduleCount = workScheduleCount;
             ViewBag.AssignmentCount = assignmentCount;
+            ViewBag.CustomerCount = customerCount;
 
             return View();
         }

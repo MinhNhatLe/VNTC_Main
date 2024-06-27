@@ -45,5 +45,6 @@ namespace dotnetstartermvc.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<UserDuty> UserDuties { get; set; }
         public DbSet<UserCustomer> UserCustomers { get; set; }
+        public DbSet<BidPackage> BidPackages { get; set; }
     }
 }

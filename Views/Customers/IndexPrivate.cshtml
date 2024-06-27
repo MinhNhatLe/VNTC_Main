@@ -32,7 +32,7 @@
             width: 70px;
         }
 
-        /* Tên công ty */
+        /* Tên đơn vị */
         th:nth-child(2), td:nth-child(2) {
             width: 200px;
         }
@@ -47,7 +47,7 @@
             width: 170px;
         }
 
-        /* SĐT công ty */
+        /* SĐT đơn vị */
         th:nth-child(5), td:nth-child(5) {
             width: 150px;
         }
@@ -72,7 +72,7 @@
             width: 250px;
         }
 
-        /* Tên gói thầu */
+        /* Tên dự án */
         th:nth-child(10), td:nth-child(10) {
             width: 350px;
         }
@@ -109,7 +109,7 @@
 
         /* Người phụ trách */
         th:nth-child(17), td:nth-child(17) {
-            width: 250px;
+            width: 320px;
         }
 
         /* Ghi chú */
@@ -119,7 +119,7 @@
 
         /* Tác vụ */
         th:nth-child(19), td:nth-child(19) {
-            width: 150px;
+            width: 320px;
         }
 
     td {
@@ -158,7 +158,7 @@
                     STT
                 </th>
                 <th>
-                    Tên công ty
+                    Tên đơn vị
                 </th>
                 <th>
                     Địa chỉ
@@ -167,7 +167,7 @@
                     Tỉnh / Thành phố
                 </th>
                 <th>
-                    SĐT công ty
+                    SĐT đơn vị
                 </th>
                 <th>
                     Người liên hệ
@@ -182,7 +182,7 @@
                     Email
                 </th>
                 <th>
-                    Tên gói thầu
+                    Tên dự án
                 </th>
                 <th>
                     Giá trị dự án
@@ -328,16 +328,16 @@
                         @Html.Raw(item.Customer.Notes)
                     </td>
 
-                    <td style="max-width: 150px;">
-                        <a asp-action="EditPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary" style="width: 130px;">
+                    <td>
+                        <a asp-action="EditPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary">
                             <i class="fa fa-wrench" aria-hidden="true"></i>
                             Cập nhật
                         </a>
-                        <a asp-action="DetailsPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary" style="width: 130px;">
+                        <a asp-action="DetailsPrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-primary">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                             Chi tiết
                         </a>
-                        <a asp-action="DeletePrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-danger" style="width: 130px;">
+                        <a asp-action="DeletePrivate" asp-route-id="@item.Customer.Id" class="btn btn-outline-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Xóa
                         </a>
