@@ -6,7 +6,48 @@
 @{
     ViewData["Title"] = "Chi tiết khách hàng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
 }
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
+    th, td {
+        word-wrap: break-word;
+    }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Tên gối thầu */
+        th:nth-child(2), td:nth-child(2) {
+            width: 300px;
+        }
+
+        /* Ghi chú */
+        th:nth-child(3), td:nth-child(3) {
+            width: 320px;
+        }
+
+        /* Tác vụ */
+        th:nth-child(4), td:nth-child(4) {
+            width: 320px;
+        }
+
+    td {
+        color: #0D0D0D;
+    }
+</style>
+
+<partial name="_AlertMessage" />
 
 <div>
     <dl class="row">
@@ -230,12 +271,65 @@
     </dl>
 </div>
 
+<hr />
+<div style="margin-top: 30px;">
+    <a asp-action="CreateBidPackagePrivate" asp-route-customerId="@Model.Customer.Id" class="btn btn-primary" style="margin-bottom: 20px;">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Tạo mới gối thầu
+    </a>
+    <div class="table-responsive">
+        <table class="table  table-striped">
+            <thead style="background-color: #4e73df; color: #fff">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>Tên gối thầu</th>
+                    <th>Ghi chú</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bidPackage in Model.Customer.BidPackages)
+                {
+                    <tr>
+                        <td>
+                            <b style="color: #4e73df">
+                                @(stt++)
+                            </b>
+                        </td>
+                        <td>@bidPackage.Name</td>
+                        <td>@Html.Raw(bidPackage.Notes)</td>
+                        <td>
+                            <a asp-action="EditBidPackagePrivate" asp-route-id="@bidPackage.Id" class="btn btn-outline-primary">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                Cập nhật
+                            </a>
+                            <a asp-action="DetailsBidPackagePrivate" asp-route-id="@bidPackage.Id" class="btn btn-outline-primary">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                Chi tiết
+                            </a>
+                            <form asp-action="DeleteBidPackagePrivate" asp-route-id="@bidPackage.Id" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa gói thầu này không?');">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    Xóa
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+
 <div>
     <a asp-action="IndexPrivate" class="btn btn-outline-dark"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
 </div>
 
 @{
-    _AdminSidebarService.SetActive("Customer", "IndexPrivate", "");
+    _AdminSidebarService.SetActive("Customers", "IndexPrivate", "");
 }
 
 @section Sidebar

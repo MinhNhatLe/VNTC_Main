@@ -1,0 +1,74 @@
+﻿@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.ModelsRequest.BidPackageRequest.CreateBidPackageRequest
+
+@{
+    ViewData["Title"] = "Tạo gối thầu mới";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <form asp-action="CreateBidPackage">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Tên gối thầu <b style="color: red">*</b></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label">Ghi chú</label>
+                        <textarea asp-for="Notes" class="form-control" id="summernoteEditor"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="CustomerId" />
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Tạo gối thầu mới
+                </button>
+            </div>
+        </form>
+        <hr />
+        <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@Model.CustomerId"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách gối thầu</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+        <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+
+        <script>
+            $("#id-select-emails").multipleSelect({
+                selectAll: false,
+                keepOpen: false,
+                isOpen: false,
+            });
+        </script>
+    }
+}
+
+@{
+    var summernote = new dotnetstartermvc.Models.Summernote("#summernoteEditor")
+            {
+                height = 100
+            };
+}
+<partial name="_Summernote" model="summernote" />
+
+@{
+    _AdminSidebarService.SetActive("Customers", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

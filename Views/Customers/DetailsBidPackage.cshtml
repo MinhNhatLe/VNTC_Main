@@ -1,0 +1,107 @@
+﻿@using System.Globalization;
+@using dotnetstartermvc.Menu
+@inject AdminSidebarService _AdminSidebarService
+@model dotnetstartermvc.Models.BidPackage
+
+@{
+    ViewData["Title"] = "Chi tiết gối thầu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Tên gối thầu
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-3">
+            Ghi chú
+        </dt>
+        <dd class="col-sm-9">
+            @Html.Raw(Model.Notes)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Người tạo
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class="col-sm-3">
+            Ngày tạo
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.CreatedDate.HasValue)
+                {
+                    var timeString = Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+        <dt class="col-sm-3">
+            Ngày sửa
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.UpdatedDate.HasValue)
+                {
+                    var timeString = Model.UpdatedDate.Value.ToString("dddd, dd/MM/yyyy hh:mm tt", new CultureInfo("vi-VN"));
+                    if (timeString.Contains("SA"))
+                    {
+                        timeString = timeString.Replace("SA", "Sáng");
+                    }
+                    else if (timeString.Contains("CH"))
+                    {
+                        timeString = timeString.Replace("CH", "Chiều");
+                    }
+                    <text>@timeString</text>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@Model.CustomerId"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách gối thầu</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+        <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+
+        <script>
+            $("#id-select-emails").multipleSelect({
+                selectAll: false,
+                keepOpen: false,
+                isOpen: false,
+            });
+        </script>
+    }
+}
+
+@{
+    _AdminSidebarService.SetActive("Customers", "Index", "");
+}
+
+@section Sidebar
+    {
+    @Html.Raw(_AdminSidebarService.renderHtml())
+}

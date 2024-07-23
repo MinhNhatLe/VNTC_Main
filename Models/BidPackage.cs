@@ -8,6 +8,17 @@ namespace dotnetstartermvc.Models
         [Required]
         public string? Name { get; set; }
 
+        public string? Notes { get; set; }
+
+        [Required]
+        public DateTime? CreatedDate { get; set; }
+
+        [Required]
+        public DateTime? UpdatedDate { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
         public Guid CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]

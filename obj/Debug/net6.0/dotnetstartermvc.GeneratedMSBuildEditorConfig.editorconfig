@@ -280,6 +280,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/CreateBidPackage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXENyZWF0ZUJpZFBhY2thZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/CreateBidPackagePrivate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXENyZWF0ZUJpZFBhY2thZ2VQcml2YXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/CreatePrivate.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXENyZWF0ZVByaXZhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -296,12 +304,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/DetailsAssigment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHNBc3NpZ21lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/DetailsBidPackage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHNCaWRQYWNrYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/DetailsBidPackagePrivate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHNCaWRQYWNrYWdlUHJpdmF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/DetailsPrivate.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHNQcml2YXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/EditBidPackage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXEVkaXRCaWRQYWNrYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/EditBidPackagePrivate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXEVkaXRCaWRQYWNrYWdlUHJpdmF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Minh Nhat/Desktop/VNTC/dotnetstartermvc/dotnetstartermvc/Views/Customers/EditIsComplete.cshtml]

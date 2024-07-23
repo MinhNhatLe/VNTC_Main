@@ -6,7 +6,41 @@
 @{
     ViewData["Title"] = "Xóa khách hàng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    int stt = 1;
 }
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        table-layout: fixed; /* Thêm dòng này để bảng tuân theo chiều rộng của các cột */
+    }
+
+    th, td {
+        word-wrap: break-word;
+    }
+        /* STT */
+        th:nth-child(1), td:nth-child(1) {
+            width: 70px;
+        }
+
+        /* Tên gối thầu */
+        th:nth-child(2), td:nth-child(2) {
+            width: 300px;
+        }
+
+        /* Ghi chú */
+        th:nth-child(3), td:nth-child(3) {
+            width: 320px;
+        }
+
+    td {
+        color: #0D0D0D;
+    }
+</style>
 
 <div>
     <dl class="row">
@@ -228,20 +262,49 @@
             }
         </dd>
     </dl>
-
-    <form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa nội dung này không?');">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-            Xóa khách hàng
-        </button>
-    </form>
-    <hr />
-    <a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
 </div>
+<hr />
+<div style="margin-top: 30px;">
+    <div class="table-responsive">
+        <table class="table  table-striped">
+            <thead style="background-color: #4e73df; color: #fff">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>Tên gối thầu</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bidPackage in Model.Customer.BidPackages)
+                {
+                    <tr>
+                        <td>
+                            <b style="color: #4e73df">
+                                @(stt++)
+                            </b>
+                        </td>
+                        <td>@bidPackage.Name</td>
+                        <td>@Html.Raw(bidPackage.Notes)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa nội dung này không?');">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Xóa khách hàng
+    </button>
+</form>
+<hr />
+<a asp-action="Index" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
 
 @{
-    _AdminSidebarService.SetActive("Customer", "Index", "");
+    _AdminSidebarService.SetActive("Customers", "Index", "");
 }
 
 @section Sidebar

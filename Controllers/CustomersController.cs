@@ -1,5 +1,6 @@
 ﻿using dotnetstartermvc.Data;
 using dotnetstartermvc.Models;
+using dotnetstartermvc.ModelsRequest.BidPackageRequest;
 using dotnetstartermvc.ModelsRequest.CustomerRequest;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -82,6 +83,7 @@ namespace dotnetstartermvc.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.BidPackages)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -294,6 +296,7 @@ namespace dotnetstartermvc.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.BidPackages)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -331,7 +334,7 @@ namespace dotnetstartermvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AssignmentExists(Guid id)
+        private bool CustomerExists(Guid id)
         {
             return (_context.Customers?.Any(e => e.Id == id)).GetValueOrDefault();
         }
@@ -389,7 +392,7 @@ namespace dotnetstartermvc.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.Where(c => c.UserId == user.Id)
+            var customer = await _context.Customers.Where(c => c.UserId == user.Id).Include(c => c.BidPackages)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -604,6 +607,7 @@ namespace dotnetstartermvc.Controllers
             }
             var userCurrent = await GetCurrentUserAsync();
             var customer = await _context.Customers.Where(c => c.UserId == userCurrent.Id)
+                .Include(c => c.BidPackages)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (customer == null)
@@ -642,7 +646,7 @@ namespace dotnetstartermvc.Controllers
 
             StatusMessage = "Xóa khách hàng thành công!";
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexPrivate));
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
@@ -687,6 +691,33 @@ namespace dotnetstartermvc.Controllers
             });
 
             return View(customerViewModels);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        public async Task<IActionResult> DetailsAssigment(Guid? id)
+        {
+            var user = await GetCurrentUserAsync();
+
+            if (id == null || _context.Customers == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.Include(c => c.BidPackages)
+                .FirstOrDefaultAsync(m => m.Id == id && _context.UserCustomers.Any(uc => uc.CustomerId == m.Id && uc.UserId == user.Id));
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var customerViewModel = new CustomerViewModel
+            {
+                Customer = customer,
+                UserCustomers = _context.UserCustomers.Include(s => s.User).Where(ud => ud.CustomerId == customer.Id).ToList()
+            };
+
+            return View(customerViewModel);
         }
 
         [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
@@ -745,6 +776,244 @@ namespace dotnetstartermvc.Controllers
             }
 
             return View(request);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        public async Task<IActionResult> DetailsBidPackage(Guid? id)
+        {
+            if (id == null || _context.BidPackages == null)
+            {
+                return NotFound();
+            }
+
+            var bidPackage = await _context.BidPackages
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+
+            return View(bidPackage);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        [HttpGet]
+        public async Task<IActionResult> CreateBidPackage(Guid customerId)
+        {
+            var model = new CreateBidPackageRequest
+            {
+                CustomerId = customerId
+            };
+            return View(model);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateBidPackage(CreateBidPackageRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+                var bidPackage = new BidPackage
+                {
+                    Name = request.Name,
+                    Notes = request.Notes,
+                    CustomerId = request.CustomerId,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    UserId = currentUser.Id,
+                };
+                _context.BidPackages.Add(bidPackage);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Tạo gối thầu mới thành công!";
+
+                return RedirectToAction(nameof(Details), new { id = request.CustomerId });
+            }
+            return View(request);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        public async Task<IActionResult> EditBidPackage(Guid id)
+        {
+            var bidPackage = await _context.BidPackages.FindAsync(id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+            var model = new EditBidPackageRequest
+            {
+                Id = bidPackage.Id,
+                Name = bidPackage.Name,
+                Notes = bidPackage.Notes,
+                CustomerId = bidPackage.CustomerId,
+            };
+            return View(model);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBidPackage(EditBidPackageRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+                var bidPackage = await _context.BidPackages.FindAsync(request.Id);
+                if (bidPackage == null)
+                {
+                    return NotFound();
+                }
+                bidPackage.Name = request.Name;
+                bidPackage.Notes = request.Notes;
+                bidPackage.UpdatedDate = DateTime.Now;
+                bidPackage.UserId = currentUser.Id;
+                _context.BidPackages.Update(bidPackage);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Cập nhật gối thầu mới thành công!";
+
+                return RedirectToAction(nameof(Details), new { id = request.CustomerId });
+            }
+            return View(request);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteBidPackage(Guid id)
+        {
+            var bidPackage = await _context.BidPackages.FindAsync(id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+            _context.BidPackages.Remove(bidPackage);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new { id = bidPackage.CustomerId });
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        public async Task<IActionResult> DetailsBidPackagePrivate(Guid? id)
+        {
+            var user = await GetCurrentUserAsync();
+
+            if (id == null || _context.BidPackages == null)
+            {
+                return NotFound();
+            }
+
+            var bidPackage = await _context.BidPackages
+                .Where(c => c.UserId == user.Id)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+
+            return View(bidPackage);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        [HttpGet]
+        public async Task<IActionResult> CreateBidPackagePrivate(Guid customerId)
+        {
+            var model = new CreateBidPackageRequest
+            {
+                CustomerId = customerId
+            };
+            return View(model);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateBidPackagePrivate(CreateBidPackageRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+                var bidPackage = new BidPackage
+                {
+                    Name = request.Name,
+                    Notes = request.Notes,
+                    CustomerId = request.CustomerId,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    UserId = currentUser.Id,
+                };
+                _context.BidPackages.Add(bidPackage);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Tạo gối thầu mới thành công!";
+
+                return RedirectToAction(nameof(DetailsPrivate), new { id = request.CustomerId });
+            }
+            return View(request);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        public async Task<IActionResult> EditBidPackagePrivate(Guid id)
+        {
+            var userCurrent = await GetCurrentUserAsync();
+            var bidPackage = await _context.BidPackages.Where(c => c.UserId == userCurrent.Id)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+            var model = new EditBidPackageRequest
+            {
+                Id = bidPackage.Id,
+                Name = bidPackage.Name,
+                Notes = bidPackage.Notes,
+                CustomerId = bidPackage.CustomerId,
+            };
+            return View(model);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBidPackagePrivate(EditBidPackageRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+                var bidPackage = await _context.BidPackages.Where(c => c.UserId == currentUser.Id)
+                .FirstOrDefaultAsync(m => m.Id == request.Id);
+                if (bidPackage == null)
+                {
+                    return NotFound();
+                }
+                bidPackage.Name = request.Name;
+                bidPackage.Notes = request.Notes;
+                bidPackage.UpdatedDate = DateTime.Now;
+                bidPackage.UserId = currentUser.Id;
+                _context.BidPackages.Update(bidPackage);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Cập nhật gối thầu mới thành công!";
+
+                return RedirectToAction(nameof(DetailsPrivate), new { id = request.CustomerId });
+            }
+            return View(request);
+        }
+
+        [Authorize(Roles = $"{RoleName.SuperAdmin},{RoleName.Administrator},{RoleName.Manager},{RoleName.Member}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteBidPackagePrivate(Guid id)
+        {
+            var currentUser = await GetCurrentUserAsync();
+            var bidPackage = await _context.BidPackages.Where(c => c.UserId == currentUser.Id)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (bidPackage == null)
+            {
+                return NotFound();
+            }
+            _context.BidPackages.Remove(bidPackage);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(DetailsPrivate), new { id = bidPackage.CustomerId });
         }
     }
 }

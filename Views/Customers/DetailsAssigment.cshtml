@@ -4,7 +4,7 @@
 @model dotnetstartermvc.ModelsRequest.CustomerRequest.CustomerViewModel
 
 @{
-    ViewData["Title"] = "Xóa khách hàng";
+    ViewData["Title"] = "Chi tiết khách hàng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     int stt = 1;
@@ -41,6 +41,8 @@
         color: #0D0D0D;
     }
 </style>
+
+<partial name="_AlertMessage" />
 
 <div>
     <dl class="row">
@@ -263,6 +265,7 @@
         </dd>
     </dl>
 </div>
+
 <hr />
 <div style="margin-top: 30px;">
     <div class="table-responsive">
@@ -293,18 +296,14 @@
         </table>
     </div>
 </div>
-<form asp-action="DeletePrivate" onsubmit="return confirm('Bạn có chắc chắn muốn xóa nội dung này không?');">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-        Xóa khách hàng
-    </button>
-</form>
 <hr />
-<a asp-action="IndexPrivate" class="btn btn-outline-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng</a>
+
+<div>
+    <a asp-action="ListCustomers" class="btn btn-outline-dark"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Danh sách khách hàng được giao</a>
+</div>
 
 @{
-    _AdminSidebarService.SetActive("Customers", "IndexPrivate", "");
+    _AdminSidebarService.SetActive("Customers", "ListCustomers", "");
 }
 
 @section Sidebar
